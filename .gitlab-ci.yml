@@ -5,10 +5,12 @@ stages:
   - test
 
 before_script:
-  - echo $PWD
-  - ls
+  - cd home_alone
   - flutter pub get
   - flutter clean
+
+after_script:
+  - cd ..
 
 test:
   stage: test
