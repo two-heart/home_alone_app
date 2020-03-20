@@ -1,8 +1,8 @@
 image: cirrusci/flutter:stable
 
 stages:
-  - build
   - test
+  - build
 
 before_script:
   - cd home_alone
@@ -19,9 +19,33 @@ test:
   tags:
     - docker
 
-build:
+build:android:
+  dependencies:
+    - test
   stage: build
   script:
-    - flutter build aot
+    - flutter build apk
+    - cp build/app/outputs/apk/release/app-release.apk ../home_alone.apk
+  artifacts:
+    when: always
+    expire_in: 1 day
+    paths:
+      - ./home_alone.apk
   tags:
     - docker
+
+
+build:ios:
+  dependencies:
+    - test
+  stage: build
+  script:
+    - flutter build ios
+    - mv build/ios/iphoneos/Runner.app ../
+  artifacts:
+    when: always
+    expire_in: 1 day
+    paths:
+      - ./Runner.app
+  tags:
+    - flutter
