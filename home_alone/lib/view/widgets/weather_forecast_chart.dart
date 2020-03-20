@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/model/forecast.dart';
-import 'package:home_alone/painter/forecast_painter.dart';
+import 'package:home_alone/utils/painter/forecast_painter.dart';
 
 class WeatherForecastChart extends StatefulWidget {
   final ForecastChartData forecastChartData;

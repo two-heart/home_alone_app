@@ -19,6 +19,7 @@ class HttpOpenWeatherApi implements OpenWeatherApi {
   Future<CurrentWeather> loadCurrentWeather(String city) async {
     var response = await dio.get("$baseUrl/data/2.5/weather",
         queryParameters: {"q": city, ...defaultQueryParams});
+
     return CurrentWeather.fromJson(response.data);
   }
 
@@ -26,6 +27,8 @@ class HttpOpenWeatherApi implements OpenWeatherApi {
   Future<WeatherForecast> loadWeatherForecast(String city) async {
     var response = await dio.get("$baseUrl/data/2.5/forecast",
         queryParameters: {"q": city, ...defaultQueryParams});
+
+    print(defaultQueryParams);
     print(response);
     return WeatherForecast.fromJson(response.data);
   }
