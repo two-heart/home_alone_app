@@ -5,6 +5,8 @@ stages:
   - test
 
 before_script:
+  - echo $PWD
+  - ls
   - flutter pub get
   - flutter clean
 
