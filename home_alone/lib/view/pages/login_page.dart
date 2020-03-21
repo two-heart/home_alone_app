@@ -79,16 +79,34 @@ class LoginPage extends StatelessWidget {
     final store = locator.get<LoginStore>();
     return TextField(
       controller: store.emailController,
+      decoration: new InputDecoration(
+          border: new OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(10.0),
+            ),
+          ),
+          filled: false,
+          hintStyle: new TextStyle(color: Theme.of(context).hintColor),
+          hintText: "Username",),
       onChanged: store.onEmailTextChanged,
     );
   }
 
   Widget _buildPasswordTextField(BuildContext context, LoginModel loginModel) {
     final store = locator.get<LoginStore>();
-    return TextField(
+    return TextField(  // Possibly factor this out together with email field
       controller: store.passwordController,
       obscureText: true,
       onChanged: store.onPasswordTextChanged,
+        decoration: new InputDecoration(
+          border: new OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(10.0),
+            ),
+          ),
+          filled: false,
+          hintStyle: new TextStyle(color: Theme.of(context).hintColor),
+          hintText: "Password",)
     );
   }
 }
