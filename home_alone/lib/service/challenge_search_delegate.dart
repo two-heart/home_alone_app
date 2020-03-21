@@ -52,7 +52,7 @@ class ChallengeSearchDelegate extends SearchDelegate {
                   itemCount: value.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     final challenge = value.data[index];
-                    return ChallengeTile(challenge, onTap: (tappedChallenge) {
+                    return ChallengeTile(challenge, onTab: (tappedChallenge) {
                       showDialog(
                           context: context,
                           builder: (context) {

@@ -10,6 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
 class RegistrationPage extends StatelessWidget {
+
+  bool isStarted = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

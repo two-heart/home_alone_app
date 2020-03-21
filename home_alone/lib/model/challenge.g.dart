@@ -11,11 +11,12 @@ Challenge _$ChallengeFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     name: json['name'] as String,
     description: json['description'] as String,
-  );
+  )..accepted = json['accepted'] as bool;
 }
 
 Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'accepted': instance.accepted,
     };

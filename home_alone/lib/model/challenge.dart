@@ -7,6 +7,7 @@ class Challenge {
   String id;
   String name;
   String description;
+  bool accepted = false;
 
   Challenge({this.id, this.name, this.description});
 
