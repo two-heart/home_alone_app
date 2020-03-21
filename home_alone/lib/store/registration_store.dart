@@ -22,7 +22,7 @@ class RegistrationStore {
       username: registrationModel.username,
     );
     final response = await registrationService.registerUser(credentials);
-    return RegistrationResponse(successful: true);
+    return RegistrationResponse(isSuccessful: true);
   }
 
   void goToNextStep() {

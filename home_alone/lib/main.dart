@@ -3,6 +3,7 @@ import 'package:flutter/physics.dart';
 import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/pages/registration_page.dart';
+import 'package:home_alone/view/pages/registration_username_page.dart';
 import 'package:home_alone/view/pages/welcome_page.dart';
 import 'package:home_alone/view/theme/colors.dart';
 import 'package:home_alone/viewmodel/app_model.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => WelcomePage(),
           '/login': (context) => LoginPage(),
+          '/register/setUsername': (context) => SetUsernamePage(),
           '/register': (context) => RegistrationPage(),
           '/home': (context) => MyHomePage(),
         },

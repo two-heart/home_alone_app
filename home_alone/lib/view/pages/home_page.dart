@@ -49,7 +49,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  SmartRefresher _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context) {
     return SmartRefresher(
       controller: _refreshController,
       onRefresh: _onRefresh,
@@ -62,7 +62,8 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _buildTabBar(BuildContext context) => Container(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).primaryColor,
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         child: TabBar(
           indicator: ShapeDecoration(
               shape: UnderlineInputBorder(
