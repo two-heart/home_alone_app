@@ -1,5 +1,3 @@
-
-
 class HomeAloneColors {
-  // static const Color 
+  // static const Color
 }

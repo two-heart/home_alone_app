@@ -4,6 +4,8 @@ import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
+import 'package:home_alone/view/pages/registration_page.dart';
+import 'package:home_alone/viewmodel/app_model.dart';
 
 import 'package:provider/provider.dart';
 
@@ -16,7 +18,7 @@ void main() async {
   // debugPaintPointersEnabled = true;
 
   await DependencyInjection.setUp();
-  DependencyInjection.loadWeather();
+  // DependencyInjection.loadWeather();
   runApp(MyApp());
 }
 
@@ -48,18 +50,38 @@ class MyApp extends StatelessWidget {
       hideFooterWhenNotFull:
           false, // Disable pull-up to load more functionality when Viewport is less than one screen
       enableBallisticLoad: true,
-      child: MaterialApp(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: locator.get<AppModel>())
+        ],
+        child: _buildApp(),
+      ),
+    );
+  }
+
+  _buildApp() => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         routes: {
-          '/': (context) => LoginPage(),
-          '/app': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
+          '/': _buildPage,
         },
-        // ),
-      ),
-    );
+      );
+
+  Widget _buildPage(BuildContext context) {
+    switch (Provider.of<AppModel>(context).appState) {
+      case AppState.welcome:
+        return Container();
+      case AppState.login:
+        return LoginPage();
+      case AppState.register:
+        return RegistrationPage();
+      case AppState.loggedIn:
+        return MyHomePage();
+      default:
+        return Container();
+    }
   }
 }
