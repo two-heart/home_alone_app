@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
+import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/viewmodel/app_model.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -39,10 +40,11 @@ class WelcomePage extends StatelessWidget {
         ),
       );
 
-  Widget _buildWelcomeText(BuildContext context) => Text(
-        'Willkommen bei Home Alone!',
-        style: Theme.of(context).textTheme.display2,
-        textAlign: TextAlign.center,
+  Widget _buildWelcomeText(BuildContext context) => Column(
+        children: <Widget>[
+          ThemedText(text: 'Willkommen bei'),
+          ThemedText(text: "Home Alone!")
+        ],
       );
 
   Widget _buildWelcomeExplanation(BuildContext context) => Text(

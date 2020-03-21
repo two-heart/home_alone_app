@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/view/theme/colors.dart';
+import 'package:home_alone/view/theme/dime.dart';
 
 class ThemedText extends StatelessWidget {
-  final String text;
+  const ThemedText({
+    this.text,
+    this.fontSize = HomeAloneDimensions.welcomeHeaderTextSize,
+    this.fontWeight = FontWeight.w600,
+  });
 
-  const ThemedText({Key key, this.text}) : super(key: key);
+  final String text;
+  final double fontSize;
+  final FontWeight fontWeight;
+
   @override
   Widget build(BuildContext context) => Text(
         text,
-        style: Theme.of(context).textTheme.display2,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: HomeAloneColors.mainGreen,
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+        ),
       );
 }
