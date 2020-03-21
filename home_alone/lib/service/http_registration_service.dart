@@ -1,24 +1,24 @@
 import 'package:dio/dio.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:home_alone/model/login_credentials.dart';
-import 'package:home_alone/model/user.dart';
+import 'package:home_alone/model/registration_credentials.dart';
 
-class HttpLoginService {
+class HttpRegistrationService {
   final Dio dio;
   final String baseUrl;
 
-  HttpLoginService({
+  HttpRegistrationService({
     @required this.dio,
     @required this.baseUrl,
   });
 
-  Future<void> loginWithCredentials(LoginCredentials credentials) async {
+  Future<void> registerUser(RegistrationCredentials credentials) async {
     var response = await dio.get(
-      "$baseUrl/login",
+      "$baseUrl/register",
       queryParameters: {
         "email": credentials.email,
         "password": credentials.password,
+        "username": credentials.username
       },
     );
 

@@ -16,4 +16,3 @@ class LoginCredentials {
 
   Map<String, dynamic> toJson() => _$LoginCredentialsToJson(this);
 }
-
