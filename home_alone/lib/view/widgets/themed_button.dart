@@ -14,7 +14,6 @@ class ThemedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store = locator.get<LoginStore>();
     return RaisedButton(
       onPressed: onPressed,
       color: Theme.of(context).accentColor,

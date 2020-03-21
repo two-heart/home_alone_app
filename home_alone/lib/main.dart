@@ -4,6 +4,7 @@ import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
+import 'package:home_alone/view/pages/welcome_page.dart';
 
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          '/': (context) => LoginPage(),
+          '/': (context) => WelcomePage(),
+          '/login': (context) => LoginPage(),
           '/app': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
         },
         // ),
