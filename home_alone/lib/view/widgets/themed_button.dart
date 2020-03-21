@@ -27,10 +27,10 @@ class ThemedButton extends StatelessWidget {
         padding: const EdgeInsets.all(0.0),
         child: Container(
             width: 300,
-            decoration: new BoxDecoration(
+            decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(
                     HomeAloneDimensions.primaryButtonBorderRadius)),
-                gradient: new LinearGradient(
+                gradient: LinearGradient(
                   colors: [
                     HomeAloneColors.primaryButtonGradientStartColor,
                     HomeAloneColors.primaryButtonGradientEndColor,

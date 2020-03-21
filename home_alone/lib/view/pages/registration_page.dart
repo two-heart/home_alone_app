@@ -4,6 +4,7 @@ import 'package:home_alone/view/widgets/registration/set_user_credentials.dart';
 import 'package:home_alone/view/widgets/registration/set_username.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 import 'package:provider/provider.dart';
+import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
 class RegistrationPage extends StatelessWidget {
   @override
@@ -31,9 +32,9 @@ class RegistrationPage extends StatelessWidget {
     _,
   ) {
     if (model.registrationStep == RegistrationStep.setUsername) {
-      return SetUsername(model: model);
+      return SetUsername(model: model).withWeirdBall();
     } else {
-      return SetUserCredentials(model: model);
+      return SetUserCredentials(model: model).withWeirdBall();
     }
   }
 }
