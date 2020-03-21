@@ -6,14 +6,16 @@ class LabelText extends StatelessWidget {
   LabelText({
     this.text,
     this.fontWeight = FontWeight.normal,
+    this.textAlign = TextAlign.center,
   });
   final String text;
   final FontWeight fontWeight;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) => Text(
         text,
-        textAlign: TextAlign.center,
+        textAlign: textAlign,
         style: TextStyle(
           color: HomeAloneColors.headerTextGrey,
           fontSize: HomeAloneDimensions.labelFontSize,
