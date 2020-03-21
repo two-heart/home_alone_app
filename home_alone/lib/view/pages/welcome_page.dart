@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
+import 'package:home_alone/viewmodel/app_model.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -16,71 +18,57 @@ class WelcomePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildTitle(context),
-                ..._buildBulletPoints(context),
-                Expanded(
-                  child: Container(),
-                ),
-                ..._buildButtons(context)
+                _buildTexts(context),
+                _buildRegisterButton(),
+                _buildLoginButton(),
               ],
             )));
   }
 
-  Widget _buildTitle(BuildContext context) {
-    return Text(
-      'Willkommen bei home_alone!', // TODO get app name from package info
-      style: Theme.of(context).textTheme.display2,
-    );
-  }
+  Widget _buildTexts(BuildContext context) => Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildWelcomeText(context),
+            SizedBox(height: 30),
+            _buildWelcomeExplanation(context),
+          ],
+        ),
+      );
 
-  List<Widget> _buildBulletPoints(BuildContext context) {
-    return [
-      Text(
-        'hier erwartet dich',
-        style: Theme.of(context).textTheme.display1,
-      ),
-      ListTile(
-        leading: new MyBullet(),
-        title: new Text('bla'),
-      ),
-      ListTile(
-        leading: new MyBullet(),
-        title: new Text('blub'),
-      ),
-      ListTile(
-        leading: new MyBullet(),
-        title: new Text('123'),
-      )
-    ];
-  }
+  Widget _buildWelcomeText(BuildContext context) => Text(
+        'Willkommen bei Home Alone!',
+        style: Theme.of(context).textTheme.display2,
+        textAlign: TextAlign.center,
+      );
 
-  List<Widget> _buildButtons(context) {
-    return [
-      SizedBox(
-          width: double.infinity,
-          child: ThemedButton(
-            onPressed: () => {},
-            child: Text('Registieren'),
-          )),
-      SizedBox(
-          width: double.infinity,
-          child: FlatButton(
-            child: Text("Login"),
-            onPressed: () => {Navigator.pushNamed(context, '/login')},
-          ))
-    ];
-  }
+  Widget _buildWelcomeExplanation(BuildContext context) => Text(
+        "Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen un dich selbst herausfordern kannst",
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.subhead,
+      );
+
+  Widget _buildLoginButton() => SizedBox(
+      width: double.infinity,
+      child: FlatButton(
+        child: Text("Login"),
+        onPressed: () => locator.get<AppModel>().appState = AppState.login,
+      ));
+
+  Widget _buildRegisterButton() => SizedBox(
+      width: double.infinity,
+      child: ThemedButton(
+        onPressed: () => locator.get<AppModel>().appState = AppState.register,
+        child: Text('Registieren'),
+      ));
 
   AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('App Logo'),
-    );
+    return AppBar(title: Text('App Logo'));
   }
 }
-
 
 // just as a placeholder... to make it look like the mock
 class MyBullet extends StatelessWidget {

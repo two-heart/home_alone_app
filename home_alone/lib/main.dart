@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/physics.dart';
-import 'package:flutter/rendering.dart';
 import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/pages/registration_page.dart';
+import 'package:home_alone/view/pages/welcome_page.dart';
 import 'package:home_alone/viewmodel/app_model.dart';
 
 import 'package:provider/provider.dart';
@@ -25,11 +24,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-        // ChangeNotifierProvider.value(
-        //   value: locator.get<WeatherModel>(),
-        //   child:
-        RefreshConfiguration(
+    return RefreshConfiguration(
       headerBuilder: () =>
           WaterDropMaterialHeader(), // Configure the default header indicator. If you have the same header indicator for each page, you need to set this
       footerBuilder: () =>
@@ -73,7 +68,7 @@ class MyApp extends StatelessWidget {
   Widget _buildPage(BuildContext context) {
     switch (Provider.of<AppModel>(context).appState) {
       case AppState.welcome:
-        return Container();
+        return WelcomePage();
       case AppState.login:
         return LoginPage();
       case AppState.register:
