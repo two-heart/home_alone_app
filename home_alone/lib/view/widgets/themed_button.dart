@@ -20,7 +20,7 @@ class ThemedButton extends StatelessWidget {
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         color: Colors.transparent,
-        onPressed: () {},
+        onPressed: onPressed,
         textColor: HomeAloneColors.primaryButtonTextColor,
         padding: const EdgeInsets.all(0.0),
         child: Container(
