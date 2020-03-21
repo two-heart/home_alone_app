@@ -107,7 +107,7 @@ class _ChallengeListPageState extends State<ChallengeListPage> {
                         ))
                     .toList(),
               ),
-              baseColor: Colors.grey[700],
+              baseColor: Colors.grey[350],
               highlightColor: Colors.grey[100]),
         ));
   }
