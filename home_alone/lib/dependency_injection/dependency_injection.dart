@@ -5,10 +5,8 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/challenge/fakes/fake_challenge_api.dart';
 import 'package:home_alone/service/challenge/http_challenge_api.dart';
-import 'package:home_alone/service/http_open_weather_api.dart';
-import 'package:home_alone/service/open_weather_api.dart';
-import 'package:home_alone/store/weather_store.dart';
-import 'package:home_alone/viewmodel/weather_model.dart';
+import 'package:home_alone/store/login_store.dart';
+import 'package:home_alone/viewmodel/login_model.dart';
 
 class DependencyInjection {
   static Future<void> setUp() async {
@@ -21,38 +19,34 @@ class DependencyInjection {
   static void _setUpServices() {
     final dio = Dio();
 
-    locator.registerSingleton<OpenWeatherApi>(
-      HttpOpenWeatherApi(
-        apiKey: DotEnv().env['API_KEY'],
-        baseUrl: "http://api.openweathermap.org",
-        dio: dio,
-      ),
-    );
-    /*locator.registerSingleton<ChallengeApi>(
+    locator.registerSingleton<ChallengeApi>(
       HttpChallengeApi(
           baseUrl: DotEnv().env['BASE_URL'],
           dio: dio,
       )
-    );*/
+    );
     locator.registerSingleton<ChallengeApi>(
       FakeChallengeApi(),
     );
   }
 
   static void _setUpViewModels() {
-    locator.registerSingleton<WeatherModel>(WeatherModel());
+    locator.registerSingleton<LoginModel>(LoginModel());
+    print('emailValid: ${locator.get<LoginModel>().isLoginButtonEnabled}');
   }
 
   static void loadWeather() {
-    locator.get<WeatherStore>()
-      ..loadCurrentWeather("Darmstadt")
-      ..loadWeatherForecast("Darmstadt");
+    // locator.get<WeatherStore>()
+    //   ..loadCurrentWeather("Darmstadt")
+    //   ..loadWeatherForecast("Darmstadt");
   }
 
   static void _setUpStores() {
-    locator.registerSingleton<WeatherStore>(WeatherStore(
-      api: locator.get<OpenWeatherApi>(),
-      weather: locator.get<WeatherModel>(),
-    ));
+    // locator.registerSingleton<WeatherStore>(WeatherStore(
+    //   api: locator.get<OpenWeatherApi>(),
+    //   weather: locator.get<WeatherModel>(),
+    // ));
+
+    locator.registerSingleton(LoginStore(locator.get<LoginModel>()));
   }
 }

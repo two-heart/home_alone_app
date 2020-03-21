@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/city_search_delegate.dart';
-import 'package:home_alone/service/open_weather_api.dart';
-import 'package:home_alone/store/weather_store.dart';
-import 'package:home_alone/view/pages/challenge_list_page.dart';
-import 'package:home_alone/view/widgets/weather_content.dart';
-import 'package:home_alone/view/widgets/weather_forecast.dart';
-import 'package:home_alone/view/widgets/weather_forecast_chart.dart';
-import 'package:home_alone/viewmodel/weather_model.dart';
-import 'package:provider/provider.dart';
+import 'package:home_alone/view/pages/login_page.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'challenge_list_page.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({
@@ -23,40 +18,41 @@ class MyHomePage extends StatelessWidget {
       RefreshController(initialRefresh: false);
 
   _onRefresh() async {
-    final weatherStore = locator.get<WeatherStore>();
-    await weatherStore.loadWeatherForecast("Darmstadt");
-    await weatherStore.loadCurrentWeather("Darmstadt");
+    // final weatherStore = locator.get<WeatherStore>();
+    // await weatherStore.loadWeatherForecast("Darmstadt");
+    // await weatherStore.loadCurrentWeather("Darmstadt");
     _refreshController.refreshCompleted();
   }
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<WeatherModel>(context);
+    // var model = Provider.of<WeatherModel>(context);
     return DefaultTabController(
       length: _navigationItems.length,
       child: Scaffold(
-          appBar: _buildAppBar(context, model),
-          body: _buildContent(model, context),
+          appBar: _buildAppBar(context),
+          body: _buildContent(context),
           bottomNavigationBar: _buildTabBar(context)),
     );
   }
 
-  AppBar _buildAppBar(BuildContext context, WeatherModel model) {
+  AppBar _buildAppBar(
+    BuildContext context,
+  ) {
     return AppBar(
-      title: Text(title),
-      actions: _buildSearchAction(context, model),
+      title: Text("Tolle Appbar"),
+      actions: _buildSearchAction(context),
     );
   }
 
-  SmartRefresher _buildContent(WeatherModel model, BuildContext context) {
+  SmartRefresher _buildContent(BuildContext context) {
     return SmartRefresher(
       controller: _refreshController,
       onRefresh: _onRefresh,
       child: TabBarView(children: [
-        WeatherContent(weather: Provider.of<WeatherModel>(context).today),
-        WeatherContent(weather: Provider.of<WeatherModel>(context).tomorrow),
-        WeatherForecast(Provider.of<WeatherModel>(context).forecastList),
-        ChallengeListPage()
+        LoginPage(),
+        LoginPage(),
+        ChallengeListPage(),
       ]),
     );
   }
@@ -72,26 +68,29 @@ class MyHomePage extends StatelessWidget {
       );
 
   final _navigationItems = <Widget>[
-    Tab(icon: Icon(Icons.cloud), text: "Current"),
-    Tab(icon: Icon(Icons.cloud), text: "Tomorrow"),
-    Tab(icon: Icon(Icons.cloud), text: "Forecast"),
+    Tab(icon: Icon(Icons.cloud), text: "Login"),
+    Tab(icon: Icon(Icons.cloud), text: "Noch mal Login"),
+    Tab(icon: Icon(Icons.cloud), text: "Ändere mich!"),
     Tab(icon: Icon(Icons.cloud), text: "Challenges"),
   ];
 
-  List<Widget> _buildSearchAction(BuildContext context, WeatherModel model) {
+  List<Widget> _buildSearchAction(
+    BuildContext context,
+  ) {
     return <Widget>[
       IconButton(
         icon: Icon(Icons.search),
         onPressed: () {
-          showSearch(
-            context: context,
-            delegate: CitySearchDelegate(
-              model,
-              locator.get<OpenWeatherApi>(),
-              keyboardType: TextInputType.text,
-              searchFieldLabel: "City ...",
-            ),
-          );
+          // showSearch(
+          //   context: context,
+          //   delegate: CitySearchDelegate(
+          //     // model,
+          //     null,
+          //     locator.get<OpenWeatherApi>(),
+          //     keyboardType: TextInputType.text,
+          //     searchFieldLabel: "City ...",
+          //   ),
+          // );
         },
       )
     ];
