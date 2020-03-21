@@ -6,6 +6,8 @@ class HomeAloneDimensions {
   static const double welcomeHeaderTextSize = 36;
   static const double welcomeHeaderSmallerTextSize = 30;
   static const double primaryButtonTextSize = 18;
+
+  static const double labelFontSize = 21;
   static const double primaryButtonBorderRadius = 24;
 
   static const double circularLogoSize = 50.0;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/view/theme/dime.dart';
+import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
+import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
@@ -47,18 +49,13 @@ class WelcomePage extends StatelessWidget {
         ],
       );
 
-  Widget _buildWelcomeExplanation(BuildContext context) => Text(
-        "Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen un dich selbst herausfordern kannst",
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.subhead,
-      );
+  Widget _buildWelcomeExplanation(BuildContext context) => LabelText(
+      text:
+          'Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen un dich selbst herausfordern kannst');
 
   Widget _buildLoginButton() => LayoutBuilder(
-        builder: (context, constraints) => FlatButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(
-                    HomeAloneDimensions.primaryButtonTextSize))),
-            child: Text("Einloggen", textAlign: TextAlign.center),
+        builder: (context, constraints) => ThemedFlatButton(
+            text: 'Einloggen',
             onPressed: () => Navigator.of(context).pushNamed("/login")),
       );
 
