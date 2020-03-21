@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
+import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/viewmodel/app_model.dart';
@@ -55,6 +56,9 @@ class WelcomePage extends StatelessWidget {
 
   Widget _buildLoginButton() => LayoutBuilder(
         builder: (context, constraints) => FlatButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(
+                    HomeAloneDimensions.primaryButtonTextSize))),
             child: Text("Login", textAlign: TextAlign.center),
             onPressed: () => Navigator.of(context).pushNamed("/login")),
       );

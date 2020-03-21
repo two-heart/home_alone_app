@@ -24,7 +24,10 @@ class SetUsername extends StatelessWidget {
             _buildQuestionText(context),
             _buildUserNameTextField(),
             Expanded(flex: 4, child: Container()),
-            _buildApplyButton(),
+            Padding(
+              child: _buildApplyButton(),
+              padding: EdgeInsets.only(bottom: 32),
+            ),
           ],
         ),
       ),

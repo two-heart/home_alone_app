@@ -18,7 +18,9 @@ class ThemedButton extends StatelessWidget {
     return Container(
       color: Colors.transparent,
       child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+                HomeAloneDimensions.primaryButtonBorderRadius)),
         color: Colors.transparent,
         onPressed: onPressed,
         textColor: HomeAloneColors.primaryButtonTextColor,
@@ -26,7 +28,8 @@ class ThemedButton extends StatelessWidget {
         child: Container(
             width: 300,
             decoration: new BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                borderRadius: BorderRadius.all(Radius.circular(
+                    HomeAloneDimensions.primaryButtonBorderRadius)),
                 gradient: new LinearGradient(
                   colors: [
                     HomeAloneColors.primaryButtonGradientStartColor,

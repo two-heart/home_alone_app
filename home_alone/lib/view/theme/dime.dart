@@ -6,4 +6,5 @@ class HomeAloneDimensions {
   static const double welcomeHeaderTextSize = 36;
   static const double welcomeHeaderSmallerTextSize = 30;
   static const double primaryButtonTextSize = 18;
+  static const double primaryButtonBorderRadius = 24;
 }
