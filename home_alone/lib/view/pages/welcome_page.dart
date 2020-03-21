@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
+import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -14,19 +16,19 @@ class WelcomePage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Center(
-        child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _buildTexts(context),
-                _buildRegisterButton(),
-                _buildLoginButton(),
-              ],
-            )));
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildTexts(context),
+          _buildRegisterButton(),
+          _buildLoginButton(),
+        ],
+      ),
+    ).withWeirdBall();
   }
 
   Widget _buildTexts(BuildContext context) => Expanded(
