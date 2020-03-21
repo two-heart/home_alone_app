@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/view/theme/colors.dart';
 import 'package:home_alone/view/theme/dime.dart';
 
 class ThemedButton extends StatelessWidget {
   final Function onPressed;
-  final Widget child;
+  final String text;
+  final double textScaleFactor;
 
-  const ThemedButton({
-    this.onPressed,
-    this.child,
-  });
+  const ThemedButton(
+      {this.onPressed, this.text = "", this.textScaleFactor = 1.0});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ThemedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         color: Colors.transparent,
         onPressed: () {},
-        textColor: Colors.white,
+        textColor: HomeAloneColors.primaryButtonTextColor,
         padding: const EdgeInsets.all(0.0),
         child: Container(
             width: 300,
@@ -26,12 +26,16 @@ class ThemedButton extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(24.0)),
                 gradient: new LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 149, 242, 168),
-                    Color.fromARGB(255, 0, 191, 146)
+                    HomeAloneColors.primaryButtonGradientStartColor,
+                    HomeAloneColors.primaryButtonGradientEndColor,
                   ],
                 )),
             padding: const EdgeInsets.all(10.0),
-            child: child),
+            child: Text(text,
+                textAlign: TextAlign.center,
+                textScaleFactor: textScaleFactor,
+                style: TextStyle(
+                    fontSize: HomeAloneDimensions.primaryButtonTextSize))),
       ),
     );
   }

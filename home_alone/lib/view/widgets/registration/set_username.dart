@@ -65,11 +65,7 @@ class SetUsername extends StatelessWidget {
               : null;
           return ThemedButton(
             onPressed: onPressed,
-            child: Text(
-              "Übernehmen und weiter",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18),
-            ),
+            text: "Übernehmen und weiter",
           );
         },
       );
