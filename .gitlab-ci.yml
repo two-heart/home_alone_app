@@ -41,14 +41,17 @@ package:ios:
   stage: package
   script:
     - flutter build ios
-    - cd ios
-    - xcodebuild -workspace Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Debug archive -archivePath $PWD/build/Runner.xcarchive
-    - xcodebuild -exportArchive -archivePath $PWD/build/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $PWD/build/Runner.ipa -allowProvisioningUpdates
-    - cp $PWD/build/Runner.ipa $projectPath/home_alone.ipa
+    - mv build/ios/iphoneos/Runner.app $projectPath
+    # Archiving doesn't work since we have no development team selected in project
+    #- cd ios
+    #- xcodebuild -workspace Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Debug archive -archivePath $PWD/build/Runner.xcarchive
+    #- xcodebuild -exportArchive -archivePath $PWD/build/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $PWD/build/Runner.ipa -allowProvisioningUpdates
+    #- cp $PWD/build/Runner.ipa $projectPath/home_alone.ipa
   artifacts:
     when: always
     expire_in: 1 day
     paths:
-      - ./home_alone.ipa
+      - ./Runner.app
+      #- ./home_alone.ipa
   tags:
     - flutter
