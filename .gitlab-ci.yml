@@ -3,24 +3,23 @@ stages:
   - package
 
 before_script:
+  - projectPath=$PWD
   - cd home_alone
   - flutter pub get
   - flutter clean
 
 after_script:
-  - cd ..
+  - cd $projectPath
 
 test:
-  image: registry.gitlab.com/home_alone_hack/app:latest
   stage: test
   script:
     - flutter test test/*
   tags:
-    - docker
+    - flutter
   
 
 package:android:
-  image: registry.gitlab.com/home_alone_hack/app:latest
   dependencies:
     - test
   stage: package
@@ -42,11 +41,14 @@ package:ios:
   stage: package
   script:
     - flutter build ios
-    - mv build/ios/iphoneos/Runner.app $PWD/..
+    - cd ios
+    - xcodebuild -workspace Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Debug archive -archivePath $PWD/build/Runner.xcarchive
+    - xcodebuild -exportArchive -archivePath $PWD/build/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath $PWD/build/Runner.ipa -allowProvisioningUpdates
+    - cp $PWD/build/Runner.ipa $projectPath/home_alone.ipa
   artifacts:
     when: always
     expire_in: 1 day
     paths:
-      - ./Runner.app
+      - ./home_alone.ipa
   tags:
     - flutter
