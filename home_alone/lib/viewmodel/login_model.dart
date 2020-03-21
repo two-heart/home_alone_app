@@ -11,7 +11,7 @@ class LoginModel extends ChangeNotifier {
   String _password;
   String get password => _password;
 
-  set passwor(String value) {
+  set password(String value) {
     _password = value;
     notifyListeners();
   }
