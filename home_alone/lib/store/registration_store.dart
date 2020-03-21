@@ -14,6 +14,8 @@ class RegistrationStore {
   final HttpRegistrationService registrationService;
 
   TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   Future<RegistrationResponse> registerUser() async {
     final credentials = RegistrationCredentials(

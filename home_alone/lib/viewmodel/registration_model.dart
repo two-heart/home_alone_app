@@ -3,6 +3,19 @@ import 'package:flutter/material.dart';
 enum RegistrationStep { setUsername, register }
 
 class RegistrationModel extends ChangeNotifier {
+  bool get usernameIsValid => username?.isNotEmpty == true;
+  bool get registerButtonIsEnabled =>
+      username?.isNotEmpty == true &&
+      email?.isNotEmpty == true &&
+      password?.isNotEmpty == true;
+
+  bool _registrationHasError = true;
+  bool get registrationHasError => _registrationHasError;
+  set registrationHasError(bool value) {
+    _registrationHasError = value;
+    notifyListeners();
+  }
+
   RegistrationStep _registrationStep = RegistrationStep.setUsername;
   RegistrationStep get registrationStep => _registrationStep;
   set registrationStep(RegistrationStep nextStep) {
@@ -20,15 +33,15 @@ class RegistrationModel extends ChangeNotifier {
   String _username;
   String get username => _username;
   set username(String value) {
+    
     _username = value;
     notifyListeners();
   }
 
-  bool get usernameIsValid => username?.isNotEmpty == true;
-
   String _email;
   String get email => _email;
   set email(String value) {
+    registrationHasError = false;
     _email = value;
     notifyListeners();
   }
@@ -36,6 +49,7 @@ class RegistrationModel extends ChangeNotifier {
   String _password;
   String get password => _password;
   set password(String value) {
+    registrationHasError = false;
     _password = value;
     notifyListeners();
   }
