@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    locator.get<LoginStore>().reset();
     super.dispose();
   }
 
@@ -90,12 +91,13 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   Widget _buildEmailTextField(BuildContext context) {
+    final model = Provider.of<LoginModel>(context);
     final store = locator.get<LoginStore>();
     return TextField(
       cursorColor: Theme.of(context).accentColor,
       controller: emailController,
       decoration: new InputDecoration(
-        errorText: store.hasError ? store.errorMessage : null,
+        errorText: model.hasError ? model.errorMessage : null,
         border: new OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             const Radius.circular(10.0),
@@ -110,14 +112,16 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildPasswordTextField(BuildContext context) {
+    final model = Provider.of<LoginModel>(context);
     final store = locator.get<LoginStore>();
     return TextField(
         // Possibly factor this out together with email field
         cursorColor: Theme.of(context).accentColor,
         controller: passwordController,
         obscureText: true,
+        onChanged: store.onPasswordTextChanged,
         decoration: new InputDecoration(
-          errorText: store.hasError ? store.errorMessage : null,
+          errorText: model.hasError ? model.errorMessage : null,
           border: new OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(10.0),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
-import 'package:home_alone/model/registration_response.dart';
 import 'package:home_alone/store/registration_store.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
@@ -10,9 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
 class RegistrationPage extends StatelessWidget {
-
   bool isStarted = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -126,12 +123,19 @@ class RegistrationPage extends StatelessWidget {
         ],
       );
 
-  Widget _buildRegisterButton(BuildContext context, RegistrationModel model) =>
-      ThemedButton(
-        onPressed:
-            model.registerButtonIsEnabled ? () => _registerUser(context) : null,
-        text: "Zugangsdaten speichern",
-      );
+  Widget _buildRegisterButton(BuildContext context, RegistrationModel model) {
+    final model = Provider.of<RegistrationModel>(context);
+    final submit = () async {
+      if (await registerUser(context)) {
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      }
+    };
+    return ThemedButton(
+      onPressed: model.registerButtonIsEnabled ? submit : null,
+      text: "Zugangsdaten speichern",
+      alternativeChild: model.isLoading ? CircularProgressIndicator() : null,
+    );
+  }
 
   Widget _buildLoginButton(BuildContext context) => ThemedFlatButton(
         text: 'Einloggen',
@@ -139,16 +143,12 @@ class RegistrationPage extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed("/register/setUsername"),
       );
 
-  Future<void> _registerUser(BuildContext context) async {
-    await locator
-        .get<RegistrationStore>()
-        .registerUser()
-        .then((RegistrationResponse response) {
-      if (response.isSuccessful) {
-        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
-      }
-    }).catchError((_) {
-      print("error registering user");
-    });
+  Future<bool> registerUser(BuildContext context) async {
+    try {
+      await locator.get<RegistrationStore>().registerUser();
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

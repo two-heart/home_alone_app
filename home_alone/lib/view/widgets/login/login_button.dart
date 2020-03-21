@@ -11,12 +11,20 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Consumer<LoginModel>(
-        builder: (context, loginModel, _) => ThemedButton(
-          onPressed:
-              loginModel.isLoginButtonEnabled ? () => _login(context) : null,
-          text: "Einloggen",
-          textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
-        ),
+        builder: (context, loginModel, _) {
+          final model = Provider.of<LoginModel>(context);
+          return ThemedButton(
+            onPressed:
+                loginModel.isLoginButtonEnabled ? () => _login(context) : null,
+            text: "Einloggen",
+            alternativeChild: model.isLoading
+                ? CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                  )
+                : null,
+            textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
+          );
+        },
       );
 
   void _login(BuildContext context) async {

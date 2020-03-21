@@ -77,6 +77,6 @@ class MyApp extends StatelessWidget {
           '/home': (context) => MyHomePage(),
           'challenge': (context) => ChallengeDetail()
         },
-        initialRoute: '/',
+        initialRoute: DependencyInjection.token != null ? '/home' : '/',
       );
 }

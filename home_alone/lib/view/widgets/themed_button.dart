@@ -6,11 +6,13 @@ class ThemedButton extends StatelessWidget {
   final Function onPressed;
   final String text;
   final double textScaleFactor;
+  final Widget alternativeChild;
 
   const ThemedButton({
     this.onPressed,
     this.text = "",
     this.textScaleFactor = 1.0,
+    this.alternativeChild,
   });
 
   @override
@@ -37,7 +39,7 @@ class ThemedButton extends StatelessWidget {
                   ],
                 )),
             padding: const EdgeInsets.all(10.0),
-            child: _buildText()),
+            child: alternativeChild != null ? alternativeChild : _buildText()),
       ),
     );
   }

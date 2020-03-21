@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
@@ -19,14 +20,14 @@ import 'package:home_alone/viewmodel/registration_model.dart';
 class DependencyInjection {
   static Future<void> setUp() async {
     await DotEnv().load('.env');
-    _setUpServices();
-    _setUpViewModels();
-    _setUpStores();
+    await _setUpServices();
+    await _setUpViewModels();
+    await _setUpStores();
   }
 
   static String token;
 
-  static void _setUpServices() {
+  static Future<void> _setUpServices() async {
     var dio = Dio(BaseOptions(
       receiveDataWhenStatusError: true,
       connectTimeout: 5000,
@@ -41,6 +42,9 @@ class DependencyInjection {
           dio: dio,
       )
     );*/
+    var storage = new FlutterSecureStorage();
+    token = await storage.read(key: "token");
+    locator.registerSingleton(storage);
 
     locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
@@ -67,6 +71,7 @@ class DependencyInjection {
       var data = options.data as Map<String, dynamic>;
       if (data.containsKey('accessToken')) {
         token = data['accessToken'];
+        locator.get<FlutterSecureStorage>().write(key: "token", value: token);
       }
     }
     return options;
@@ -79,14 +84,14 @@ class DependencyInjection {
     return options;
   }
 
-  static void _setUpViewModels() {
+  static Future<void> _setUpViewModels() async {
     locator.registerSingleton<AppModel>(AppModel());
     locator.registerSingleton<RegistrationModel>(RegistrationModel());
     locator.registerSingleton<LoginModel>(LoginModel());
     // print('emailValid: ${locator.get<LoginModel>().isLoginButtonEnabled}');
   }
 
-  static void _setUpStores() {
+  static Future<void> _setUpStores() async {
     locator.registerSingleton(LoginStore(
       locator.get<LoginModel>(),
       locator.get<HttpLoginService>(),

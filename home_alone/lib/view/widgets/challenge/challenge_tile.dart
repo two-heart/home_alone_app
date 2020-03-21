@@ -3,7 +3,8 @@ import 'package:home_alone/model/challenge.dart';
 
 class ChallengeTile extends StatelessWidget {
   final Challenge challenge;
-  ChallengeTile(this.challenge ,{Function onTab, Null Function(tappedChallenge)});
+  ChallengeTile(this.challenge,
+      {Function onTab, Null Function(tappedChallenge)});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,12 @@ class ChallengeTile extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, 'challenge', arguments: challenge);
               },
-              title: Text(
-                challenge.name,
-                style: TextStyle(color: Colors.black87, fontSize: 24),
+              title: Hero(
+                tag: "challengeTitle",
+                child: Text(
+                  challenge.name,
+                  style: TextStyle(color: Colors.black87, fontSize: 24),
+                ),
               ),
               subtitle: Text(
                 challenge.description,

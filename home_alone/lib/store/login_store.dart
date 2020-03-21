@@ -28,43 +28,42 @@ class LoginStore with ChangeNotifier {
   final LoginModel loginModel;
   final HttpLoginService loginService;
 
-  bool isLoading = false;
-  bool hasError = false;
-  String errorMessage;
-
   void onEmailTextChanged(String value) {
     loginModel.email = value;
     _resetErrorStateIfNecessary();
   }
 
   void onPasswordTextChanged(String value) {
+    print(value);
     loginModel.password = value;
     _resetErrorStateIfNecessary();
   }
 
   void _resetErrorStateIfNecessary() {
-    if (hasError) {
-      hasError = false;
-      notifyListeners();
-    }
+    loginModel.resetErrorStateIfNecessary();
+  }
+
+  void reset() {
+    loginModel.reset();
   }
 
   Future<LoginResponseModel> onLoginButtonPressed() async {
-    isLoading = true;
+    loginModel.isLoading = true;
     notifyListeners();
+
+    await Future.delayed(Duration(milliseconds: 1000));
 
     final response = await this.loginService.loginWithCredentials(
         LoginCredentials(loginModel.email, loginModel.password));
 
     final statusCode = response.statusCode;
-    this.hasError = response.statusCode > 299;
-    this.errorMessage = errorMessages[statusCode];
-    isLoading = false;
-
+    loginModel.hasError = response.statusCode > 299;
+    loginModel.errorMessage = errorMessages[statusCode];
+    loginModel.isLoading = false;
+    final success = statusCode < 299;
     notifyListeners();
 
     return LoginResponseModel(
-        success: statusCode < 299,
-        errorMessage: errorMessages[statusCode] ?? '');
+        success: success, errorMessage: errorMessages[statusCode] ?? '');
   }
 }
