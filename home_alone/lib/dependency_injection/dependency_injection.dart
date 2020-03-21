@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:home_alone/dependency_injection/locator.dart';
+import 'package:home_alone/service/challenge_api.dart';
+import 'package:home_alone/service/fakes/fake_challenge_api.dart';
 import 'package:home_alone/service/http_open_weather_api.dart';
 import 'package:home_alone/service/open_weather_api.dart';
 import 'package:home_alone/store/weather_store.dart';
@@ -22,6 +24,9 @@ class DependencyInjection {
         baseUrl: "http://api.openweathermap.org",
         dio: Dio(),
       ),
+    );
+    locator.registerSingleton<ChallengeApi>(
+      FakeChallengeApi(),
     );
   }
 

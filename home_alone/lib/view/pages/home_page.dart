@@ -3,6 +3,7 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/city_search_delegate.dart';
 import 'package:home_alone/service/open_weather_api.dart';
 import 'package:home_alone/store/weather_store.dart';
+import 'package:home_alone/view/pages/challenge_list_page.dart';
 import 'package:home_alone/view/widgets/weather_content.dart';
 import 'package:home_alone/view/widgets/weather_forecast.dart';
 import 'package:home_alone/view/widgets/weather_forecast_chart.dart';
@@ -55,7 +56,7 @@ class MyHomePage extends StatelessWidget {
         WeatherContent(weather: Provider.of<WeatherModel>(context).today),
         WeatherContent(weather: Provider.of<WeatherModel>(context).tomorrow),
         WeatherForecast(Provider.of<WeatherModel>(context).forecastList),
-        WeatherForecastChart(Provider.of<WeatherModel>(context).forecastChartData),
+        ChallengeListPage()
       ]),
     );
   }
@@ -74,7 +75,7 @@ class MyHomePage extends StatelessWidget {
     Tab(icon: Icon(Icons.cloud), text: "Current"),
     Tab(icon: Icon(Icons.cloud), text: "Tomorrow"),
     Tab(icon: Icon(Icons.cloud), text: "Forecast"),
-    Tab(icon: Icon(Icons.cloud), text: "Chart"),
+    Tab(icon: Icon(Icons.cloud), text: "Challenges"),
   ];
 
   List<Widget> _buildSearchAction(BuildContext context, WeatherModel model) {

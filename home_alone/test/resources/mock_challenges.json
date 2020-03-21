@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "name": "First Challenge",
+    "description": "Completed challenge"
+  },
+  {
+    "id": "2",
+    "name": "Second Challenge",
+    "description": "Incompleted challenge"
+  }
+]
