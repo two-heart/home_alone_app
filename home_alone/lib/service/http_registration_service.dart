@@ -6,6 +6,7 @@ import 'package:home_alone/model/registration_credentials.dart';
 class HttpRegistrationService {
   final Dio dio;
   final String baseUrl;
+  String token;
 
   HttpRegistrationService({
     @required this.dio,

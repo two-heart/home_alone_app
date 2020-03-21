@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -14,6 +16,7 @@ import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 
 class DependencyInjection {
+
   static Future<void> setUp() async {
     await DotEnv().load('.env');
     _setUpServices();
@@ -23,8 +26,15 @@ class DependencyInjection {
 
   static const baseUrl = "www/";
 
+  String token;
+
+
   static void _setUpServices() {
-    final dio = Dio();
+    final dio = Dio(BaseOptions(
+      connectTimeout: 5000,
+      receiveTimeout: 5000,
+    ));
+
 
     /*locator.registerSingleton<ChallengeApi>(
       HttpChallengeApi(
@@ -32,6 +42,8 @@ class DependencyInjection {
           dio: dio,
       )
     );*/
+
+
     locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
@@ -41,6 +53,20 @@ class DependencyInjection {
       dio: dio,
       baseUrl: baseUrl,
     ));
+  }
+
+  Dio addInterceptors(Dio dio) {
+    return dio
+      ..interceptors.add(InterceptorsWrapper(
+          onResponse: (Response response) => responseInterceptor(response)
+    ));
+  }
+
+  dynamic responseInterceptor(Response options) async {
+    var data = jsonDecode(options.data);
+    if (data.containsKey('accessToken')) {
+      token = data['accessToken'];
+    }
   }
 
   static void _setUpViewModels() {
