@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/model/challenge.dart';
+import 'package:home_alone/view/pages/challenge_detail_page.dart';
 
 class ChallengeTile extends StatelessWidget {
   final Challenge challenge;
@@ -17,7 +18,11 @@ class ChallengeTile extends StatelessWidget {
             child: ListTile(
               contentPadding: EdgeInsets.all(8),
               onTap: () {
-                Navigator.pushNamed(context, 'challenge', arguments: challenge);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ChallengeDetail(challenge: challenge)),
+                );
               },
               title: Text(
                 challenge.name,
