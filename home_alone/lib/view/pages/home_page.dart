@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
-import 'package:home_alone/service/city_search_delegate.dart';
+import 'package:home_alone/service/challenge/challenge_api.dart';
+import 'package:home_alone/service/challenge_search_delegate.dart';
 import 'package:home_alone/view/pages/dashboard_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/pages/profile_page.dart';
@@ -82,16 +83,15 @@ class MyHomePage extends StatelessWidget {
       IconButton(
         icon: Icon(Icons.search),
         onPressed: () {
-          // showSearch(
-          //   context: context,
-          //   delegate: CitySearchDelegate(
-          //     // model,
-          //     null,
-          //     locator.get<OpenWeatherApi>(),
-          //     keyboardType: TextInputType.text,
-          //     searchFieldLabel: "City ...",
-          //   ),
-          // );
+          showSearch(
+            context: context,
+            delegate: ChallengeSearchDelegate(
+              // model,
+              locator.get<ChallengeApi>(),
+              keyboardType: TextInputType.text,
+              searchFieldLabel: "Name ...",
+            ),
+          );
         },
       )
     ];

@@ -42,4 +42,14 @@ class HttpChallengeApi implements ChallengeApi {
       return Future.error(ResponseErrorType.SERVER_ERROR);
     }
   }
+
+  @override
+  Future<List<Challenge>> findChallenges(String query) async {
+    var response =
+        await dio.get("$baseUrl/api/challenges/search", queryParameters: {
+      "q": query,
+    });
+    return determineResponse(
+        response, (data) => Challenge.fromJsonList(response.data));
+  }
 }

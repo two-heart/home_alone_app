@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
+import 'package:home_alone/view/widgets/challenge/challenge_tile.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -123,22 +124,7 @@ class _ChallengeListPageState extends State<ChallengeListPage> {
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
                 final challenge = data[index];
-                return Padding(
-                  child: Container(
-                    color: Colors.white,
-                    child: ListTile(
-                      title: Text(
-                        challenge.name,
-                        style: TextStyle(color: Colors.black87, fontSize: 24),
-                      ),
-                      subtitle: Text(
-                        challenge.description,
-                        style: TextStyle(color: Colors.black87, fontSize: 14),
-                      ),
-                    ),
-                  ),
-                  padding: EdgeInsets.all(8),
-                );
+                return ChallengeTile(challenge);
               },
             ),
     );

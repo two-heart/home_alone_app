@@ -15,4 +15,14 @@ class FakeChallengeApi implements ChallengeApi {
   Future<List<Challenge>> getAllIncompletedChallenges() async {
     return Challenge.fromJsonList(jsonDecode(incomplete));
   }
+
+  @override
+  Future<List<Challenge>> findChallenges(String query) async {
+    final challenges = await getAllChallenges();
+    challenges.forEach((item) => print(item.name));
+    var result = challenges
+        .where((challenge) => challenge.name.toLowerCase().startsWith(query))
+        .toList();
+    return result;
+  }
 }
