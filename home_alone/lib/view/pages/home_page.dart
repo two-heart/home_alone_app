@@ -43,7 +43,7 @@ class MyHomePage extends StatelessWidget {
     BuildContext context,
   ) {
     return AppBar(
-      title: Text("Tolle Appbar"),
+      title: Text("Home Alone"),
       actions: _buildSearchAction(context),
     );
   }
@@ -89,7 +89,7 @@ class MyHomePage extends StatelessWidget {
               // model,
               locator.get<ChallengeApi>(),
               keyboardType: TextInputType.text,
-              searchFieldLabel: "Name ...",
+              searchFieldLabel: "Name der Challenge ...",
             ),
           );
         },
