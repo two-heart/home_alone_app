@@ -15,9 +15,9 @@ class HttpLoginService {
 
   Future<void> loginWithCredentials(LoginCredentials credentials) async {
     var response = await dio.get(
-      "$baseUrl/login",
+      "$baseUrl/auth/login",
       queryParameters: {
-        "email": credentials.email,
+        "username": credentials.email,
         "password": credentials.password,
       },
     );

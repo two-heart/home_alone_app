@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -14,6 +17,7 @@ import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 
 class DependencyInjection {
+
   static Future<void> setUp() async {
     await DotEnv().load('.env');
     _setUpServices();
@@ -23,8 +27,16 @@ class DependencyInjection {
 
   static const baseUrl = "www/";
 
+  static String token;
+
+
   static void _setUpServices() {
-    final dio = Dio();
+    var dio = Dio(BaseOptions(
+      connectTimeout: 5000,
+      receiveTimeout: 5000,
+    ));
+
+    dio = addInterceptors(dio);
 
     /*locator.registerSingleton<ChallengeApi>(
       HttpChallengeApi(
@@ -32,6 +44,10 @@ class DependencyInjection {
           dio: dio,
       )
     );*/
+
+
+
+
     locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
@@ -41,7 +57,35 @@ class DependencyInjection {
       dio: dio,
       baseUrl: baseUrl,
     ));
+
+
   }
+
+  static Dio addInterceptors(Dio dio) {
+    return dio
+      ..interceptors.add(InterceptorsWrapper(
+          onResponse: (Response response) => responseInterceptor(response),
+          onRequest: (RequestOptions options) => requestInterceptor(options),
+          onError: (DioError dioError) => {/*TODO*/}
+    ));
+
+  }
+
+  static dynamic responseInterceptor(Response options) async {
+    if (options.request.method != 'POST') return;
+    var data = jsonDecode(options.data);
+    if (data.containsKey('accessToken')) {
+      token = data['accessToken'];
+      print('received token');
+    }
+  }
+
+  static dynamic requestInterceptor(RequestOptions options) {
+    if (token == null) return;
+    options.headers.addAll({"Authorization": "Bearer " + token});
+    print('token set');
+  }
+
 
   static void _setUpViewModels() {
     locator.registerSingleton<AppModel>(AppModel());
