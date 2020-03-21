@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import 'package:home_alone/dependency_injection/dependency_injection.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
-import 'package:home_alone/viewmodel/weather_model.dart';
 
 void main() async {
   // debugPrintHitTestResults = true;
@@ -22,9 +21,11 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: locator.get<WeatherModel>(),
-      child: MaterialApp(
+    return 
+    // ChangeNotifierProvider.value(
+    //   value: locator.get<WeatherModel>(),
+    //   child: 
+      MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => LoginPage(),
           '/app': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
         },
-      ),
+      // ),
     );
   }
 }

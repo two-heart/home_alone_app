@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/store/login_store.dart';
+import 'package:home_alone/view/pages/home_page.dart';
 import 'package:provider/provider.dart';
 
 import 'package:home_alone/dependency_injection/locator.dart';
@@ -68,10 +69,12 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       onPressed: loginModel.isLoginButtonEnabled
-          ? () {
+          ? () async {
               // clear the current focus to dismiss the keyboard
               FocusScope.of(context).requestFocus(FocusNode());
-              locator.get<LoginStore>().onLoginButtonPressed();
+              await locator.get<LoginStore>().onLoginButtonPressed();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()));
             }
           : null,
     );
