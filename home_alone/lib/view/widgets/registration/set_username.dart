@@ -11,7 +11,6 @@ class SetUsername extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store = locator.get<RegistrationStore>();
     return Center(
       child: Container(
         width: 300,
