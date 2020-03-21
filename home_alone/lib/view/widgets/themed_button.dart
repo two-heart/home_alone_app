@@ -7,8 +7,11 @@ class ThemedButton extends StatelessWidget {
   final String text;
   final double textScaleFactor;
 
-  const ThemedButton(
-      {this.onPressed, this.text = "", this.textScaleFactor = 1.0});
+  const ThemedButton({
+    this.onPressed,
+    this.text = "",
+    this.textScaleFactor = 1.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +34,19 @@ class ThemedButton extends StatelessWidget {
                   ],
                 )),
             padding: const EdgeInsets.all(10.0),
-            child: Text(text,
-                textAlign: TextAlign.center,
-                textScaleFactor: textScaleFactor,
-                style: TextStyle(
-                    fontSize: HomeAloneDimensions.primaryButtonTextSize))),
+            child: _buildText()),
       ),
     );
+  }
+
+  Text _buildText() {
+    return Text(text,
+        textAlign: TextAlign.center,
+        textScaleFactor: textScaleFactor,
+        style: TextStyle(
+          fontSize: HomeAloneDimensions.primaryButtonTextSize,
+          fontWeight: FontWeight.bold,
+        ));
   }
 }
 
