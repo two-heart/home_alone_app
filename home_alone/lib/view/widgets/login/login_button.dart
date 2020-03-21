@@ -13,18 +13,9 @@ class LoginButton extends StatelessWidget {
           onPressed:
               loginModel.isLoginButtonEnabled ? () => _login(context) : null,
           text: "Einloggen",
-          
           textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
         ),
       );
-
-  // Text _buildText() {
-  //   return Text(
-  //     "Login",
-  //     style: TextStyle(color: Colors.white),
-  //     textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
-  //   );
-  // }
 
   void _login(BuildContext context) async {
     // clear the current focus to dismiss the keyboard

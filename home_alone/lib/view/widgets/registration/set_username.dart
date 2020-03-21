@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/registration_store.dart';
+import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 
@@ -40,8 +41,10 @@ class SetUsername extends StatelessWidget {
         style: Theme.of(context).textTheme.display1,
       );
 
-  Widget _buildQuestionText(BuildContext context) =>
-      Text("Wie willst du bei uns heißen?");
+  Widget _buildQuestionText(BuildContext context) => LabelText(
+        text: "Wie willst du bei uns heißen?",
+        fontWeight: FontWeight.bold,
+      );
 
   _buildUserNameTextField() {
     final store = locator.get<RegistrationStore>();
