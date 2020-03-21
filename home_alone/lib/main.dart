@@ -58,7 +58,6 @@ class MyApp extends StatelessWidget {
   _buildApp() => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        navigatorKey: GlobalKey(),
         theme: ThemeData(
           // primarySwatch: HomeAloneColors.mainGreen,„
           primaryColor: HomeAloneColors.primaryColor,
