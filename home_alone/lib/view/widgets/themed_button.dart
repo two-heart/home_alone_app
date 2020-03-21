@@ -30,7 +30,7 @@ class ThemedButton extends StatelessWidget {
             decoration: new BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(
                     HomeAloneDimensions.primaryButtonBorderRadius)),
-                gradient: new LinearGradient(
+                gradient: LinearGradient( // not sure if vertical or horizontal looks better
                   colors: [
                     HomeAloneColors.primaryButtonGradientStartColor,
                     HomeAloneColors.primaryButtonGradientEndColor,
