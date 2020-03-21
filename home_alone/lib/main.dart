@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:home_alone/view/pages/challenge_detail_page.dart';
 import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/pages/registration_page.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Baloo2',
         ),
         routes: {
-          '/': (context) => WelcomePage(),
+          '/': (context) => ChallengeDetail(),
           '/login': (context) => LoginPage(),
           '/register/setUsername': (context) => SetUsernamePage(),
           '/register': (context) => RegistrationPage(),
