@@ -11,7 +11,8 @@ class ChallengeListPage extends StatefulWidget {
   _ChallengeListPageState createState() => _ChallengeListPageState();
 }
 
-class _ChallengeListPageState extends State<ChallengeListPage> {
+class _ChallengeListPageState extends State<ChallengeListPage>
+    with AutomaticKeepAliveClientMixin {
   List<Challenge> data = [];
   RefreshController refreshController;
   bool isLoading = false;
@@ -129,4 +130,7 @@ class _ChallengeListPageState extends State<ChallengeListPage> {
             ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
