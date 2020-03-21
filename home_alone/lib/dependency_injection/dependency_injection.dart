@@ -17,7 +17,6 @@ import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 
 class DependencyInjection {
-
   static Future<void> setUp() async {
     await DotEnv().load('.env');
     _setUpServices();
@@ -42,9 +41,6 @@ class DependencyInjection {
       )
     );*/
 
-
-
-
     locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
@@ -54,8 +50,6 @@ class DependencyInjection {
       dio: dio,
       baseUrl: DotEnv().env['BASE_URL'],
     ));
-
-
   }
 
   static Dio addInterceptors(Dio dio) {
@@ -63,9 +57,7 @@ class DependencyInjection {
       ..interceptors.add(InterceptorsWrapper(
           onResponse: (Response response) => responseInterceptor(response),
           onRequest: (RequestOptions options) => requestInterceptor(options),
-          onError: (DioError dioError) => {/*TODO*/}
-    ));
-
+          onError: (DioError dioError) => {/*TODO*/}));
   }
 
   static dynamic responseInterceptor(Response options) async {
@@ -82,7 +74,6 @@ class DependencyInjection {
     options.headers.addAll({"Authorization": "Bearer " + token});
     print('token set');
   }
-
 
   static void _setUpViewModels() {
     locator.registerSingleton<AppModel>(AppModel());

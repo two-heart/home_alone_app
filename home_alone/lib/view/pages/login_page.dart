@@ -58,14 +58,14 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             _buildGreetingText(),
             SizedBox(height: 30),
-            _buildTexts(context),
+            _buildTextFields(context),
           ],
         ),
       );
 
   Widget _buildGreetingText() => ThemedText(text: "Willkommen zurück!");
 
-  Widget _buildTexts(BuildContext context) => Column(
+  Widget _buildTextFields(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _buildEmailTextField(context),
@@ -101,8 +101,8 @@ class _LoginPageState extends State<LoginPage> {
         // Possibly factor this out together with email field
         cursorColor: Theme.of(context).accentColor,
         controller: store.passwordController,
-        obscureText: true,
         onChanged: store.onPasswordTextChanged,
+        obscureText: true,
         decoration: new InputDecoration(
           errorText:
               hasError ? 'Nutzername und/oder Passwort nicht korrekt' : null,
@@ -118,12 +118,6 @@ class _LoginPageState extends State<LoginPage> {
         );
   }
 
-  Widget _buildRegisterButton(BuildContext context) => ThemedFlatButton(
-        text: 'Noch kein Account?\nJetzt registrieren!',
-        onPressed: () =>
-            Navigator.of(context).pushReplacementNamed("/register/setUsername"),
-      );
-
   _buildButtons(BuildContext context) => Column(
         children: <Widget>[
           LoginButton(
@@ -136,5 +130,11 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(height: 8),
           _buildRegisterButton(context),
         ],
+      );
+
+  Widget _buildRegisterButton(BuildContext context) => ThemedFlatButton(
+        text: 'Noch kein Account?\nJetzt registrieren!',
+        onPressed: () =>
+            Navigator.of(context).pushReplacementNamed("/register/setUsername"),
       );
 }
