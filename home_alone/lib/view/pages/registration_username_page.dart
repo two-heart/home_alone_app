@@ -3,6 +3,7 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/registration_store.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
+import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 import 'package:provider/provider.dart';
@@ -45,10 +46,7 @@ class SetUsernamePage extends StatelessWidget {
               _buildQuestionText(context),
               _buildUserNameTextField(context),
               Expanded(flex: 4, child: Container()),
-              Padding(
-                child: _buildApplyButton(model),
-                padding: EdgeInsets.only(bottom: 32),
-              ),
+              _buildButtons(model, context),
             ],
           ),
         ),
@@ -62,7 +60,7 @@ class SetUsernamePage extends StatelessWidget {
         fontWeight: FontWeight.bold,
       );
 
-  _buildUserNameTextField(context) {
+  Widget _buildUserNameTextField(context) {
     final store = locator.get<RegistrationStore>();
     return Padding(
       child: TextField(
@@ -79,16 +77,24 @@ class SetUsernamePage extends StatelessWidget {
     );
   }
 
-  Widget _buildApplyButton(model) => LayoutBuilder(
-        builder: (context, constraints) {
-          // Reset navigation stack and push home screen
-          var onPressed = model.usernameIsValid
-              ? () => Navigator.of(context).pushNamed("/register")
-              : null;
-          return ThemedButton(
-            onPressed: onPressed,
-            text: "Übernehmen und weiter",
-          );
-        },
+  _buildButtons(RegistrationModel model, BuildContext context) => Column(
+        children: <Widget>[
+          _buildApplyButton(context, model),
+          SizedBox(height: 8),
+          _buildLoginButton(context),
+        ],
+      );
+
+  Widget _buildApplyButton(BuildContext context, model) => ThemedButton(
+        text: "Übernehmen und weiter",
+        onPressed: model.usernameIsValid
+            ? () => Navigator.of(context).pushNamed("/register")
+            : null,
+      );
+
+  Widget _buildLoginButton(BuildContext context) => ThemedFlatButton(
+        text: 'Einloggen',
+        onPressed: () =>
+            Navigator.of(context).pushReplacementNamed("/register/setUsername"),
       );
 }

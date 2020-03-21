@@ -15,19 +15,21 @@ class WelcomePage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildTexts(context),
-          _buildRegisterButton(context),
-          _buildLoginButton(context),
-        ],
-      ),
-    ).withWeirdBall();
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildTexts(context),
+            _buildRegisterButton(context),
+            _buildLoginButton(context),
+          ],
+        ),
+      ).withWeirdBall(),
+    );
   }
 
   Widget _buildTexts(BuildContext context) => Expanded(
