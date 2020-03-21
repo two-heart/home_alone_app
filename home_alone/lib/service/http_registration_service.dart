@@ -14,11 +14,11 @@ class HttpRegistrationService {
 
   Future<void> registerUser(RegistrationCredentials credentials) async {
     var response = await dio.get(
-      "$baseUrl/register",
+      "$baseUrl/auth/register",
       queryParameters: {
+        "displayedName": credentials.username,
         "email": credentials.email,
-        "password": credentials.password,
-        "username": credentials.username
+        "plainPassword": credentials.password,
       },
     );
 
