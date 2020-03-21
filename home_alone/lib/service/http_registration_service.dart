@@ -24,10 +24,8 @@ class HttpRegistrationService {
           "plainPassword": credentials.password,
         },
       );
-      return response.evaluate((item) => item);
     } catch (err) {
       final error = err as DioError;
-      return error.response.evaluate((item) => item);
     }
   }
 }

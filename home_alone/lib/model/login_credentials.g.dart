@@ -8,13 +8,13 @@ part of 'login_credentials.dart';
 
 LoginCredentials _$LoginCredentialsFromJson(Map<String, dynamic> json) {
   return LoginCredentials(
-    json['email'] as String,
+    json['username'] as String,
     json['password'] as String,
   );
 }
 
 Map<String, dynamic> _$LoginCredentialsToJson(LoginCredentials instance) =>
     <String, dynamic>{
-      'email': instance.email,
+      'username': instance.username,
       'password': instance.password,
     };

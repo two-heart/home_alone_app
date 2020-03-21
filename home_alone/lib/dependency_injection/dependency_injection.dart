@@ -17,7 +17,6 @@ import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 
 class DependencyInjection {
-
   static Future<void> setUp() async {
     await DotEnv().load('.env');
     _setUpServices();
@@ -29,6 +28,7 @@ class DependencyInjection {
 
   static void _setUpServices() {
     var dio = Dio(BaseOptions(
+      receiveDataWhenStatusError: true,
       connectTimeout: 5000,
       receiveTimeout: 5000,
     ));
@@ -42,9 +42,6 @@ class DependencyInjection {
       )
     );*/
 
-
-
-
     locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
@@ -54,8 +51,6 @@ class DependencyInjection {
       dio: dio,
       baseUrl: DotEnv().env['BASE_URL'],
     ));
-
-
   }
 
   static Dio addInterceptors(Dio dio) {
@@ -63,26 +58,26 @@ class DependencyInjection {
       ..interceptors.add(InterceptorsWrapper(
           onResponse: (Response response) => responseInterceptor(response),
           onRequest: (RequestOptions options) => requestInterceptor(options),
-          onError: (DioError dioError) => {/*TODO*/}
-    ));
-
+          onError: (DioError dioError) => dioError));
   }
 
   static dynamic responseInterceptor(Response options) async {
-    if (options.request.method != 'POST') return;
-    var data = jsonDecode(options.data);
-    if (data.containsKey('accessToken')) {
-      token = data['accessToken'];
-      print('received token');
+    if (options.request.method != 'POST') return options;
+    if (options.statusCode < 299) {
+      var data = options.data as Map<String, dynamic>;
+      if (data.containsKey('accessToken')) {
+        token = data['accessToken'];
+      }
     }
+    return options;
   }
 
   static dynamic requestInterceptor(RequestOptions options) {
-    if (token == null) return;
+    if (token == null) return options;
     options.headers.addAll({"Authorization": "Bearer " + token});
     print('token set');
+    return options;
   }
-
 
   static void _setUpViewModels() {
     locator.registerSingleton<AppModel>(AppModel());

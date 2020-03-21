@@ -6,6 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:home_alone/model/login_credentials.dart';
 import 'package:home_alone/service/ext.dart';
 
+class LoginResponse {
+  final int statusCode;
+  LoginResponse(this.statusCode);
+  factory LoginResponse.error() => LoginResponse(500);
+}
+
 class HttpLoginService {
   final Dio dio;
   final String baseUrl;
@@ -15,19 +21,22 @@ class HttpLoginService {
     @required this.baseUrl,
   });
 
-  Future<bool> loginWithCredentials(LoginCredentials credentials) async {
+  Future<LoginResponse> loginWithCredentials(
+      LoginCredentials credentials) async {
     try {
-      var response = await dio.post(
+      final response = await dio.post(
         "$baseUrl/auth/login",
-        data: {
-          "username": credentials.email,
-          "password": credentials.password,
-        },
+        data: credentials.toJson(),
       );
-      return response.evaluate(((item) => item));
+
+      return LoginResponse(response.statusCode);
     } catch (error) {
-      final dioError = error as DioError;
-      return dioError.response.evaluate((item) => item);
+      if (error is DioError) {
+        if (error.response != null) {
+          return LoginResponse(error.response.statusCode);
+        }
+      }
+      return LoginResponse.error();
     }
   }
 }

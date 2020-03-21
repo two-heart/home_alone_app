@@ -15,7 +15,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool hasError = false;
+  TextEditingController emailController;
+  TextEditingController passwordController;
+
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +93,9 @@ class _LoginPageState extends State<LoginPage> {
     final store = locator.get<LoginStore>();
     return TextField(
       cursorColor: Theme.of(context).accentColor,
-      controller: store.emailController,
+      controller: emailController,
       decoration: new InputDecoration(
-        errorText:
-            hasError ? 'Nutzername und/oder Passwort nicht korrekt' : null,
+        errorText: store.hasError ? store.errorMessage : null,
         border: new OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             const Radius.circular(10.0),
@@ -100,12 +114,11 @@ class _LoginPageState extends State<LoginPage> {
     return TextField(
         // Possibly factor this out together with email field
         cursorColor: Theme.of(context).accentColor,
-        controller: store.passwordController,
+        controller: passwordController,
         obscureText: true,
         onChanged: store.onPasswordTextChanged,
         decoration: new InputDecoration(
-          errorText:
-              hasError ? 'Nutzername und/oder Passwort nicht korrekt' : null,
+          errorText: store.hasError ? store.errorMessage : null,
           border: new OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(10.0),
@@ -126,13 +139,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _buildButtons(BuildContext context) => Column(
         children: <Widget>[
-          LoginButton(
-            loginFailed: () => {
-              setState(() {
-                hasError = true;
-              })
-            },
-          ),
+          LoginButton(),
           SizedBox(height: 8),
           _buildRegisterButton(context),
         ],

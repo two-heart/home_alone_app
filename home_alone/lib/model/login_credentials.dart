@@ -5,10 +5,10 @@ part 'login_credentials.g.dart';
 @JsonSerializable(nullable: true)
 class LoginCredentials {
   LoginCredentials(
-    this.email,
+    this.username,
     this.password,
   );
-  final String email;
+  final String username;
   final String password;
 
   factory LoginCredentials.fromJson(Map<String, dynamic> json) =>

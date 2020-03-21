@@ -7,8 +7,7 @@ import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:provider/provider.dart';
 
 class LoginButton extends StatelessWidget {
-  Function loginFailed;
-  LoginButton({@required this.loginFailed});
+  LoginButton();
 
   @override
   Widget build(BuildContext context) => Consumer<LoginModel>(
@@ -25,11 +24,9 @@ class LoginButton extends StatelessWidget {
     FocusScope.of(context).requestFocus(FocusNode());
 
     final loginResult = await locator.get<LoginStore>().onLoginButtonPressed();
-    if (loginResult) {
+    if (loginResult.success) {
       // Reset navigation stack and push home screen
       Navigator.of(context).pushNamedAndRemoveUntil("/home", (route) => false);
-    } else {
-      this.loginFailed();
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/ext.dart';
 
 typedef ResultMapper<T> = T Function(dynamic data);
-enum ResponseErrorType { NOT_AUTHENTICATED, FORBIDDEN, SERVER_ERROR }
+enum ResponseType { NOT_AUTHENTICATED, FORBIDDEN, SERVER_ERROR }
 
 class HttpChallengeApi implements ChallengeApi {
   String baseUrl;
