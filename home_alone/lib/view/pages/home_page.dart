@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/city_search_delegate.dart';
+import 'package:home_alone/view/pages/dashboard_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
+import 'package:home_alone/view/pages/profile_page.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'challenge_list_page.dart';
@@ -50,8 +52,8 @@ class MyHomePage extends StatelessWidget {
       controller: _refreshController,
       onRefresh: _onRefresh,
       child: TabBarView(children: [
-        LoginPage(),
-        LoginPage(),
+        DashboardPage(),
+        ProfilePage(),
         ChallengeListPage(),
       ]),
     );
@@ -68,9 +70,9 @@ class MyHomePage extends StatelessWidget {
       );
 
   final _navigationItems = <Widget>[
-    Tab(icon: Icon(Icons.cloud), text: "Login"),
-    Tab(icon: Icon(Icons.cloud), text: "Noch mal Login"),
-    Tab(icon: Icon(Icons.cloud), text: "Challenges"),
+    Tab(icon: Icon(Icons.home), text: "Dashboard"),
+    Tab(icon: Icon(Icons.person), text: "Profil"),
+    Tab(icon: Icon(Icons.queue), text: "Challenges"),
   ];
 
   List<Widget> _buildSearchAction(
