@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          fontFamily: 'Ballo2',
+          fontFamily: 'Baloo2',
         ),
         routes: {
           '/': _buildPage,
