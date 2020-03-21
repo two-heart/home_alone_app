@@ -45,6 +45,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  # custom app fonts
+  fonts:
+    - family: Baloo2
+      fonts:
+        - asset: assets/Baloo2-Bold.ttf
+        - asset: assets/Baloo2-ExtraBold.ttf
+        - asset: assets/Baloo2-Medium.ttf
+        - asset: assets/Baloo2-Regular.ttf
+        - asset: assets/Baloo2-SemiBold.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
