@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/store/login_store.dart';
 import 'package:provider/provider.dart';
 
 import 'package:home_alone/dependency_injection/locator.dart';
@@ -68,18 +69,27 @@ class LoginPage extends StatelessWidget {
           ? () {
               // clear the current focus to dismiss the keyboard
               FocusScope.of(context).requestFocus(FocusNode());
-              //TODO: perform login
+              locator.get<LoginStore>().onLoginButtonPressed();
             }
           : null,
     );
   }
 
   Widget _buildEmailTextField(BuildContext context, LoginModel loginModel) {
-    return TextField();
+    final store = locator.get<LoginStore>();
+    return TextField(
+      controller: store.emailController,
+      onChanged: store.onEmailTextChanged,
+    );
   }
 
   Widget _buildPasswordTextField(BuildContext context, LoginModel loginModel) {
-    return TextField();
+    final store = locator.get<LoginStore>();
+    return TextField(
+      controller: store.passwordController,
+      obscureText: true,
+      onChanged: store.onPasswordTextChanged,
+    );
   }
 }
 
