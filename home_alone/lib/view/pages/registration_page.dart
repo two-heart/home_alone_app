@@ -126,7 +126,7 @@ class RegistrationPage extends StatelessWidget {
       ThemedButton(
         onPressed:
             model.registerButtonIsEnabled ? () => _registerUser(context) : null,
-        text: "Übernehmen und weiter",
+        text: "Zugangsdaten speichern",
       );
 
   Widget _buildLoginButton(BuildContext context) => ThemedFlatButton(
