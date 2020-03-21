@@ -129,11 +129,11 @@ class _ChallengeListPageState extends State<ChallengeListPage> {
                     child: ListTile(
                       title: Text(
                         challenge.name,
-                        style: TextStyle(color: Colors.black87),
+                        style: TextStyle(color: Colors.black87, fontSize: 24),
                       ),
                       subtitle: Text(
                         challenge.description,
-                        style: TextStyle(color: Colors.black87),
+                        style: TextStyle(color: Colors.black87, fontSize: 14),
                       ),
                     ),
                   ),
