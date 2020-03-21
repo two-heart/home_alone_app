@@ -51,19 +51,21 @@ class LoginPage extends StatelessWidget {
       );
 
   RaisedButton _buildLoginButton(BuildContext context, LoginModel loginModel) {
-    return RaisedButton(
+    return
+      RaisedButton(
       child: Text(
         "Login",
         style: TextStyle(),
         textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
       ),
-      color: Colors.red,
+      color: Theme.of(context).buttonColor,
       padding: EdgeInsets.symmetric(
           horizontal: HomeAloneDimensions.loginButtonVerticalPadding,
           vertical: HomeAloneDimensions.loginButtonVerticalPadding),
       shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(50.0),
-        side: BorderSide(color: Colors.red),
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(10.0),
+        ),
       ),
       onPressed: loginModel.isLoginButtonEnabled
           ? () {
@@ -87,7 +89,7 @@ class LoginPage extends StatelessWidget {
           ),
           filled: false,
           hintStyle: new TextStyle(color: Theme.of(context).hintColor),
-          hintText: "Username",),
+          hintText: "Username",),//TODO i18n
       onChanged: store.onEmailTextChanged,
     );
   }
@@ -106,7 +108,7 @@ class LoginPage extends StatelessWidget {
           ),
           filled: false,
           hintStyle: new TextStyle(color: Theme.of(context).hintColor),
-          hintText: "Password",)
+          hintText: "Password",) //TODO i18n
     );
   }
 }
