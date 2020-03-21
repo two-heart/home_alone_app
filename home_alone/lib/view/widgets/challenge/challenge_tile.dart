@@ -19,12 +19,9 @@ class ChallengeTile extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, 'challenge', arguments: challenge);
               },
-              title: Hero(
-                tag: "challengeTitle",
-                child: Text(
-                  challenge.name,
-                  style: TextStyle(color: Colors.black87, fontSize: 24),
-                ),
+              title: Text(
+                challenge.name,
+                style: TextStyle(color: Colors.black87, fontSize: 24),
               ),
               subtitle: Text(
                 challenge.description,

@@ -43,10 +43,7 @@ class ChallengeDetail extends StatelessWidget {
   }
 
   List<Widget> _buildText(Challenge challenge) {
-    return [
-      Hero(tag: "challenge_tile", child: ThemedText(text: challenge.name)),
-      Hero(tag: "challenge_description", child: Text(challenge.description))
-    ];
+    return [ThemedText(text: challenge.name), Text(challenge.description)];
   }
 
   Widget _buildSlider(BuildContext context, _value) {
