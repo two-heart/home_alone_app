@@ -1,8 +1,6 @@
-image: cirrusci/flutter:stable
-
 stages:
   - test
-  - build
+  - package
 
 before_script:
   - cd home_alone
@@ -12,17 +10,11 @@ before_script:
 after_script:
   - cd ..
 
-test:
-  stage: test
-  script:
-    - flutter test test/*
-  tags:
-    - docker
-
-build:android:
+package:android:
+  image: registry.gitlab.com/home_alone_hack/app:latest
   dependencies:
     - test
-  stage: build
+  stage: package
   script:
     - flutter build apk
     - cp build/app/outputs/apk/release/app-release.apk ../home_alone.apk
@@ -35,13 +27,13 @@ build:android:
     - docker
 
 
-build:ios:
+package:ios:
   dependencies:
     - test
-  stage: build
+  stage: package
   script:
     - flutter build ios
-    - mv build/ios/iphoneos/Runner.app ../
+    - mv build/ios/iphoneos/Runner.app $PWD/..
   artifacts:
     when: always
     expire_in: 1 day
