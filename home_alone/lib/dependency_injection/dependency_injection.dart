@@ -72,6 +72,7 @@ class DependencyInjection {
   }
 
   dynamic requestInterceptor(RequestOptions options) {
+    if (token ==null) return DioError(); //TODO
     options.headers.addAll({"Authorization": "Bearer " + token});
   }
 
