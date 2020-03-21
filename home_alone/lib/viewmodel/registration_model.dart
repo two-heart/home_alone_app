@@ -9,7 +9,7 @@ class RegistrationModel extends ChangeNotifier {
       email?.isNotEmpty == true &&
       password?.isNotEmpty == true;
 
-  bool _registrationHasError = true;
+  bool _registrationHasError = false;
   bool get registrationHasError => _registrationHasError;
   set registrationHasError(bool value) {
     _registrationHasError = value;
@@ -33,7 +33,6 @@ class RegistrationModel extends ChangeNotifier {
   String _username;
   String get username => _username;
   set username(String value) {
-    
     _username = value;
     notifyListeners();
   }

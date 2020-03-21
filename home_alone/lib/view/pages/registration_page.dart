@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/registration_store.dart';
-import 'package:home_alone/view/theme/dime.dart';
+import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
@@ -9,14 +9,20 @@ import 'package:home_alone/viewmodel/registration_model.dart';
 import 'package:provider/provider.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends StatefulWidget {
+  @override
+  _RegistrationPageState createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage>
+    with AwfulKeyboardMixin {
   bool isStarted = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Benutzer registrieren")),
-      body: SafeArea(child: _buildBody()),
+      body: SafeArea(child: _buildBody().withAwfulKeyboardFix(this)),
     );
   }
 

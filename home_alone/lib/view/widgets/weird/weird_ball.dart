@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/theme/dime.dart';
 
 class WeirdBall extends StatelessWidget {
@@ -56,5 +57,17 @@ extension WeirdBallExtension on Widget {
         builder != null ? builder(this) : this
       ],
     );
+  }
+}
+
+extension AwfulKeyboardFix on Widget {
+  Widget withAwfulKeyboardFix(AwfulKeyboardMixin mixin,
+      {ParentWidgetBuilder builder}) {
+    return LayoutBuilder(builder: (context, constraints) {
+      return SingleChildScrollView(
+          child: Container(
+              height: mixin.getContentHeightForAwfulKeyboard(constraints),
+              child: this));
+    });
   }
 }

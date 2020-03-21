@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/registration_store.dart';
+import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 import 'package:provider/provider.dart';
+import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
-class SetUsernamePage extends StatelessWidget {
+class SetUsernamePage extends StatefulWidget {
+  @override
+  _SetUsernamePageState createState() => _SetUsernamePageState();
+}
+
+class _SetUsernamePageState extends State<SetUsernamePage>
+    with AwfulKeyboardMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +33,7 @@ class SetUsernamePage extends StatelessWidget {
           builder: _buildContent,
         ),
       ),
-    );
+    ).withAwfulKeyboardFix(this);
   }
 
   Widget _buildContent(

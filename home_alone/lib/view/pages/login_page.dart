@@ -21,12 +21,12 @@ class AwfulKeyboardMixin {
   }
 }
 
-class LoginPage extends StatefulWidget with AwfulKeyboardMixin {
+class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with AwfulKeyboardMixin {
   TextEditingController emailController;
   TextEditingController passwordController;
 
@@ -54,27 +54,19 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        var container = SingleChildScrollView(
-            child: Container(
-          height: getContentHeightForAwfulKeyboard(constraints),
-          child: SafeArea(
-            child: Center(
-              child: ChangeNotifierProvider.value(
-                value: locator.get<LoginModel>(),
-                child: Builder(
-                  builder: (context) => _buildContent(context).withWeirdBall(
-                    builder: (child) => Center(child: child),
-                  ),
-                ),
-              ),
+    var container = SafeArea(
+      child: Center(
+        child: ChangeNotifierProvider.value(
+          value: locator.get<LoginModel>(),
+          child: Builder(
+            builder: (context) => _buildContent(context).withWeirdBall(
+              builder: (child) => Center(child: child),
             ),
           ),
-        ));
-        return container;
-      },
+        ),
+      ),
     );
+    return container.withAwfulKeyboardFix(this);
   }
 
   Widget _buildContent(BuildContext context) => Padding(
