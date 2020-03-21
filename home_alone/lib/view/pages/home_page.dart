@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/city_search_delegate.dart';
+import 'package:home_alone/view/pages/dashboard_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
+import 'package:home_alone/view/pages/profile_page.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -34,7 +36,9 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context,) {
+  AppBar _buildAppBar(
+    BuildContext context,
+  ) {
     return AppBar(
       title: Text("Tolle Appbar"),
       actions: _buildSearchAction(context),
@@ -46,8 +50,8 @@ class MyHomePage extends StatelessWidget {
       controller: _refreshController,
       onRefresh: _onRefresh,
       child: TabBarView(children: [
-        LoginPage(),
-        LoginPage(),
+        DashboardPage(),
+        ProfilePage(),
         LoginPage(),
       ]),
     );
@@ -64,12 +68,14 @@ class MyHomePage extends StatelessWidget {
       );
 
   final _navigationItems = <Widget>[
-    Tab(icon: Icon(Icons.cloud), text: "Login"),
-    Tab(icon: Icon(Icons.cloud), text: "Noch mal Login"),
+    Tab(icon: Icon(Icons.home), text: "Dashboard"),
+    Tab(icon: Icon(Icons.person), text: "Profil"),
     Tab(icon: Icon(Icons.cloud), text: "Ändere mich!"),
   ];
 
-  List<Widget> _buildSearchAction(BuildContext context, ) {
+  List<Widget> _buildSearchAction(
+    BuildContext context,
+  ) {
     return <Widget>[
       IconButton(
         icon: Icon(Icons.search),
