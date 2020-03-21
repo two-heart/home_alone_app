@@ -1,5 +1,5 @@
 class RegistrationResponse {
-  RegistrationResponse({this.successful});
+  RegistrationResponse({this.isSuccessful});
 
-  final bool successful;
+  final bool isSuccessful;
 }

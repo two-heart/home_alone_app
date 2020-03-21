@@ -61,7 +61,8 @@ class WelcomePage extends StatelessWidget {
 
   Widget _buildRegisterButton() => LayoutBuilder(
         builder: (context, constraints) => ThemedButton(
-          onPressed: () => Navigator.of(context).pushNamed("/register"),
+          onPressed: () =>
+              Navigator.of(context).pushNamed("/register/setUsername"),
           text: 'Registieren',
         ),
       );
