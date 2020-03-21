@@ -9,7 +9,14 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool hasError = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +80,8 @@ class LoginPage extends StatelessWidget {
       cursorColor: Theme.of(context).accentColor,
       controller: store.emailController,
       decoration: new InputDecoration(
+        errorText:
+            hasError ? 'Nutzername und/oder Passwort nicht korrekt' : null,
         border: new OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             const Radius.circular(10.0),
@@ -95,6 +104,8 @@ class LoginPage extends StatelessWidget {
         obscureText: true,
         onChanged: store.onPasswordTextChanged,
         decoration: new InputDecoration(
+          errorText:
+              hasError ? 'Nutzername und/oder Passwort nicht korrekt' : null,
           border: new OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(10.0),
@@ -115,7 +126,13 @@ class LoginPage extends StatelessWidget {
 
   _buildButtons(BuildContext context) => Column(
         children: <Widget>[
-          LoginButton(),
+          LoginButton(
+            loginFailed: () => {
+              setState(() {
+                hasError = true;
+              })
+            },
+          ),
           SizedBox(height: 8),
           _buildRegisterButton(context),
         ],
