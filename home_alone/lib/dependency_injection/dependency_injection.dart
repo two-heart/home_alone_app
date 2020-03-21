@@ -25,10 +25,7 @@ class DependencyInjection {
     _setUpStores();
   }
 
-  static const baseUrl = "www/";
-
   static String token;
-
 
   static void _setUpServices() {
     var dio = Dio(BaseOptions(
@@ -51,11 +48,11 @@ class DependencyInjection {
     locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
-      baseUrl: baseUrl,
+      baseUrl: DotEnv().env['BASE_URL'],
     ));
     locator.registerSingleton<HttpLoginService>(HttpLoginService(
       dio: dio,
-      baseUrl: baseUrl,
+      baseUrl: DotEnv().env['BASE_URL'],
     ));
 
 
