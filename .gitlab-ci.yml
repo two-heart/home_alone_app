@@ -10,6 +10,15 @@ before_script:
 after_script:
   - cd ..
 
+test:
+  image: registry.gitlab.com/home_alone_hack/app:latest
+  stage: test
+  script:
+    - flutter test test/*
+  tags:
+    - docker
+  
+
 package:android:
   image: registry.gitlab.com/home_alone_hack/app:latest
   dependencies:
