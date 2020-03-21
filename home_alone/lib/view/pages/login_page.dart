@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/viewmodel/login_model.dart';
+import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -26,7 +27,8 @@ class LoginPage extends StatelessWidget {
       child: ChangeNotifierProvider.value(
         value: locator.get<LoginModel>(),
         child: Builder(
-          builder: (context) => _buildContent(context),
+          builder: (context) => _buildContent(context)
+              .withWeirdBall(builder: (child) => Center(child: child)),
         ),
       ),
     );
@@ -49,6 +51,7 @@ class LoginPage extends StatelessWidget {
   Widget _buildEmailTextField(BuildContext context) {
     final store = locator.get<LoginStore>();
     return TextField(
+      cursorColor: Theme.of(context).accentColor,
       controller: store.emailController,
       decoration: new InputDecoration(
         border: new OutlineInputBorder(
@@ -68,6 +71,7 @@ class LoginPage extends StatelessWidget {
     final store = locator.get<LoginStore>();
     return TextField(
         // Possibly factor this out together with email field
+        cursorColor: Theme.of(context).accentColor,
         controller: store.passwordController,
         obscureText: true,
         onChanged: store.onPasswordTextChanged,

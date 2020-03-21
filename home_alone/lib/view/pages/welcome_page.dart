@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:home_alone/dependency_injection/locator.dart';
+import 'package:home_alone/view/theme/dime.dart';
+import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
-import 'package:home_alone/viewmodel/app_model.dart';
+import 'package:home_alone/view/widgets/themed_flat_button.dart';
+import 'package:home_alone/view/widgets/themed_text.dart';
+import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -13,19 +16,19 @@ class WelcomePage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Center(
-        child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _buildTexts(context),
-                _buildRegisterButton(),
-                _buildLoginButton(),
-              ],
-            )));
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildTexts(context),
+          _buildRegisterButton(),
+          _buildLoginButton(),
+        ],
+      ),
+    ).withWeirdBall();
   }
 
   Widget _buildTexts(BuildContext context) => Expanded(
@@ -39,34 +42,30 @@ class WelcomePage extends StatelessWidget {
         ),
       );
 
-  Widget _buildWelcomeText(BuildContext context) => Text(
-        'Willkommen bei Home Alone!',
-        style: Theme.of(context).textTheme.display2,
-        textAlign: TextAlign.center,
+  Widget _buildWelcomeText(BuildContext context) => Column(
+        children: <Widget>[
+          ThemedText(text: 'Willkommen bei'),
+          ThemedText(text: "Home Alone!")
+        ],
       );
 
-  Widget _buildWelcomeExplanation(BuildContext context) => Text(
-        "Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen un dich selbst herausfordern kannst",
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.subhead,
-      );
+  Widget _buildWelcomeExplanation(BuildContext context) => LabelText(
+      text:
+          'Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen un dich selbst herausfordern kannst');
 
-  Widget _buildLoginButton() => SizedBox(
-      width: double.infinity,
-      child: LayoutBuilder(
-        builder: (context, constraints) => FlatButton(
-            child: Text("Login"),
+  Widget _buildLoginButton() => LayoutBuilder(
+        builder: (context, constraints) => ThemedFlatButton(
+            text: 'Einloggen',
             onPressed: () => Navigator.of(context).pushNamed("/login")),
-      ));
+      );
 
-  Widget _buildRegisterButton() => SizedBox(
-      width: double.infinity,
-      child: LayoutBuilder(
+  Widget _buildRegisterButton() => LayoutBuilder(
         builder: (context, constraints) => ThemedButton(
-          onPressed: () => Navigator.of(context).pushNamed("/register"),
-          child: Text('Registieren'),
+          onPressed: () =>
+              Navigator.of(context).pushNamed("/register/setUsername"),
+          text: 'Registieren',
         ),
-      ));
+      );
 
   AppBar _buildAppBar() {
     return AppBar(title: Text('App Logo'));

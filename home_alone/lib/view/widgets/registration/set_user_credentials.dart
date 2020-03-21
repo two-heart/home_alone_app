@@ -29,7 +29,7 @@ class SetUserCredentials extends StatelessWidget {
         onPressed: model.usernameIsValid
             ? locator.get<RegistrationStore>().goToNextStep
             : null,
-        child: Text("Übernehmen und weiter"),
+        text: "Übernehmen und weiter",
       );
 
   _buildGreetingText(BuildContext context) {

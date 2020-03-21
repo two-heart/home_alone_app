@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/login_store.dart';
-import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/viewmodel/login_model.dart';
@@ -13,17 +12,10 @@ class LoginButton extends StatelessWidget {
         builder: (context, loginModel, _) => ThemedButton(
           onPressed:
               loginModel.isLoginButtonEnabled ? () => _login(context) : null,
-          child: _buildText(),
+          text: "Einloggen",
+          textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
         ),
       );
-
-  Text _buildText() {
-    return Text(
-      "Login",
-      style: TextStyle(color: Colors.white),
-      textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
-    );
-  }
 
   void _login(BuildContext context) async {
     // clear the current focus to dismiss the keyboard

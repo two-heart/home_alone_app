@@ -3,7 +3,9 @@ import 'package:flutter/physics.dart';
 import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/pages/registration_page.dart';
+import 'package:home_alone/view/pages/registration_username_page.dart';
 import 'package:home_alone/view/pages/welcome_page.dart';
+import 'package:home_alone/view/theme/colors.dart';
 import 'package:home_alone/viewmodel/app_model.dart';
 
 import 'package:provider/provider.dart';
@@ -58,13 +60,21 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          // primarySwatch: HomeAloneColors.mainGreen,„
+          primaryColor: HomeAloneColors.primaryColor,
+          primaryColorDark: HomeAloneColors.primaryDarkColor,
+          primaryColorLight: HomeAloneColors.primaryLightColor,
+          accentColor: HomeAloneColors.primaryLightColor,
+
+          fontFamily: 'Baloo2',
         ),
         routes: {
           '/': (context) => WelcomePage(),
           '/login': (context) => LoginPage(),
+          '/register/setUsername': (context) => SetUsernamePage(),
           '/register': (context) => RegistrationPage(),
           '/home': (context) => MyHomePage(),
         },
+        initialRoute: '/',
       );
 }

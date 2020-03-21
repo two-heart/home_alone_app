@@ -1,31 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:home_alone/dependency_injection/locator.dart';
-import 'package:home_alone/store/login_store.dart';
+import 'package:home_alone/view/theme/colors.dart';
 import 'package:home_alone/view/theme/dime.dart';
 
 class ThemedButton extends StatelessWidget {
   final Function onPressed;
-  final Widget child;
+  final String text;
+  final double textScaleFactor;
 
   const ThemedButton({
     this.onPressed,
-    this.child,
+    this.text = "",
+    this.textScaleFactor = 1.0,
   });
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: onPressed,
-      color: Theme.of(context).accentColor,
-      padding: EdgeInsets.symmetric(
-          horizontal: HomeAloneDimensions.loginButtonVerticalPadding,
-          vertical: HomeAloneDimensions.loginButtonVerticalPadding),
-      shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(10.0),
-        ),
+    return Container(
+      color: Colors.transparent,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+                HomeAloneDimensions.primaryButtonBorderRadius)),
+        color: Colors.transparent,
+        onPressed: onPressed,
+        textColor: HomeAloneColors.primaryButtonTextColor,
+        padding: const EdgeInsets.all(0.0),
+        child: Container(
+            width: 300,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(
+                    HomeAloneDimensions.primaryButtonBorderRadius)),
+                gradient: LinearGradient(
+                  colors: [
+                    HomeAloneColors.primaryButtonGradientStartColor,
+                    HomeAloneColors.primaryButtonGradientEndColor,
+                  ],
+                )),
+            padding: const EdgeInsets.all(10.0),
+            child: _buildText()),
       ),
-      child: child,
     );
   }
+
+  Text _buildText() {
+    return Text(text,
+        textAlign: TextAlign.center,
+        textScaleFactor: textScaleFactor,
+        style: TextStyle(
+          fontSize: HomeAloneDimensions.primaryButtonTextSize,
+          fontWeight: FontWeight.bold,
+        ));
+  }
 }
+
+/**
+ *
+ * EdgeInsets.symmetric(
+    horizontal: HomeAloneDimensions.loginButtonVerticalPadding,
+    vertical: HomeAloneDimensions.loginButtonVerticalPadding)
+ */

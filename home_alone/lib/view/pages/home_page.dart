@@ -5,6 +5,7 @@ import 'package:home_alone/service/challenge_search_delegate.dart';
 import 'package:home_alone/view/pages/dashboard_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/pages/profile_page.dart';
+import 'package:home_alone/view/theme/colors.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'challenge_list_page.dart';
@@ -48,7 +49,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  SmartRefresher _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context) {
     return SmartRefresher(
       controller: _refreshController,
       onRefresh: _onRefresh,
@@ -61,11 +62,23 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _buildTabBar(BuildContext context) => Container(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).primaryColor,
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         child: TabBar(
-          indicatorColor: Colors.orange,
+          indicator: ShapeDecoration(
+              shape: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 0,
+                      style: BorderStyle.solid)),
+              gradient: LinearGradient(
+                colors: [
+                  HomeAloneColors.primaryButtonGradientStartColor,
+                  HomeAloneColors.primaryButtonGradientEndColor,
+                ],
+              )),
           unselectedLabelColor: Colors.white,
-          labelColor: Colors.orange,
+          labelColor: Theme.of(context).hintColor,
           tabs: _navigationItems,
         ),
       );
