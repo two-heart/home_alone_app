@@ -23,6 +23,12 @@ class _ChallengeListPageState extends State<ChallengeListPage> {
     _onRefresh();
   }
 
+  @override
+  void dispose() {
+    refreshController.dispose();
+    super.dispose();
+  }
+
   void _onRefresh() async {
     setState(() {
       isLoading = true;

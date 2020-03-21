@@ -70,7 +70,6 @@ class MyHomePage extends StatelessWidget {
   final _navigationItems = <Widget>[
     Tab(icon: Icon(Icons.cloud), text: "Login"),
     Tab(icon: Icon(Icons.cloud), text: "Noch mal Login"),
-    Tab(icon: Icon(Icons.cloud), text: "Ändere mich!"),
     Tab(icon: Icon(Icons.cloud), text: "Challenges"),
   ];
 

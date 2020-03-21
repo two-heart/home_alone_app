@@ -19,12 +19,12 @@ class DependencyInjection {
   static void _setUpServices() {
     final dio = Dio();
 
-    locator.registerSingleton<ChallengeApi>(
+    /*locator.registerSingleton<ChallengeApi>(
       HttpChallengeApi(
           baseUrl: DotEnv().env['BASE_URL'],
           dio: dio,
       )
-    );
+    );*/
     locator.registerSingleton<ChallengeApi>(
       FakeChallengeApi(),
     );
