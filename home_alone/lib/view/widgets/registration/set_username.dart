@@ -16,10 +16,14 @@ class SetUsername extends StatelessWidget {
         width: 300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            Expanded(flex: 4, child: Container()),
             _buildGreetingText(context),
+            Expanded(flex: 1, child: Container()),
+            _buildQuestionText(context),
             _buildUserNameTextField(),
-            Expanded(child: Container()),
+            Expanded(flex: 4, child: Container()),
             _buildApplyButton(),
           ],
         ),
@@ -29,15 +33,26 @@ class SetUsername extends StatelessWidget {
 
   Widget _buildGreetingText(BuildContext context) => Text(
         "Super dich an Board zu haben!",
+        textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.display1,
       );
 
+  Widget _buildQuestionText(BuildContext context) =>
+      Text("Wie willst du bei uns heißen?");
+
   _buildUserNameTextField() {
     final store = locator.get<RegistrationStore>();
-    return TextField(
-      decoration: InputDecoration(labelText: "Lege einen Benutzername fest:"),
-      controller: store.userNameController,
-      onChanged: (t) => store.registrationModel.username = t,
+    return Padding(
+      child: TextField(
+        decoration: InputDecoration(
+            fillColor: Color(0xF4F4F4),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xF4F4F4))),
+            labelText: "Lege einen Benutzername fest:"),
+        controller: store.userNameController,
+        onChanged: (t) => store.registrationModel.username = t,
+      ),
+      padding: EdgeInsets.only(top: 12),
     );
   }
 
@@ -50,7 +65,11 @@ class SetUsername extends StatelessWidget {
               : null;
           return ThemedButton(
             onPressed: onPressed,
-            child: Text("Übernehmen und weiter"),
+            child: Text(
+              "Übernehmen und weiter",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
+            ),
           );
         },
       );

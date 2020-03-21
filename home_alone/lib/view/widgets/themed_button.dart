@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_alone/dependency_injection/locator.dart';
-import 'package:home_alone/store/login_store.dart';
 import 'package:home_alone/view/theme/dime.dart';
 
 class ThemedButton extends StatelessWidget {
@@ -14,18 +12,34 @@ class ThemedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: onPressed,
-      color: Theme.of(context).accentColor,
-      padding: EdgeInsets.symmetric(
-          horizontal: HomeAloneDimensions.loginButtonVerticalPadding,
-          vertical: HomeAloneDimensions.loginButtonVerticalPadding),
-      shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(10.0),
-        ),
+    return Container(
+      color: Colors.transparent,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        color: Colors.transparent,
+        onPressed: () {},
+        textColor: Colors.white,
+        padding: const EdgeInsets.all(0.0),
+        child: Container(
+            width: 300,
+            decoration: new BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                gradient: new LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 149, 242, 168),
+                    Color.fromARGB(255, 0, 191, 146)
+                  ],
+                )),
+            padding: const EdgeInsets.all(10.0),
+            child: child),
       ),
-      child: child,
     );
   }
 }
+
+/**
+ *
+ * EdgeInsets.symmetric(
+    horizontal: HomeAloneDimensions.loginButtonVerticalPadding,
+    vertical: HomeAloneDimensions.loginButtonVerticalPadding)
+ */

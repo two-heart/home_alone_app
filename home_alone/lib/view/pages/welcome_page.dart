@@ -51,22 +51,21 @@ class WelcomePage extends StatelessWidget {
         style: Theme.of(context).textTheme.subhead,
       );
 
-  Widget _buildLoginButton() => SizedBox(
-      width: double.infinity,
-      child: LayoutBuilder(
+  Widget _buildLoginButton() => LayoutBuilder(
         builder: (context, constraints) => FlatButton(
-            child: Text("Login"),
+            child: Text("Login", textAlign: TextAlign.center),
             onPressed: () => Navigator.of(context).pushNamed("/login")),
-      ));
+      );
 
-  Widget _buildRegisterButton() => SizedBox(
-      width: double.infinity,
-      child: LayoutBuilder(
+  Widget _buildRegisterButton() => LayoutBuilder(
         builder: (context, constraints) => ThemedButton(
           onPressed: () => Navigator.of(context).pushNamed("/register"),
-          child: Text('Registieren'),
+          child: Text(
+            'Registieren',
+            textAlign: TextAlign.center,
+          ),
         ),
-      ));
+      );
 
   AppBar _buildAppBar() {
     return AppBar(title: Text('App Logo'));
