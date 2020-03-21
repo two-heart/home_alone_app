@@ -42,10 +42,17 @@ class SetUsername extends StatelessWidget {
     );
   }
 
-  Widget _buildApplyButton() => ThemedButton(
-        onPressed: model.usernameIsValid
-            ? locator.get<RegistrationStore>().goToNextStep
-            : null,
-        child: Text("Übernehmen und weiter"),
+  Widget _buildApplyButton() => LayoutBuilder(
+        builder: (context, constraints) {
+          // Reset navigation stack and push home screen
+          var onPressed = model.usernameIsValid
+              ? () => Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/home", (route) => false)
+              : null;
+          return ThemedButton(
+            onPressed: onPressed,
+            child: Text("Übernehmen und weiter"),
+          );
+        },
       );
 }

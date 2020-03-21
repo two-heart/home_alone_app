@@ -61,22 +61,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          '/': _buildPage,
+          '/': (context) => WelcomePage(),
+          '/login': (context) => LoginPage(),
+          '/register': (context) => RegistrationPage(),
+          '/home': (context) => MyHomePage(),
         },
       );
-
-  Widget _buildPage(BuildContext context) {
-    switch (Provider.of<AppModel>(context).appState) {
-      case AppState.welcome:
-        return WelcomePage();
-      case AppState.login:
-        return LoginPage();
-      case AppState.register:
-        return RegistrationPage();
-      case AppState.loggedIn:
-        return MyHomePage();
-      default:
-        return Container();
-    }
-  }
 }

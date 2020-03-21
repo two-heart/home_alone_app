@@ -53,16 +53,19 @@ class WelcomePage extends StatelessWidget {
 
   Widget _buildLoginButton() => SizedBox(
       width: double.infinity,
-      child: FlatButton(
-        child: Text("Login"),
-        onPressed: () => locator.get<AppModel>().appState = AppState.login,
+      child: LayoutBuilder(
+        builder: (context, constraints) => FlatButton(
+            child: Text("Login"),
+            onPressed: () => Navigator.of(context).pushNamed("/login")),
       ));
 
   Widget _buildRegisterButton() => SizedBox(
       width: double.infinity,
-      child: ThemedButton(
-        onPressed: () => locator.get<AppModel>().appState = AppState.register,
-        child: Text('Registieren'),
+      child: LayoutBuilder(
+        builder: (context, constraints) => ThemedButton(
+          onPressed: () => Navigator.of(context).pushNamed("/register"),
+          child: Text('Registieren'),
+        ),
       ));
 
   AppBar _buildAppBar() {

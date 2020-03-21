@@ -31,9 +31,7 @@ class LoginButton extends StatelessWidget {
 
     await locator.get<LoginStore>().onLoginButtonPressed();
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MyHomePage()),
-    );
+    // Reset navigation stack and push home screen
+    Navigator.of(context).pushNamedAndRemoveUntil("/home", (route) => false);
   }
 }
