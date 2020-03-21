@@ -58,7 +58,9 @@ class DependencyInjection {
   Dio addInterceptors(Dio dio) {
     return dio
       ..interceptors.add(InterceptorsWrapper(
-          onResponse: (Response response) => responseInterceptor(response)
+          onResponse: (Response response) => responseInterceptor(response),
+          onRequest: (RequestOptions options) => requestInterceptor(options),
+          onError: (DioError dioError) => {/*TODO*/}
     ));
   }
 
@@ -68,6 +70,11 @@ class DependencyInjection {
       token = data['accessToken'];
     }
   }
+
+  dynamic requestInterceptor(RequestOptions options) {
+    options.headers.addAll({"Authorization": "Bearer " + token});
+  }
+
 
   static void _setUpViewModels() {
     locator.registerSingleton<AppModel>(AppModel());
