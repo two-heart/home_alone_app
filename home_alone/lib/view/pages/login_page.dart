@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:home_alone/store/login_store.dart';
 import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/login/login_button.dart';
@@ -10,7 +11,17 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 
-class LoginPage extends StatefulWidget {
+class AwfulKeyboardMixin {
+  double maxHeight = 0;
+  double getContentHeightForAwfulKeyboard(BoxConstraints constraints) {
+    if (this.maxHeight < constraints.maxHeight) {
+      this.maxHeight = constraints.maxHeight;
+    }
+    return this.maxHeight;
+  }
+}
+
+class LoginPage extends StatefulWidget with AwfulKeyboardMixin {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -43,17 +54,26 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: ChangeNotifierProvider.value(
-          value: locator.get<LoginModel>(),
-          child: Builder(
-            builder: (context) => _buildContent(context).withWeirdBall(
-              builder: (child) => Center(child: child),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        var container = SingleChildScrollView(
+            child: Container(
+          height: getContentHeightForAwfulKeyboard(constraints),
+          child: SafeArea(
+            child: Center(
+              child: ChangeNotifierProvider.value(
+                value: locator.get<LoginModel>(),
+                child: Builder(
+                  builder: (context) => _buildContent(context).withWeirdBall(
+                    builder: (child) => Center(child: child),
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
+        ));
+        return container;
+      },
     );
   }
 

@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:home_alone/dependency_injection/locator.dart';
+import 'package:home_alone/model/user.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/challenge/fakes/fake_challenge_api.dart';
 import 'package:home_alone/service/challenge/http_challenge_api.dart';
@@ -71,9 +72,14 @@ class DependencyInjection {
     if (options.request.method != 'POST') return options;
     if (options.statusCode < 299) {
       var data = options.data as Map<String, dynamic>;
-      if (data.containsKey('accessToken')) {
+      if (options.request.path.endsWith('auth/login') &&
+          data.containsKey('accessToken')) {
         token = data['accessToken'];
+        User user = User.fromJson(data['user']);
         locator.get<FlutterSecureStorage>().write(key: "token", value: token);
+        locator
+            .get<FlutterSecureStorage>()
+            .write(key: "user", value: jsonEncode(user.toJson()));
       }
     }
     return options;
