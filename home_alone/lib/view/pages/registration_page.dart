@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
-import 'package:home_alone/view/pages/home_page.dart';
+import 'package:home_alone/view/widgets/registration/set_user_credentials.dart';
 import 'package:home_alone/view/widgets/registration/set_username.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +33,7 @@ class RegistrationPage extends StatelessWidget {
     if (model.registrationStep == RegistrationStep.setUsername) {
       return SetUsername(model: model);
     } else {
-      return MyHomePage();
+      return SetUserCredentials(model: model);
     }
   }
 }
