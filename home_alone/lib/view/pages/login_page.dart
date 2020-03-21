@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextField(
         // Possibly factor this out together with email field
         cursorColor: Theme.of(context).accentColor,
-        controller: store.passwordController,
+        controller: passwordController,
         obscureText: true,
         decoration: new InputDecoration(
           errorText: store.hasError ? store.errorMessage : null,
