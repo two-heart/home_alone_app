@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -26,15 +27,16 @@ class DependencyInjection {
 
   static const baseUrl = "www/";
 
-  String token;
+  static String token;
 
 
   static void _setUpServices() {
-    final dio = Dio(BaseOptions(
+    var dio = Dio(BaseOptions(
       connectTimeout: 5000,
       receiveTimeout: 5000,
     ));
 
+    dio = addInterceptors(dio);
 
     /*locator.registerSingleton<ChallengeApi>(
       HttpChallengeApi(
@@ -42,6 +44,8 @@ class DependencyInjection {
           dio: dio,
       )
     );*/
+
+
 
 
     locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
@@ -53,27 +57,33 @@ class DependencyInjection {
       dio: dio,
       baseUrl: baseUrl,
     ));
+
+
   }
 
-  Dio addInterceptors(Dio dio) {
+  static Dio addInterceptors(Dio dio) {
     return dio
       ..interceptors.add(InterceptorsWrapper(
           onResponse: (Response response) => responseInterceptor(response),
           onRequest: (RequestOptions options) => requestInterceptor(options),
           onError: (DioError dioError) => {/*TODO*/}
     ));
+
   }
 
-  dynamic responseInterceptor(Response options) async {
+  static dynamic responseInterceptor(Response options) async {
+    if (options.request.method != 'POST') return;
     var data = jsonDecode(options.data);
     if (data.containsKey('accessToken')) {
       token = data['accessToken'];
+      print('received token');
     }
   }
 
-  dynamic requestInterceptor(RequestOptions options) {
-    if (token ==null) return DioError(); //TODO
+  static dynamic requestInterceptor(RequestOptions options) {
+    if (token == null) return;
     options.headers.addAll({"Authorization": "Bearer " + token});
+    print('token set');
   }
 
 
