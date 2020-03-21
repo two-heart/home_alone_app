@@ -23,7 +23,8 @@ class RegistrationStore {
       password: registrationModel.password,
       username: registrationModel.username,
     );
-    await registrationService.registerUser(credentials);
+    // await registrationService.registerUser(credentials);
+    return RegistrationResponse(isSuccessful: true);
   }
 
   void goToNextStep() {

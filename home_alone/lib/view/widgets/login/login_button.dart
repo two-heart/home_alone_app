@@ -18,8 +18,14 @@ class LoginButton extends StatelessWidget {
                 loginModel.isLoginButtonEnabled ? () => _login(context) : null,
             text: "Einloggen",
             alternativeChild: model.isLoading
-                ? CircularProgressIndicator(
-                    backgroundColor: Colors.white,
+                ? Center(
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
                   )
                 : null,
             textScaleFactor: HomeAloneDimensions.loginButtonTextScale,

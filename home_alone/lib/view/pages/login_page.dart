@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/store/login_store.dart';
+import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/login/login_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
@@ -79,7 +80,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Widget _buildGreetingText() => ThemedText(text: "Willkommen zurück!");
+  Widget _buildGreetingText() => ThemedText(
+        text: "Willkommen zurück!",
+        fontSize: HomeAloneDimensions.welcomeHeaderTextSize,
+      );
 
   Widget _buildTextFields(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -94,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
     final model = Provider.of<LoginModel>(context);
     final store = locator.get<LoginStore>();
     return TextField(
+      onChanged: store.onEmailTextChanged,
       cursorColor: Theme.of(context).accentColor,
       controller: emailController,
       decoration: new InputDecoration(
@@ -107,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
         hintStyle: new TextStyle(color: Theme.of(context).hintColor),
         hintText: "Username",
       ), //TODO i18n
-      onChanged: store.onEmailTextChanged,
     );
   }
 

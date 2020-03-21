@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/registration_store.dart';
+import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
@@ -62,8 +63,9 @@ class RegistrationPage extends StatelessWidget {
         ),
       );
 
-  _buildGreetingText(RegistrationModel model) =>
-      ThemedText(text: 'Schön, dich kennen zu lernen, ${model.username}');
+  _buildGreetingText(RegistrationModel model) => ThemedText(
+        text: 'Schön, dich kennen zu lernen, ${model.username}',
+      );
 
   Widget _buildTextFields(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -127,7 +129,8 @@ class RegistrationPage extends StatelessWidget {
     final model = Provider.of<RegistrationModel>(context);
     final submit = () async {
       if (await registerUser(context)) {
-        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/categories', (route) => false);
       }
     };
     return ThemedButton(
@@ -139,8 +142,7 @@ class RegistrationPage extends StatelessWidget {
 
   Widget _buildLoginButton(BuildContext context) => ThemedFlatButton(
         text: 'Einloggen',
-        onPressed: () =>
-            Navigator.of(context).pushReplacementNamed("/register/setUsername"),
+        onPressed: () => Navigator.of(context).pushReplacementNamed("/login"),
       );
 
   Future<bool> registerUser(BuildContext context) async {

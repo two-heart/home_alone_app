@@ -94,7 +94,6 @@ class SetUsernamePage extends StatelessWidget {
 
   Widget _buildLoginButton(BuildContext context) => ThemedFlatButton(
         text: 'Einloggen',
-        onPressed: () =>
-            Navigator.of(context).pushReplacementNamed("/register/setUsername"),
+        onPressed: () => Navigator.of(context).pushReplacementNamed("/login"),
       );
 }

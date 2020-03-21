@@ -11,9 +11,11 @@ import 'package:home_alone/service/challenge/fakes/fake_challenge_api.dart';
 import 'package:home_alone/service/challenge/http_challenge_api.dart';
 import 'package:home_alone/service/http_login_service.dart';
 import 'package:home_alone/service/http_registration_service.dart';
+import 'package:home_alone/store/category_selection_store.dart';
 import 'package:home_alone/store/login_store.dart';
 import 'package:home_alone/store/registration_store.dart';
 import 'package:home_alone/viewmodel/app_model.dart';
+import 'package:home_alone/viewmodel/category_selection_model.dart';
 import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 
@@ -88,6 +90,7 @@ class DependencyInjection {
     locator.registerSingleton<AppModel>(AppModel());
     locator.registerSingleton<RegistrationModel>(RegistrationModel());
     locator.registerSingleton<LoginModel>(LoginModel());
+    locator.registerSingleton<CategorySelectionModel>(CategorySelectionModel());
     // print('emailValid: ${locator.get<LoginModel>().isLoginButtonEnabled}');
   }
 
@@ -99,6 +102,10 @@ class DependencyInjection {
     locator.registerSingleton(RegistrationStore(
       locator.get<RegistrationModel>(),
       locator.get<HttpRegistrationService>(),
+    ));
+    locator.registerSingleton(CategorySelectionStore(
+      locator.get<CategorySelectionModel>(),
+      // locator.get<HttpRegistrationService>(),
     ));
   }
 }

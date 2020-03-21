@@ -30,12 +30,15 @@ class LoginStore with ChangeNotifier {
 
   void onEmailTextChanged(String value) {
     loginModel.email = value;
+    print(value);
     _resetErrorStateIfNecessary();
   }
 
   void onPasswordTextChanged(String value) {
     print(value);
     loginModel.password = value;
+    print(value);
+
     _resetErrorStateIfNecessary();
   }
 
