@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:home_alone/model/login_credentials.dart';
-import 'package:home_alone/model/user.dart';
+import 'package:home_alone/service/ext.dart';
 
 class HttpLoginService {
   final Dio dio;
@@ -13,15 +15,19 @@ class HttpLoginService {
     @required this.baseUrl,
   });
 
-  Future<void> loginWithCredentials(LoginCredentials credentials) async {
-    var response = await dio.get(
-      "$baseUrl/auth/login",
-      queryParameters: {
-        "username": credentials.email,
-        "password": credentials.password,
-      },
-    );
-
-    // User.fromJson(response);
+  Future<bool> loginWithCredentials(LoginCredentials credentials) async {
+    try {
+      var response = await dio.post(
+        "$baseUrl/auth/login",
+        data: {
+          "username": credentials.email,
+          "password": credentials.password,
+        },
+      );
+      return response.evaluate(((item) => item));
+    } catch (error) {
+      final dioError = error as DioError;
+      return dioError.response.evaluate((item) => item);
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/model/login_credentials.dart';
 import 'package:home_alone/service/http_login_service.dart';
 import 'package:home_alone/viewmodel/login_model.dart';
 
@@ -21,7 +22,13 @@ class LoginStore {
     loginModel.password = value;
   }
 
-  Future<void> onLoginButtonPressed() async {
-    //TODO: call Login service, do stuff
+  Future<bool> onLoginButtonPressed() async {
+    try {
+      await this.loginService.loginWithCredentials(
+          LoginCredentials(loginModel.email, loginModel.password));
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 }
