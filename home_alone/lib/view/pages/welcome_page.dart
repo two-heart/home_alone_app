@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
@@ -24,8 +23,8 @@ class WelcomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildTexts(context),
-          _buildRegisterButton(),
-          _buildLoginButton(),
+          _buildRegisterButton(context),
+          _buildLoginButton(context),
         ],
       ),
     ).withWeirdBall();
@@ -53,18 +52,15 @@ class WelcomePage extends StatelessWidget {
       text:
           'Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen un dich selbst herausfordern kannst');
 
-  Widget _buildLoginButton() => LayoutBuilder(
-        builder: (context, constraints) => ThemedFlatButton(
-            text: 'Einloggen',
-            onPressed: () => Navigator.of(context).pushNamed("/login")),
+  Widget _buildRegisterButton(BuildContext context) => ThemedButton(
+        text: 'Registrieren',
+        onPressed: () =>
+            Navigator.of(context).pushNamed("/register/setUsername"),
       );
 
-  Widget _buildRegisterButton() => LayoutBuilder(
-        builder: (context, constraints) => ThemedButton(
-          onPressed: () =>
-              Navigator.of(context).pushNamed("/register/setUsername"),
-          text: 'Registieren',
-        ),
+  Widget _buildLoginButton(BuildContext context) => ThemedFlatButton(
+        text: 'Einloggen',
+        onPressed: () => Navigator.of(context).pushNamed("/login"),
       );
 
   AppBar _buildAppBar() {
