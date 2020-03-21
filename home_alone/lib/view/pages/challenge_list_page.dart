@@ -41,7 +41,7 @@ class _ChallengeListPageState extends State<ChallengeListPage> {
               data = challenges;
               refreshController.refreshCompleted();
             }))
-        .catchError((_) => refreshController.loadFailed())
+        .catchError((_) => refreshController.refreshFailed())
         .whenComplete(() => {
               setState(() {
                 isLoading = false;
