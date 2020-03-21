@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:home_alone/model/challenge.dart';
-import 'ext.dart';
+import 'extension/ext.dart';
 
 void main() {
   test('Can load json fixtures in test', () async {
