@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/registration_response.dart';
 import 'package:home_alone/store/registration_store.dart';
+import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
@@ -65,8 +66,9 @@ class RegistrationPage extends StatelessWidget {
         ),
       );
 
-  _buildGreetingText(RegistrationModel model) =>
-      ThemedText(text: 'Schön, dich kennen zu lernen, ${model.username}');
+  _buildGreetingText(RegistrationModel model) => ThemedText(
+        text: 'Schön, dich kennen zu lernen, ${model.username}',
+      );
 
   Widget _buildTextFields(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -135,17 +137,17 @@ class RegistrationPage extends StatelessWidget {
 
   Widget _buildLoginButton(BuildContext context) => ThemedFlatButton(
         text: 'Einloggen',
-        onPressed: () =>
-            Navigator.of(context).pushReplacementNamed("/register/setUsername"),
+        onPressed: () => Navigator.of(context).pushReplacementNamed("/login"),
       );
 
   Future<void> _registerUser(BuildContext context) async {
-    await locator
+    locator
         .get<RegistrationStore>()
         .registerUser()
         .then((RegistrationResponse response) {
       if (response.isSuccessful) {
-        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/categories', (route) => false);
       }
     }).catchError((_) {
       print("error registering user");

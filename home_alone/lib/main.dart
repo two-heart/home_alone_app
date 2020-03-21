@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:home_alone/view/pages/category_selection_page.dart';
 import 'package:home_alone/view/pages/challenge_detail_page.dart';
 import 'package:home_alone/view/pages/home_page.dart';
 import 'package:home_alone/view/pages/login_page.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
           '/login': (context) => LoginPage(),
           '/register/setUsername': (context) => SetUsernamePage(),
           '/register': (context) => RegistrationPage(),
+          '/categories': (context) => CategorySelection(),
           '/home': (context) => MyHomePage(),
           'challenge': (context) => ChallengeDetail()
         },
