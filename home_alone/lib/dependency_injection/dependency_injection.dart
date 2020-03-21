@@ -5,6 +5,7 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/http_open_weather_api.dart';
 import 'package:home_alone/service/open_weather_api.dart';
 import 'package:home_alone/store/weather_store.dart';
+import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/viewmodel/weather_model.dart';
 
 class DependencyInjection {
@@ -27,6 +28,8 @@ class DependencyInjection {
 
   static void _setUpViewModels() {
     locator.registerSingleton<WeatherModel>(WeatherModel());
+    locator.registerSingleton<LoginModel>(LoginModel());
+    print('emailValid: ${locator.get<LoginModel>().isLoginButtonEnabled}');
   }
 
   static void loadWeather() {
