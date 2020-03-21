@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:home_alone/model/registration_credentials.dart';
+import 'package:home_alone/service/ext.dart';
 
 class HttpRegistrationService {
   final Dio dio;
@@ -14,15 +15,19 @@ class HttpRegistrationService {
   });
 
   Future<void> registerUser(RegistrationCredentials credentials) async {
-    var response = await dio.get(
-      "$baseUrl/auth/register",
-      queryParameters: {
-        "displayedName": credentials.username,
-        "email": credentials.email,
-        "plainPassword": credentials.password,
-      },
-    );
-
-    // User.fromJson(response);
+    try {
+      var response = await dio.post(
+        "$baseUrl/auth/register",
+        data: {
+          "displayedName": credentials.username,
+          "email": credentials.email,
+          "plainPassword": credentials.password,
+        },
+      );
+      return response.evaluate((item) => item);
+    } catch (err) {
+      final error = err as DioError;
+      return error.response.evaluate((item) => item);
+    }
   }
 }

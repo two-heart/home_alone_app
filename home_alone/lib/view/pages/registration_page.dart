@@ -61,12 +61,13 @@ class RegistrationPage extends StatelessWidget {
   Future<void> _registerUser(BuildContext context) async {
     await locator
         .get<RegistrationStore>()
-        .registertUser()
+        .registerUser()
         .then((RegistrationResponse response) {
-      print("§");
       if (response.isSuccessful) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
       }
+    }).catchError((_) {
+      print("error registering user");
     });
   }
 }

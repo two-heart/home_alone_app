@@ -15,14 +15,13 @@ class RegistrationStore {
 
   TextEditingController userNameController = TextEditingController();
 
-  Future<RegistrationResponse> registertUser() async {
+  Future<RegistrationResponse> registerUser() async {
     final credentials = RegistrationCredentials(
       email: registrationModel.email,
       password: registrationModel.password,
       username: registrationModel.username,
     );
-    final response = await registrationService.registerUser(credentials);
-    return RegistrationResponse(isSuccessful: true);
+    await registrationService.registerUser(credentials);
   }
 
   void goToNextStep() {
