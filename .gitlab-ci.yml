@@ -32,7 +32,7 @@ package:android:
     paths:
       - ./home_alone.apk
   tags:
-    - docker
+    - flutter
 
 
 package:ios:
