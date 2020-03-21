@@ -51,6 +51,7 @@ class LoginPage extends StatelessWidget {
   Widget _buildEmailTextField(BuildContext context) {
     final store = locator.get<LoginStore>();
     return TextField(
+      cursorColor: Theme.of(context).accentColor,
       controller: store.emailController,
       decoration: new InputDecoration(
         border: new OutlineInputBorder(
@@ -70,6 +71,7 @@ class LoginPage extends StatelessWidget {
     final store = locator.get<LoginStore>();
     return TextField(
         // Possibly factor this out together with email field
+        cursorColor: Theme.of(context).accentColor,
         controller: store.passwordController,
         obscureText: true,
         onChanged: store.onPasswordTextChanged,

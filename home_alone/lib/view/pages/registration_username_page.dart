@@ -43,7 +43,7 @@ class SetUsernamePage extends StatelessWidget {
               _buildGreetingText(context),
               Expanded(flex: 1, child: Container()),
               _buildQuestionText(context),
-              _buildUserNameTextField(),
+              _buildUserNameTextField(context),
               Expanded(flex: 4, child: Container()),
               Padding(
                 child: _buildApplyButton(model),
@@ -62,10 +62,11 @@ class SetUsernamePage extends StatelessWidget {
         fontWeight: FontWeight.bold,
       );
 
-  _buildUserNameTextField() {
+  _buildUserNameTextField(context) {
     final store = locator.get<RegistrationStore>();
     return Padding(
       child: TextField(
+        cursorColor: Theme.of(context).accentColor,
         decoration: InputDecoration(
             fillColor: Color(0xF4F4F4),
             border: OutlineInputBorder(
