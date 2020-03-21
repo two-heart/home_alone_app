@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:home_alone/model/challenge.dart';
-import 'package:home_alone/service/challenge_api.dart';
+import 'package:home_alone/service/challenge/challenge_api.dart';
 
 import 'challenge_data.dart';
 

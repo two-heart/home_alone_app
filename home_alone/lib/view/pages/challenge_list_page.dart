@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
-import 'package:home_alone/service/challenge_api.dart';
+import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shimmer/shimmer.dart';
 
