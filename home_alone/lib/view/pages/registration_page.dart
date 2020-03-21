@@ -80,14 +80,13 @@ class RegistrationPage extends StatelessWidget {
       controller: store.emailController,
       onChanged: (t) => store.registrationModel.email = t,
       decoration: new InputDecoration(
-        errorText: true ? 'Nutzername und/oder Passwort nicht korrekt' : null,
         border: new OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             const Radius.circular(10.0),
           ),
         ),
         filled: false,
-        hintStyle: new TextStyle(color: Theme.of(context).hintColor),
+        hintStyle: TextStyle(color: Theme.of(context).hintColor),
         hintText: "E-Mail",
       ), //TODO i18n
     );
@@ -102,7 +101,9 @@ class RegistrationPage extends StatelessWidget {
         onChanged: (t) => store.registrationModel.password = t,
         obscureText: true,
         decoration: new InputDecoration(
-          errorText: true ? 'Nutzername und/oder Passwort nicht korrekt' : null,
+          errorText: store.registrationModel.registrationHasError
+              ? 'Nutzername und/oder Passwort nicht korrekt'
+              : null,
           border: new OutlineInputBorder(
             borderRadius: const BorderRadius.all(const Radius.circular(10.0)),
           ),
