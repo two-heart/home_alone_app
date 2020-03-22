@@ -77,9 +77,16 @@ class DependencyInjection {
       if ((options.request.path.endsWith("/auth/login") ||
           options.request.path.endsWith("/auth/register"))) {
         var data = options.data as Map<String, dynamic>;
-        if (data['accessToken'] == null) return;
+
+        if (data['accessToken'] == null) return options;
         token = data['accessToken'];
         locator.get<FlutterSecureStorage>().write(key: "token", value: token);
+
+        if (data['user'] == null) return options;
+        User user = User.fromJson(data['user']);
+        locator
+            .get<FlutterSecureStorage>()
+            .write(key: "user", value: jsonEncode(user.toJson()));
       }
     }
     return options;

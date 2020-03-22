@@ -31,12 +31,6 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
-  void onPressed() {
-    locator.get<FlutterSecureStorage>().delete(key: "token");
-    locator.get<FlutterSecureStorage>().delete(key: "user");
-    Navigator.of(context).pushNamedAndRemoveUntil("/login", (route) => false);
-  }
-
   @override
   Widget build(BuildContext context) {
     final userWidget = user != null ? Text(user.displayedName) : Container();
@@ -44,10 +38,6 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
       children: [
         userWidget,
-        RaisedButton(
-          child: Text("Logout"),
-          onPressed: onPressed,
-        )
       ],
     ));
   }
