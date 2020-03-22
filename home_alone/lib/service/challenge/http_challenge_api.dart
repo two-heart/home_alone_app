@@ -41,6 +41,7 @@ class HttpChallengeApi implements ChallengeApi {
 
     challengesModel.subScribedChallenges =
         challenges.map((f) => ChallengeModel(f)).toList();
+    challengesModel.challenges = challengesModel.subScribedChallenges;
 
     return challenges;
   }
@@ -78,7 +79,15 @@ class HttpChallengeApi implements ChallengeApi {
     var response = await dio.post("$baseUrl/challenge/$id/accept");
     print(response.statusCode);
     print(response.data);
-    if (response.statusCode < 299) {}
+    await getAllChallenges();
+    if (response.statusCode < 299) {
+      final model = challengesModel.challenges
+          ?.firstWhere((m) => m.challenge.id == id, orElse: null);
+      model.challenge = model.challenge..finished = false;
+      return true;
+    }
+
+    return false;
   }
 
   @override

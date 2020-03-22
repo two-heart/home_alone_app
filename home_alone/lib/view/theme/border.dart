@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class CurvedAppBarBorder extends ContinuousRectangleBorder {
   @override
   Path getOuterPath(Rect rect, {TextDirection textDirection}) {
-
     final size = rect.size;
     Path path = Path();
     path.lineTo(0, size.height - 5);

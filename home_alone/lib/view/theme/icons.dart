@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/HomeAlone.ttf
 ///
-/// 
+///
 ///
 import 'package:flutter/widgets.dart';
 
@@ -20,11 +20,15 @@ class HomeAloneIcons {
 
   static const _kFontFam = 'HomeAlone';
 
-  static const IconData home_alone_logo = IconData(0xe816, fontFamily: _kFontFam);
-  static const IconData arrow_circle_right = IconData(0xe900, fontFamily: _kFontFam);
+  static const IconData home_alone_logo =
+      IconData(0xe816, fontFamily: _kFontFam);
+  static const IconData arrow_circle_right =
+      IconData(0xe900, fontFamily: _kFontFam);
   static const IconData arrow_left = IconData(0xe901, fontFamily: _kFontFam);
-  static const IconData challenges_fill = IconData(0xe902, fontFamily: _kFontFam);
-  static const IconData challenges_outline = IconData(0xe903, fontFamily: _kFontFam);
+  static const IconData challenges_fill =
+      IconData(0xe902, fontFamily: _kFontFam);
+  static const IconData challenges_outline =
+      IconData(0xe903, fontFamily: _kFontFam);
   static const IconData check = IconData(0xe904, fontFamily: _kFontFam);
   static const IconData creativity = IconData(0xe905, fontFamily: _kFontFam);
   static const IconData culinary = IconData(0xe906, fontFamily: _kFontFam);

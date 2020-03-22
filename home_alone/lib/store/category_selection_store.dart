@@ -37,7 +37,8 @@ class CategorySelectionStore {
   Future<void> updateCategories() async {
     final selectedCategories =
         categorySelectionModel.categories._getIdsOfSelected();
-print(selectedCategories);
+    print("lol");
+    print(selectedCategories);
 
     await categorySelectionService.selectCategories(selectedCategories);
 
@@ -57,7 +58,7 @@ print(selectedCategories);
           .firstWhere((c) => c.category.id == category.id)
           .isSelected = true;
     });
-    return categories..forEach((f)=>print(f.id));
+    return categories..forEach((f) => print(f.id));
   }
 }
 

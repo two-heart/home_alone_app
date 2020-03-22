@@ -20,8 +20,6 @@ class Challenge {
   @JsonKey(nullable: true)
   DateTime acceptedAt;
 
-
-
   Challenge(
       {this.id,
       this.name,

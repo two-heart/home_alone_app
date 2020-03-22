@@ -12,6 +12,8 @@ import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
+import 'package:home_alone/viewmodel/challenges_model.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:home_alone/view/widgets/challenge/challenge_icon.dart';
 
@@ -21,9 +23,9 @@ const URLS = [
 ];
 
 class ChallengeDetail extends StatefulWidget {
-  final Challenge challenge;
+  Challenge challenge;
 
-  const ChallengeDetail({this.challenge});
+  ChallengeDetail({this.challenge});
 
   @override
   _ChallengeDetailState createState() => _ChallengeDetailState();
@@ -42,11 +44,25 @@ class _ChallengeDetailState extends State<ChallengeDetail>
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(
-      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Expanded(child: _buildContent(context)),
-        _buildButtonOrSlider(context),
-      ]),
-    );
+        child: ChangeNotifierProvider.value(
+      value: locator.get<ChallengesModel>(),
+      child: Consumer<ChallengesModel>(
+        builder: (context, model, _) {
+          if (model.challenges?.isNotEmpty == true) {
+            final schallenge = model.challenges
+                ?.firstWhere((f) => f.challenge.id == widget.challenge.id);
+            widget.challenge = schallenge?.challenge ?? widget.challenge;
+          }
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(child: _buildContent(context)),
+              _buildButtonOrSlider(context),
+            ],
+          );
+        },
+      ),
+    ));
   }
 
   Widget _buildContent(BuildContext context) => ListView(

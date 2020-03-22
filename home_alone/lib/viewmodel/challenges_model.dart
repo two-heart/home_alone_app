@@ -9,6 +9,7 @@ class ChallengesModel extends ChangeNotifier {
     newChallenges?.forEach((f) => f.addListener(_notifyListeners));
     notifyListeners();
   }
+
   List<ChallengeModel> _subScribedChallenges = List<ChallengeModel>();
   List<ChallengeModel> get subScribedChallenges => _subScribedChallenges;
   set subScribedChallenges(List<ChallengeModel> newChallenges) {

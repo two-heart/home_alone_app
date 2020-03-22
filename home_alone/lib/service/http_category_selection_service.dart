@@ -25,7 +25,7 @@ class HttpCategorySelectionService {
 
   selectCategories(List<String> selectedCategories) async {
     // print(selectedCategories);
-    final data = {"categoryIds": jsonEncode( selectedCategories)};
+    final data = {"categoryIds": jsonEncode(selectedCategories)};
     print(data);
     var response = await dio.post(
       "$baseUrl/user/categories",
