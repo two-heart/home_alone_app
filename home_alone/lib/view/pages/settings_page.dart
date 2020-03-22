@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/user.dart';
+import 'package:home_alone/view/pages/category_selection_page.dart';
+import 'package:home_alone/view/pages/challenge_list_page.dart';
+import 'package:home_alone/view/widgets/categories/category_list.dart';
+import 'package:home_alone/view/widgets/themed_flat_button.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -43,11 +47,12 @@ class _SettingsPageState extends State<SettingsPage> {
     return Center(
         child: Column(
       children: [
+        ThemedFlatButton(text: 'Kategorien ändern', onPressed: () {Navigator.pushNamed(context, '/categories');},),
         userWidget,
         RaisedButton(
           child: Text("Logout"),
           onPressed: onPressed,
-        )
+        ),
       ],
     ));
   }
