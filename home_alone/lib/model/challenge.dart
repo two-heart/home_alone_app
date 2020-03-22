@@ -7,6 +7,8 @@ class Challenge {
   String id;
   String name;
   String description;
+  String teaser;
+  String imageUrl;
   bool accepted = false;
 
   Challenge({this.id, this.name, this.description});

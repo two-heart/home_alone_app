@@ -29,7 +29,7 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          _buildImage('assets/something.jpg', context),
+          _buildImage(widget.challenge, context),
           _buildText(widget.challenge),
           _buildSlider(context, 0),
         ]),
@@ -37,14 +37,18 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     );
   }
 
-  Widget _buildImage(String path, BuildContext context) {
+  Widget _buildImage(Challenge challenge, BuildContext context) {
     return Container(
         constraints: BoxConstraints.expand(height: 200.0),
         // placeholder if image load fails
         decoration: BoxDecoration(color: Theme.of(context).accentColor),
-        child: Image.asset(
-          path,
-          fit: BoxFit.cover,
+        child: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Image(
+            image: NetworkImage(
+              challenge.imageUrl,
+            ),
+          ),
         ));
   }
 
