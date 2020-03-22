@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
+import 'package:home_alone/service/challenge/challenge_api.dart';
+import 'package:home_alone/service/challenge/http_challenge_api.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_app_bar.dart';
@@ -104,7 +106,8 @@ class _ChallengeDetailState extends State<ChallengeDetail>
       );
 
   void _acceptChallenge() {
-    // locator.get<>()
+    // await locator.get<HttpChallengeApi>().acceptChallenge(widget.challenge.id);
+    locator.get<ChallengeApi>().acceptChallenge(widget.challenge.id);
   }
 
   Widget _buildFinishedPopup(BuildContext context) {
