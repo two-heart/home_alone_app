@@ -12,7 +12,7 @@ class FakeChallengeApi implements ChallengeApi {
   }
 
   @override
-  Future<List<Challenge>> getAllIncompletedChallenges() async {
+  Future<List<Challenge>> getAllSubscribedChallenges() async {
     return Challenge.fromJsonList(jsonDecode(incomplete));
   }
 

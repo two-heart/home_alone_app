@@ -21,7 +21,7 @@ class HttpChallengeApi implements ChallengeApi {
   }
 
   @override
-  Future<List<Challenge>> getAllIncompletedChallenges() async {
+  Future<List<Challenge>> getAllSubscribedChallenges() async {
     var response = await dio.get("$baseUrl/challenge");
     return response.evaluate((data) => Challenge.fromJsonList(response.data)) ??
         [];

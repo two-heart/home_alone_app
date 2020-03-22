@@ -11,10 +11,11 @@ Challenge _$ChallengeFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     name: json['name'] as String,
     description: json['description'] as String,
-  )
-    ..teaser = json['teaser'] as String
-    ..imageUrl = json['imageUrl'] as String
-    ..accepted = json['accepted'] as bool;
+    teaser: json['teaser'] as String,
+    imageUrl: json['imageUrl'] as String,
+    category: Category.fromJson(json['category'] as Map<String, dynamic>),
+    accepted: json['accepted'] as bool,
+  );
 }
 
 Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
@@ -23,5 +24,6 @@ Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
       'description': instance.description,
       'teaser': instance.teaser,
       'imageUrl': instance.imageUrl,
+      'category': instance.category,
       'accepted': instance.accepted,
     };

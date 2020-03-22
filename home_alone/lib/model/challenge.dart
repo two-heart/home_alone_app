@@ -1,3 +1,4 @@
+import 'package:home_alone/model/category.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'challenge.g.dart';
@@ -9,9 +10,17 @@ class Challenge {
   String description;
   String teaser;
   String imageUrl;
+  Category category;
   bool accepted = false;
 
-  Challenge({this.id, this.name, this.description});
+  Challenge(
+      {this.id,
+      this.name,
+      this.description,
+      this.teaser,
+      this.imageUrl,
+      this.category,
+      this.accepted});
 
   factory Challenge.fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);

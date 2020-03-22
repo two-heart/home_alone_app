@@ -38,7 +38,7 @@ class _ChallengeListPageState extends State<ChallengeListPage>
     await Future.delayed(Duration(seconds: 2));
     final api = locator.get<ChallengeApi>();
     api
-        .getAllChallenges()
+        .getAllSubscribedChallenges()
         .then((challenges) => setState(() {
               data = challenges;
               refreshController.refreshCompleted();

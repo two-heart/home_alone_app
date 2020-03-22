@@ -7,12 +7,14 @@ class ThemedButton extends StatelessWidget {
   final String text;
   final double textScaleFactor;
   final Widget alternativeChild;
+  final double width;
 
   const ThemedButton({
     this.onPressed,
     this.text = "",
     this.textScaleFactor = 1.0,
     this.alternativeChild,
+    this.width,
   });
 
   @override
@@ -28,7 +30,7 @@ class ThemedButton extends StatelessWidget {
         textColor: HomeAloneColors.primaryButtonTextColor,
         padding: const EdgeInsets.all(0.0),
         child: Container(
-            width: 300,
+            width: width == null ? 300 : width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(
                     HomeAloneDimensions.primaryButtonBorderRadius)),
