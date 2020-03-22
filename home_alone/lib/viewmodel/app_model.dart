@@ -17,7 +17,7 @@ class AppModel extends ChangeNotifier {
         currentTabTitle = 'Entdecken';
         break;
       case Tabs.challenges:
-        currentTabTitle = 'Challenges';
+        currentTabTitle = 'Meine Challenges';
         break;
       case Tabs.settings:
         currentTabTitle = 'Einstellungen';
