@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> with AwfulKeyboardMixin {
         filled: false,
         hintStyle: new TextStyle(color: Theme.of(context).hintColor),
         hintText: "E-Mail",
-      ), //TODO i18n
+      ),
     );
   }
 
@@ -146,8 +146,8 @@ class _LoginPageState extends State<LoginPage> with AwfulKeyboardMixin {
           ),
           filled: false,
           hintStyle: new TextStyle(color: Theme.of(context).hintColor),
-          hintText: "Password",
-        ) //TODO i18n
+          hintText: "Passwort",
+        )
         );
   }
 

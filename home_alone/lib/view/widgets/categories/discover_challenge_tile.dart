@@ -5,6 +5,7 @@ import 'package:home_alone/view/widgets/themed_button.dart';
 
 class DiscoverChallengeTile extends StatelessWidget {
   final Challenge challenge;
+
   DiscoverChallengeTile(this.challenge);
 
   @override
@@ -58,16 +59,7 @@ class DiscoverChallengeTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    FlatButton(
-                      child: Text("Zur Challenge"),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ChallengeDetail(challenge: challenge)),
-                        );
-                      },
-                    ),
+                    Expanded(child: Container(),),
                     ThemedButton(
                         text: "Teilnehmen", width: 120, onPressed: () {})
                   ],

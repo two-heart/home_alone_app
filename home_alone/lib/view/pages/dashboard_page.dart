@@ -9,6 +9,8 @@ import 'package:home_alone/view/widgets/challenge/challenge_tile.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'challenge_detail_page.dart';
+
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -149,10 +151,16 @@ class _DashboardPageState extends State<DashboardPage>
                   itemCount: challenges.length,
                   itemBuilder: (BuildContext context, int index) {
                     final challenge = challenges[index];
-                    return Container(
+                    return InkWell(
+                        onTap: () {Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ChallengeDetail(challenge: challenge)),
+                        );},
+                        child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 5),
                         width: 350,
-                        child: DiscoverChallengeTile(challenge));
+                        child: DiscoverChallengeTile(challenge)));
                   }),
             )
           ],
