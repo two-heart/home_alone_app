@@ -15,4 +15,6 @@ class HomeAloneColors {
 
   static const flatButtonGrey = Color(0xFFA2A2A2);
   static const headerTextGrey = Color(0xFF5E5E5E);
+
+  static var categoryIconColor = Color(0xFF00AB96);
 }

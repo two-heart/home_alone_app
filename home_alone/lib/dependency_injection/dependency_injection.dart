@@ -10,6 +10,7 @@ import 'package:home_alone/model/user.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/challenge/fakes/fake_challenge_api.dart';
 import 'package:home_alone/service/challenge/http_challenge_api.dart';
+import 'package:home_alone/service/http_category_selection_service.dart';
 import 'package:home_alone/service/http_login_service.dart';
 import 'package:home_alone/service/http_registration_service.dart';
 import 'package:home_alone/store/category_selection_store.dart';
@@ -39,16 +40,17 @@ class DependencyInjection {
 
     dio = addInterceptors(dio);
 
-    locator.registerSingleton<ChallengeApi>(HttpChallengeApi(
-      baseUrl: DotEnv().env['BASE_URL'],
-      dio: dio,
-    ));
-
+    /*locator.registerSingleton<ChallengeApi>(
+      HttpChallengeApi(
+          baseUrl: DotEnv().env['BASE_URL'],
+          dio: dio,
+      )
+    );*/
     var storage = new FlutterSecureStorage();
     token = await storage.read(key: "token");
     locator.registerSingleton(storage);
 
-    //locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
+
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
       baseUrl: DotEnv().env['BASE_URL'],
@@ -57,6 +59,12 @@ class DependencyInjection {
       dio: dio,
       baseUrl: DotEnv().env['BASE_URL'],
     ));
+    locator.registerSingleton<HttpCategorySelectionService>(
+        HttpCategorySelectionService(
+      dio: dio,
+      baseUrl: DotEnv().env['BASE_URL'],
+    ));
+    locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
   }
 
   static Dio addInterceptors(Dio dio) {
@@ -71,14 +79,9 @@ class DependencyInjection {
     if (options.request.method != 'POST') return options;
     if (options.statusCode < 299) {
       var data = options.data as Map<String, dynamic>;
-      if (options.request.path.endsWith('auth/login') &&
-          data.containsKey('accessToken')) {
+      if (data.containsKey('accessToken')) {
         token = data['accessToken'];
-        User user = User.fromJson(data['user']);
         locator.get<FlutterSecureStorage>().write(key: "token", value: token);
-        locator
-            .get<FlutterSecureStorage>()
-            .write(key: "user", value: jsonEncode(user.toJson()));
       }
     }
     return options;
@@ -108,7 +111,7 @@ class DependencyInjection {
     ));
     locator.registerSingleton(CategorySelectionStore(
       locator.get<CategorySelectionModel>(),
-      // locator.get<HttpRegistrationService>(),
+      locator.get<HttpCategorySelectionService>(),
     ));
   }
 }

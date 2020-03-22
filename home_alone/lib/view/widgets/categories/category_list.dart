@@ -7,9 +7,12 @@ class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<CategorySelectionModel>(
-      builder: (context, model, _) => ListView(
-        shrinkWrap: true,
-        children: _buildListItems(model),
+      builder: (context, model, _) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: ListView(
+          // shrinkWrap: true,
+          children: _buildListItems(model),
+        ),
       ),
     );
   }
