@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
+import 'package:home_alone/view/widgets/categories/discover_challenge_tile.dart';
 import 'package:home_alone/view/widgets/challenge/challenge_tile.dart';
+import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -14,6 +16,8 @@ class ChallengeListPage extends StatefulWidget {
 class _ChallengeListPageState extends State<ChallengeListPage>
     with AutomaticKeepAliveClientMixin {
   List<Challenge> data = [];
+  List<Challenge> acceptedChallenges = [];
+  List<Challenge> finishedChallenges = [];
   RefreshController refreshController;
   bool isLoading = false;
 
@@ -41,6 +45,15 @@ class _ChallengeListPageState extends State<ChallengeListPage>
         .getAcceptedChallenges()
         .then((challenges) => setState(() {
               data = challenges;
+              acceptedChallenges = challenges
+                  .where((x) =>
+                      (x.finished == null || x.finished == false) &&
+                      x.accepted != null &&
+                      x.accepted == true)
+                  .toList();
+              finishedChallenges = data
+                  .where((x) => x.finished != null && x.finished == true)
+                  .toList();
               refreshController.refreshCompleted();
             }))
         .catchError((_) => refreshController.refreshFailed())
@@ -119,15 +132,64 @@ class _ChallengeListPageState extends State<ChallengeListPage>
     return SmartRefresher(
       controller: refreshController,
       onRefresh: _onRefresh,
-      child: isLoading
-          ? _renderShimmer()
-          : ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (BuildContext context, int index) {
-                final challenge = data[index];
-                return ChallengeTile(challenge);
-              },
-            ),
+      child: isLoading ? _renderShimmer() : _renderContent(context),
+    );
+  }
+
+  Widget _renderCaption(String text) {
+    return Padding(
+      padding: EdgeInsets.only(left: 8.0, top: 16.0),
+      child: Container(
+        width: double.infinity,
+        child: ThemedText(
+          text: text,
+          color: Color(0xFF00AB96),
+          textAlign: TextAlign.start,
+          fontSize: 16.0,
+        ),
+      ),
+    );
+  }
+
+  Widget _renderContent(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        Column(
+          children: [
+            _renderCaption("Geschafft!"),
+            SizedBox(
+                height: 160,
+                child: ListView.builder(
+                    physics: ClampingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: finishedChallenges.length,
+                    itemBuilder: (context, index) {
+                      return DiscoverChallengeTile(
+                        finishedChallenges[index],
+                        () {},
+                        fromAcceptedChallenges: true,
+                      );
+                    }))
+          ],
+        ),
+        Column(
+          children: <Widget>[
+            _renderCaption("Offene Challenges"),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemCount: acceptedChallenges.length,
+                itemBuilder: (context, index) {
+                  return DiscoverChallengeTile(
+                    acceptedChallenges[index],
+                    () {},
+                    fromAcceptedChallenges: true,
+                  );
+                }),
+          ],
+        ),
+      ],
     );
   }
 

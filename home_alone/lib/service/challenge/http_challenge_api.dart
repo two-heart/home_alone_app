@@ -78,4 +78,15 @@ class HttpChallengeApi implements ChallengeApi {
     print(response.data);
     if (response.statusCode < 299) {}
   }
+
+  @override
+  Future<bool> finishChallenge(String challengeId) async {
+    try {
+      await dio.put("$baseUrl/challenge/$challengeId/finish");
+      return true;
+    } catch (err) {
+      print(err);
+      return false;
+    }
+  }
 }

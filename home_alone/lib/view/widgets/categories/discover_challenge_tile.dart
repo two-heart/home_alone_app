@@ -1,15 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/view/pages/challenge_detail_page.dart';
+import 'package:home_alone/view/theme/colors.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 
 class DiscoverChallengeTile extends StatelessWidget {
   final Challenge challenge;
   final Function onChallengeAccepted;
-  DiscoverChallengeTile(this.challenge, this.onChallengeAccepted);
+  final bool fromAcceptedChallenges;
+
+  DiscoverChallengeTile(this.challenge, this.onChallengeAccepted,
+      {this.fromAcceptedChallenges = false});
 
   @override
   Widget build(BuildContext context) {
@@ -71,36 +77,59 @@ class DiscoverChallengeTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: !challenge.accepted
-            ? <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: ThemedFlatButton(
-                    fontSize: 14,
-                    text: "Zur Challenge",
-                    onPressed: () {
-                      _openDetailPage(context);
-                    },
-                  ),
-                ),
-                ThemedButton(
-                    padding: 4,
-                    text: "Teilnehmen",
-                    width: 120,
-                    onPressed: _acceptChallenge)
+        children: fromAcceptedChallenges == true
+            ? [
+                Container(),
+                challenge.finished
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 6.0),
+                        child: CircleAvatar(
+                            maxRadius: 18.0,
+                            backgroundColor:
+                                HomeAloneColors.primaryButtonGradientEndColor,
+                            child: Image.asset(
+                              "assets/image/check.png",
+                              width: 24.0,
+                            )),
+                      )
+                    : ThemedButton(
+                        padding: 2,
+                        text: "Zur Challenge",
+                        width: 120,
+                        onPressed: () {
+                          _openDetailPage(context);
+                        })
               ]
-            : [
-                Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: ThemedFlatButton(
-                    fontSize: 14,
-                    text: "Zur Challenge",
-                    onPressed: () {
-                      _openDetailPage(context);
-                    },
-                  ),
-                )
-              ],
+            : !challenge.accepted
+                ? <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2.0),
+                      child: ThemedFlatButton(
+                        fontSize: 14,
+                        text: "Zur Challenge",
+                        onPressed: () {
+                          _openDetailPage(context);
+                        },
+                      ),
+                    ),
+                    ThemedButton(
+                        padding: 4,
+                        text: "Teilnehmen",
+                        width: 120,
+                        onPressed: _acceptChallenge)
+                  ]
+                : [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2.0),
+                      child: ThemedFlatButton(
+                        fontSize: 14,
+                        text: "Zur Challenge",
+                        onPressed: () {
+                          _openDetailPage(context);
+                        },
+                      ),
+                    )
+                  ],
       ),
     );
   }
@@ -130,7 +159,7 @@ class DiscoverChallengeTile extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.fitWidth,
           image: NetworkImage(
-            "https://www.meridianspa.de/fileadmin/user_upload/Fitness-Hamburg-Meridian-Plank.jpg",
+            URLS[challenge.id.hashCode.abs() % URLS.length],
           ),
         ),
       ),

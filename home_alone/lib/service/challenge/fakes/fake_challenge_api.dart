@@ -32,4 +32,7 @@ class FakeChallengeApi implements ChallengeApi {
 
   @override
   Future<void> acceptChallenge(String id) async {}
+
+  @override
+  Future<bool> finishChallenge(String challengeId) {}
 }

@@ -98,6 +98,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
+  static Widget loadTabIcon(String imageName) {
+    return Image.asset(
+      "assets/image/$imageName.png",
+      width: 28,
+      height: 28,
+    );
+  }
+
   Widget _buildTabBar(BuildContext context) => Container(
         color: Theme.of(context).primaryColor,
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
@@ -122,9 +130,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       );
 
   final _navigationItems = <Widget>[
-    Tab(icon: Icon(Icons.home), text: "Entdecken"),
-    Tab(icon: Icon(Icons.queue), text: "Meine Challenges"),
-    Tab(icon: Icon(Icons.settings), text: "Einstellungen"),
+    Tab(icon: loadTabIcon("home"), text: "Entdecken"),
+    Tab(icon: loadTabIcon("challenges"), text: "Meine Challenges"),
+    Tab(icon: loadTabIcon("settings"), text: "Einstellungen"),
   ];
 
   List<Widget> _buildSearchAction(
@@ -151,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<Widget> _buildLogoutAction(BuildContext context) {
     return <Widget>[
       IconButton(
-        icon: Icon(HomeAloneIcons.logout),
+        icon: Image.asset("assets/image/log_out.png"),
         onPressed: () {
           locator.get<FlutterSecureStorage>().delete(key: "token");
           locator.get<FlutterSecureStorage>().delete(key: "user");

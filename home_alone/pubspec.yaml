@@ -83,6 +83,12 @@ flutter:
     - assets/image/categories/users.png
     - assets/image/categories/
     - assets/hamster.png
+    - assets/image/check.png
+    - assets/image/home.png
+    - assets/image/log_in.png
+    - assets/image/log_out.png
+    - assets/image/settings.png
+    - assets/image/challenges.png
     - assets/challenge_accomplished_face.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

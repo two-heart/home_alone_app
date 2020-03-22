@@ -1,8 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
-import 'package:home_alone/service/challenge/http_challenge_api.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_app_bar.dart';
@@ -11,6 +12,11 @@ import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 import 'package:share/share.dart';
+
+const URLS = [
+  "https://www.stendo.net/mobile/img/senior/senior-13.jpg",
+  "https://www.meridianspa.de/fileadmin/user_upload/Fitness-Hamburg-Meridian-Plank.jpg"
+];
 
 class ChallengeDetail extends StatefulWidget {
   final Challenge challenge;
@@ -26,7 +32,8 @@ class _ChallengeDetailState extends State<ChallengeDetail>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ThemedAppBar(title: 'Challenge'),
+      extendBodyBehindAppBar: true,
+      appBar: ThemedAppBar(title: widget.challenge.name),
       body: _buildBody(context).withAwfulKeyboardFix(this),
     );
   }
@@ -66,7 +73,8 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         child: FittedBox(
           fit: BoxFit.fitWidth,
           child: Image(
-            image: NetworkImage(challenge.imageUrl),
+            image:
+                NetworkImage(URLS[challenge.id.hashCode.abs() % URLS.length]),
           ),
         ));
   }
@@ -87,6 +95,9 @@ class _ChallengeDetailState extends State<ChallengeDetail>
 
   Widget _buildButtonOrSlider(BuildContext context) {
     print(widget.challenge != null);
+    if (widget.challenge.finished) {
+      return Container();
+    }
     if (widget.challenge.accepted == true) {
       return _buildSlider();
     }
@@ -110,38 +121,50 @@ class _ChallengeDetailState extends State<ChallengeDetail>
       );
 
   void _acceptChallenge() {
-    // await locator.get<HttpChallengeApi>().acceptChallenge(widget.challenge.id);
     locator.get<ChallengeApi>().acceptChallenge(widget.challenge.id);
   }
 
   Widget _buildFinishedPopup(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.fromLTRB(20, 80, 20, 20),
-        content: Column(
-      children: <Widget>[
-        new Image.asset(
-          'assets/challenge_accomplished_face.png',
-          width: 300.0,
-          fit: BoxFit.cover,
-        ),
-        ThemedText(text: 'Super du hast die Challenge erledigt!',),
-        Text(
-            'Du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
-        Expanded(child: Container(),),
-        ThemedButton(
-          text: 'Weiter',
-          onPressed: () {
-            Navigator.pushNamed(context, '/home');
-          },
-        )
-      ],
-    ));
+        contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              new Image.asset(
+                'assets/challenge_accomplished_face.png',
+                width: 200.0,
+                fit: BoxFit.cover,
+              ),
+              Padding(
+                child: ThemedText(
+                  fontSize: 22.0,
+                  text: 'Super du hast die Challenge erledigt!',
+                ),
+                padding: EdgeInsets.only(top: 8, bottom: 8),
+              ),
+              Text(
+                'Du hast die Challenge ${widget.challenge.name} abgeschlossen.',
+                textAlign: TextAlign.center,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: ThemedButton(
+                  text: 'Weiter',
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                ),
+              )
+            ],
+          ),
+        ));
   }
 
-  _finishChallenge() {
-    widget.challenge.finished = true;
-    widget.challenge.finishedAt = DateTime.now();
-    showDialog(context: context,
+  _finishChallenge() async {
+    await locator.get<ChallengeApi>().finishChallenge(widget.challenge.id);
+    showDialog(
+        context: context,
         builder: (BuildContext context) {
           return _buildFinishedPopup(context);
         });

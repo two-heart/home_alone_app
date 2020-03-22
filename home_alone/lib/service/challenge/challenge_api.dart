@@ -5,5 +5,6 @@ abstract class ChallengeApi {
   Future<List<Challenge>> getSubscribedChallenges();
   Future<List<Challenge>> getAcceptedChallenges();
   Future<List<Challenge>> findChallenges(String query);
+  Future<bool> finishChallenge(String challengeId);
   Future<void> acceptChallenge(String id);
 }
