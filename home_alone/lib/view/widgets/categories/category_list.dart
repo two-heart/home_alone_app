@@ -10,7 +10,7 @@ class CategoryList extends StatelessWidget {
       builder: (context, model, _) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: ListView(
-          // shrinkWrap: true,
+          shrinkWrap: true,
           children: _buildListItems(model),
         ),
       ),

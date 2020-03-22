@@ -44,12 +44,24 @@ class _CategorySelectionState extends State<CategorySelection> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         SizedBox(height: 8),
-        _buildLabelText(),
-        Expanded(child: _buildCategoryList(context)),
+        _buildTextAndList(context),
         _buildNextButton(context),
       ],
     );
   }
+
+  _buildTextAndList(BuildContext context) => Expanded(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _buildLabelText(),
+              SizedBox(height: 8),
+              _buildCategoryList(context),
+            ],
+          ),
+      ),
+  );
 
   Widget _buildCategoryList(BuildContext context) =>
       Provider.of<CategorySelectionModel>(context).isLoading
@@ -71,7 +83,8 @@ class _CategorySelectionState extends State<CategorySelection> {
                 : null,
       );
 
-  _sendCategorySelectionOpenHomePage(BuildContext context) {
+  _sendCategorySelectionOpenHomePage(BuildContext context) async {
+    await locator.get<CategorySelectionStore>().updateCategories();
     Navigator.of(context).pushReplacementNamed('/home');
   }
 }

@@ -33,4 +33,10 @@ class CategorySelectionStore {
     }
     categorySelectionModel.isLoading = false;
   }
+
+  Future<void> updateCategories() async {
+    final selectedCategories =
+        categorySelectionModel.categories.where((f) => f.isSelected).toList();
+    // await categorySelectionService.updateCategories();
+  }
 }
