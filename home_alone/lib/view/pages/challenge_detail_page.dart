@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
-import 'package:home_alone/service/challenge/http_challenge_api.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_app_bar.dart';
@@ -59,6 +58,7 @@ class _ChallengeDetailState extends State<ChallengeDetail>
   }
 
   Widget _buildImage(Challenge challenge, BuildContext context) {
+    print(challenge.imageUrl);
     return Container(
         constraints: BoxConstraints.expand(height: 200.0),
         // placeholder if image load fails
@@ -86,7 +86,6 @@ class _ChallengeDetailState extends State<ChallengeDetail>
   }
 
   Widget _buildButtonOrSlider(BuildContext context) {
-    print(widget.challenge != null);
     if (widget.challenge.accepted == true) {
       return _buildSlider();
     }
