@@ -11,7 +11,11 @@ import 'package:provider/provider.dart';
 
 class CategorySelection extends StatefulWidget {
   final bool fromSettings;
-  CategorySelection({@required this.fromSettings});
+  final bool buildScaffold;
+  CategorySelection({
+    @required this.fromSettings,
+    this.buildScaffold = true,
+  });
 
   @override
   _CategorySelectionState createState() => _CategorySelectionState();
@@ -26,12 +30,14 @@ class _CategorySelectionState extends State<CategorySelection> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: ThemedAppBar(
-          title: 'Kategorien',
-        ),
-        body: _buildBody(context),
-      );
+  Widget build(BuildContext context) => widget.buildScaffold
+      ? Scaffold(
+          appBar: ThemedAppBar(
+            title: 'Kategorien',
+          ),
+          body: _buildBody(context),
+        )
+      : _buildBody(context);
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(
@@ -72,11 +78,7 @@ class _CategorySelectionState extends State<CategorySelection> {
       );
 
   Widget _buildCategoryList(BuildContext context) =>
-      Provider.of<CategorySelectionModel>(context).isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : CategoryList();
+      CategoryList(widget.fromSettings);
 
   Widget _buildLabelText() => ThemedText(
         text: 'Wofür interessierst du dich?',
@@ -88,10 +90,10 @@ class _CategorySelectionState extends State<CategorySelection> {
     var model = Provider.of<CategorySelectionModel>(context);
     print(widget.fromSettings);
     if (widget.fromSettings) {
-      onPressed = () async {
-        await _sendCategorySelectionOpenHomePage(context);
-        Navigator.of(context).pop();
-      };
+      // onPressed = () async {
+      //   await _sendCategorySelectionOpenHomePage(context);
+      // };
+      return Container();
     } else if (model.actionButtonIsEnabled) {
       onPressed = () async {
         await _sendCategorySelectionOpenHomePage(context);

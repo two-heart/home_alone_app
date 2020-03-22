@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/user.dart';
-import 'package:home_alone/view/widgets/themed_flat_button.dart';
+import 'package:home_alone/view/pages/category_selection_page.dart';
+import 'package:home_alone/view/theme/dime.dart';
+import 'package:home_alone/view/widgets/themed_text.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -35,20 +37,24 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final userWidget = user != null
-        ? Text('Angemeldet als: ${user.displayedName}')
+        ? ThemedText(
+            text: 'Angemeldet als: ${user.displayedName}',
+            fontSize: HomeAloneDimensions.labelFontSize,
+          )
         : Container();
     return Center(
         child: Column(
       children: [
         userWidget,
-        ThemedFlatButton(
-          text: 'Kategorien ändern',
-          onPressed: () {
-            Navigator.pushNamed(context, '/categories',
-                arguments: {"fromSettings": true});
-          },
-        ),
+        _buildCategorySelection(),
       ],
     ));
   }
+
+  _buildCategorySelection() => Expanded(
+        child: CategorySelection(
+          fromSettings: true,
+          buildScaffold: false,
+        ),
+      );
 }

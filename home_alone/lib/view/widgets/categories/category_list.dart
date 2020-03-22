@@ -4,6 +4,9 @@ import 'package:home_alone/viewmodel/category_selection_model.dart';
 import 'package:provider/provider.dart';
 
 class CategoryList extends StatelessWidget {
+  CategoryList(this.fromSettings);
+  final bool fromSettings;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CategorySelectionModel>(
@@ -21,6 +24,8 @@ class CategoryList extends StatelessWidget {
     if (model.categories.isEmpty) {
       return [];
     }
-    return model.categories.map((f) => CategoryListItem(category: f)).toList();
+    return model.categories
+        .map((f) => CategoryListItem(category: f, fromSettings: fromSettings))
+        .toList();
   }
 }

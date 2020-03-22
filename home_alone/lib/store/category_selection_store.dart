@@ -42,8 +42,7 @@ class CategorySelectionStore {
 
     await categorySelectionService.selectCategories(selectedCategories);
 
-    final categories = await loadSelectedCategories();
-    print(categories);
+    await loadSelectedCategories();
   }
 
   Future<List<Category>> loadSelectedCategories() async {
