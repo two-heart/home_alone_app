@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
@@ -84,15 +85,23 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     if (widget.challenge.accepted == true) {
       return _buildSlider();
     }
-    return _buildParticipateButton();
+    return _buildAcceptChallengeButton();
   }
 
   Widget _buildSlider() {
     return Container();
   }
 
-  Widget _buildParticipateButton() => Padding(
-        child: ThemedButton(text: 'Teilnehmen'),
+  Widget _buildAcceptChallengeButton() => Padding(
+        child: ThemedButton(
+          text: 'Teilnehmen',
+          onPressed: _acceptChallenge,
+        ),
         padding: EdgeInsets.all(16.0),
       );
+
+  void _acceptChallenge() {
+    
+    // locator.get<>()
+  }
 }
