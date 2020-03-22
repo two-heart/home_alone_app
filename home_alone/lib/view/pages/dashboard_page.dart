@@ -150,7 +150,7 @@ class _DashboardPageState extends State<DashboardPage>
                 children: <Widget>[
                   Padding(
                     child: CategoryIcon(
-                      challenge: challenges.first,
+                      category: challenges.first.category,
                     ),
                     padding: EdgeInsets.only(left: 4.0),
                   ),
