@@ -42,16 +42,19 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         shrinkWrap: true,
         children: <Widget>[
           _buildImage(widget.challenge, context),
-          ThemedFlatButton(
-              text: 'Share',
-              onPressed: () {
-                print('pressed');
-                Share.share(
-                    'Spiel mit mir die ${widget.challenge.name}. In der home alone challenge App.');
-              }),
           _buildText(widget.challenge),
         ],
       );
+
+  Widget _buildShareButton() {
+    return ThemedFlatButton(
+        text: 'Share',
+        onPressed: () {
+          print('pressed');
+          Share.share(
+              'Spiel mit mir die ${widget.challenge.name}. In der home alone challenge App.');
+        });
+  }
 
   Widget _buildImage(Challenge challenge, BuildContext context) {
     return Container(
@@ -101,7 +104,13 @@ class _ChallengeDetailState extends State<ChallengeDetail>
       );
 
   void _acceptChallenge() {
-    
     // locator.get<>()
+  }
+
+  Widget _finishedScreen() {
+    return AlertDialog(
+      content: Text(
+          'Herzlichen Glückwunsch du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
+    );
   }
 }
