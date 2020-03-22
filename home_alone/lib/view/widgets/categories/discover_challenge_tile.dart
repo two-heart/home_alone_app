@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/view/pages/challenge_detail_page.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
-import 'package:home_alone/view/widgets/themed_text.dart';
+import 'package:home_alone/view/widgets/themed_flat_button.dart';
 
 class DiscoverChallengeTile extends StatelessWidget {
   final Challenge challenge;
@@ -21,14 +21,17 @@ class DiscoverChallengeTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       width: 350,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          _buildImageSection(),
-          _buildTeaserText(),
-          _buildButtonRow()
-        ],
+      child: Card(
+        elevation: 4.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            _buildImageSection(),
+            _buildTeaserText(),
+            _buildButtonRow()
+          ],
+        ),
       ),
     );
   }
@@ -45,18 +48,42 @@ class DiscoverChallengeTile extends StatelessWidget {
     );
   }
 
-  Text _buildTeaserText() => Text(challenge.teaser, maxLines: 1);
+  Widget _buildTeaserText() => Padding(
+        child: Container(
+          width: double.infinity,
+          child: Text(challenge.teaser,
+              maxLines: 1,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 14,
+              )),
+        ),
+        padding: EdgeInsets.only(left: 4.0),
+      );
 
   Widget _buildButtonRow() {
     return Padding(
-      padding: EdgeInsets.only(bottom: 8, right: 8),
+      padding: EdgeInsets.only(
+        right: 8,
+      ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: !challenge.accepted
             ? <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 2.0),
+                  child: ThemedFlatButton(
+                    fontSize: 14,
+                    text: "Zur Challenge",
+                    onPressed: () {},
+                  ),
+                ),
                 ThemedButton(
-                    text: "Teilnehmen", width: 120, onPressed: _acceptChallenge)
+                    padding: 4,
+                    text: "Teilnehmen",
+                    width: 120,
+                    onPressed: _acceptChallenge)
               ]
             : [],
       ),
@@ -68,10 +95,15 @@ class DiscoverChallengeTile extends StatelessWidget {
         bottom: 0,
         left: 0,
         right: 0,
-        child: Text(
-          challenge.name,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white),
+        child: Container(
+          width: double.infinity,
+          color: Color(0x99000000),
+          child: Text(
+            challenge.name,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
         ));
   }
 

@@ -165,7 +165,7 @@ class _DashboardPageState extends State<DashboardPage>
             Padding(
               padding: EdgeInsets.only(top: 4),
               child: SizedBox(
-                height: 180,
+                height: 160,
                 child: ListView.builder(
                   physics: ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,

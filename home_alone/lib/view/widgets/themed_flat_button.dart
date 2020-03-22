@@ -5,8 +5,10 @@ import 'package:home_alone/view/theme/dime.dart';
 class ThemedFlatButton extends StatelessWidget {
   final String text;
   final Function onPressed;
+  final double fontSize;
 
   const ThemedFlatButton({
+    this.fontSize,
     this.text,
     this.onPressed,
   });
@@ -18,7 +20,9 @@ class ThemedFlatButton extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             color: HomeAloneColors.flatButtonGrey,
-            fontSize: HomeAloneDimensions.primaryButtonTextSize,
+            fontSize: fontSize != null
+                ? fontSize
+                : HomeAloneDimensions.primaryButtonTextSize,
           ),
         ),
       );
