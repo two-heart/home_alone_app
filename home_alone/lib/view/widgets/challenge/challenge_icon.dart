@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/model/category.dart';
 import 'package:home_alone/model/challenge.dart';
+import 'package:home_alone/view/theme/colors.dart';
 
 class CategoryIcon extends StatelessWidget {
-  final Challenge challenge;
+  final Category category;
 
   const CategoryIcon({
     Key key,
-    this.challenge,
+    this.category,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) => CircleAvatar(
-        maxRadius: 50,
-        child: Image.asset(_getImagePath(challenge.category.name)),
+        maxRadius: 22,
+        backgroundColor: HomeAloneColors.primaryButtonGradientEndColor,
+        child: Image.asset(
+          _getImagePath(category.name.toLowerCase()),
+          // color: Colors.green,
+        ),
       );
 
   String _getImagePath(String category) =>
