@@ -69,6 +69,19 @@ flutter:
   assets:
     - .env
     - assets/
+    - assets/image/categories/compatible.png
+    - assets/image/categories/creativity.png
+    - assets/image/categories/culinary.png
+    - assets/image/categories/daily.png
+    - assets/image/categories/education.png
+    - assets/image/categories/entertainment.png
+    - assets/image/categories/mandatory.png
+    - assets/image/categories/profound.png
+    - assets/image/categories/realigned.png
+    - assets/image/categories/spa.png
+    - assets/image/categories/sports.png
+    - assets/image/categories/users.png
+    - assets/image/categories/
     - assets/hamster.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
