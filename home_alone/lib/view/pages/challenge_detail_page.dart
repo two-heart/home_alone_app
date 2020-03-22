@@ -123,8 +123,9 @@ class _ChallengeDetailState extends State<ChallengeDetail>
           width: 400.0,
           fit: BoxFit.cover,
         ),
+        ThemedText(text: 'Super du hast die Challenge erledigt!',),
         Text(
-            'Herzlichen Glückwunsch du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
+            'Du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
         ThemedButton(
           text: 'Weiter',
           onPressed: () {
