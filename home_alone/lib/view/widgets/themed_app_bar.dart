@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/view/theme/border.dart';
+import 'package:home_alone/view/theme/icons.dart';
 
 class ThemedAppBar extends AppBar {
   ThemedAppBar({String title = "Home Alone", actions, showLogo = false}): super(
@@ -14,6 +15,7 @@ class ThemedAppBar extends AppBar {
       ),
     ),
     actions: actions,
-    leading: showLogo ? Icon(Icons.print) : null
+    elevation: 0.0,
+    leading: showLogo ? Icon(HomeAloneIcons.home_alone_logo, size: 24) : null,
   );
 }

@@ -7,6 +7,7 @@ import 'package:home_alone/view/pages/dashboard_page.dart';
 import 'package:home_alone/view/pages/settings_page.dart';
 import 'package:home_alone/view/theme/border.dart';
 import 'package:home_alone/view/theme/colors.dart';
+import 'package:home_alone/view/theme/icons.dart';
 import 'package:home_alone/view/widgets/themed_app_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -126,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   ) {
     return <Widget>[
       IconButton(
-        icon: Icon(Icons.search),
+        icon: Icon(HomeAloneIcons.search, size: 20),
         onPressed: () {
           showSearch(
             context: context,
@@ -145,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<Widget> _buildLogoutAction(BuildContext context) {
     return <Widget>[
       IconButton(
-        icon: Icon(Icons.forward),
+        icon: Icon(HomeAloneIcons.logout),
         onPressed: () {
           locator.get<FlutterSecureStorage>().delete(key: "token");
           locator.get<FlutterSecureStorage>().delete(key: "user");
