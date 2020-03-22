@@ -44,6 +44,15 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         shrinkWrap: true,
         children: <Widget>[
           _buildImage(widget.challenge, context),
+          ThemedButton(
+              text: 'test',
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return _buildFinishedPopup(context);
+                    });
+              }),
           _buildShareButton(),
           _buildText(widget.challenge),
         ],
@@ -114,6 +123,11 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     return AlertDialog(
         content: Column(
       children: <Widget>[
+        new Image.asset(
+          'assets/hamster.png',
+          width: 400.0,
+          fit: BoxFit.cover,
+        ),
         Text(
             'Herzlichen Glückwunsch du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
         ThemedButton(
