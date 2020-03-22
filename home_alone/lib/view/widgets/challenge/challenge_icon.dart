@@ -16,9 +16,12 @@ class CategoryIcon extends StatelessWidget {
   Widget build(BuildContext context) => CircleAvatar(
         maxRadius: maxRadius,
         backgroundColor: HomeAloneColors.primaryButtonGradientEndColor,
-        child: Image.asset(
-          _getImagePath(category.name.toLowerCase()),
-          // color: Colors.green,
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Image.asset(
+            _getImagePath(category.name.toLowerCase()),
+            // color: Colors.green,
+          ),
         ),
       );
 
