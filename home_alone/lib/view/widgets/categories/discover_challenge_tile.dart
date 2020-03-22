@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/view/pages/challenge_detail_page.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
+import 'package:home_alone/view/widgets/themed_text.dart';
 
 class DiscoverChallengeTile extends StatelessWidget {
   final Challenge challenge;
@@ -20,54 +21,44 @@ class DiscoverChallengeTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       width: 350,
-      child: Container(
-        color: Colors.black12,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            _buildCategoryHeader(),
-            _buildImageSection(),
-            _buildTeaserText(),
-            _buildButtonRow()
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          _buildImageSection(),
+          _buildTeaserText(),
+          _buildButtonRow()
+        ],
       ),
     );
   }
 
-  Stack _buildImageSection() {
-    return Stack(
-      children: <Widget>[
-        _buildImage(),
-        _buildText(),
-      ],
-    );
-  }
-
-  Row _buildCategoryHeader() {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[Icon(Icons.work), Text(challenge.category.name)],
+  Widget _buildImageSection() {
+    return Container(
+      color: Color(0xF4F4F4),
+      child: Stack(
+        children: <Widget>[
+          _buildImage(),
+          _buildText(),
+        ],
+      ),
     );
   }
 
   Text _buildTeaserText() => Text(challenge.teaser, maxLines: 1);
 
-  Expanded _buildButtonRow() {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 8, right: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: challenge.accepted ? <Widget>[
-            ThemedButton(
-                text: "Teilnehmen", width: 120, onPressed: _acceptChallenge)
-          ] : [],
-        ),
+  Widget _buildButtonRow() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8, right: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: !challenge.accepted
+            ? <Widget>[
+                ThemedButton(
+                    text: "Teilnehmen", width: 120, onPressed: _acceptChallenge)
+              ]
+            : [],
       ),
     );
   }
@@ -92,7 +83,7 @@ class DiscoverChallengeTile extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.fitWidth,
           image: NetworkImage(
-            "https://blog.photofeeler.com/wp-content/uploads/2017/09/tinder-photo-size-tinder-picture-size-tinder-aspect-ratio-image-dimensions-crop.jpg",
+            "https://www.meridianspa.de/fileadmin/user_upload/Fitness-Hamburg-Meridian-Plank.jpg",
           ),
         ),
       ),

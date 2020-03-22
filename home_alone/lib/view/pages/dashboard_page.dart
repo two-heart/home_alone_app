@@ -6,6 +6,7 @@ import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/view/widgets/categories/discover_challenge_tile.dart';
 import 'package:home_alone/view/widgets/challenge/challenge_tile.dart';
+import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -139,25 +140,49 @@ class _DashboardPageState extends State<DashboardPage>
     data.forEach((category, challenges) => listViews.add(Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              category.name,
-              textAlign: TextAlign.left,
+            Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    child: Icon(Icons.work),
+                    padding: EdgeInsets.only(left: 4.0),
+                  ),
+                  Padding(
+                    child: ThemedText(
+                      fontSize: 16,
+                      text: category.name,
+                      textAlign: TextAlign.left,
+                    ),
+                    padding: EdgeInsets.only(left: 8),
+                  )
+                ],
+              ),
             ),
-            SizedBox(
-              height: 180,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: challenges.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    DiscoverChallengeTile(challenges[index]),
+            Padding(
+              padding: EdgeInsets.only(top: 4),
+              child: SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: challenges.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      DiscoverChallengeTile(challenges[index]),
+                ),
               ),
             )
           ],
         )));
 
     return SingleChildScrollView(
-        child: Column(mainAxisSize: MainAxisSize.min, children: listViews));
+        child: Padding(
+      child: Column(mainAxisSize: MainAxisSize.min, children: listViews),
+      padding: EdgeInsets.all(8.0),
+    ));
   }
 
   @override
