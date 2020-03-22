@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
+import 'package:home_alone/view/theme/colors.dart';
+import 'package:home_alone/view/widgets/categories/discover_challenge_tile.dart';
 import 'package:home_alone/view/widgets/challenge/challenge_tile.dart';
 
 class ChallengeSearchDelegate extends SearchDelegate {
@@ -38,7 +41,11 @@ class ChallengeSearchDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-      primarySwatch: Colors.blue,
+      primaryColor: HomeAloneColors.primaryColor,
+      primaryColorDark: HomeAloneColors.primaryDarkColor,
+      primaryColorLight: HomeAloneColors.primaryLightColor,
+      accentColor: HomeAloneColors.primaryLightColor,
+      fontFamily: 'Baloo2',
     );
   }
 
@@ -52,24 +59,8 @@ class ChallengeSearchDelegate extends SearchDelegate {
                   itemCount: value.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     final challenge = value.data[index];
-                    return ChallengeTile(challenge, onTab: (tappedChallenge) {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(tappedChallenge.name),
-                              content: Text(tappedChallenge.description),
-                              actions: <Widget>[
-                                RaisedButton(
-                                  child: Text("OK"),
-                                  onPressed: () {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop();
-                                  },
-                                )
-                              ],
-                            );
-                          });
+                    return DiscoverChallengeTile(challenge, () {
+                      locator.get<ChallengeApi>().acceptChallenge(challenge.id);
                     });
                   })
               : Container(),

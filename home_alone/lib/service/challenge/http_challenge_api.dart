@@ -64,11 +64,13 @@ class HttpChallengeApi implements ChallengeApi {
 
   @override
   Future<List<Challenge>> findChallenges(String query) async {
-    var response = await dio.get("$baseUrl/challenge", queryParameters: {
-      "q": query,
-    });
-    return response.evaluate((data) => Challenge.fromJsonList(response.data)) ??
+    var challenges = (await getSubscribedChallenges());
+    final result = challenges
+            .where((x) => x.name.toLowerCase().contains(query.toLowerCase()))
+            .toList() ??
         [];
+    print(result);
+    return result;
   }
 
   @override
