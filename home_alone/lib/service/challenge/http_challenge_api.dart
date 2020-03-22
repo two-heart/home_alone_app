@@ -16,22 +16,23 @@ class HttpChallengeApi implements ChallengeApi {
 
   @override
   Future<List<Challenge>> getAllChallenges() async {
-    var response = await dio.get("$baseUrl/api/challenges");
-    return response.evaluate((data) => Challenge.fromJsonList(data));
+    var response = await dio.get("$baseUrl/challenge");
+    return Challenge.fromJsonList(response.data);
   }
 
   @override
   Future<List<Challenge>> getAllIncompletedChallenges() async {
-    var response = await dio.get("$baseUrl/api/challenges/incomplete");
-    return response.evaluate((data) => Challenge.fromJsonList(response.data));
+    var response = await dio.get("$baseUrl/challenge");
+    return response.evaluate((data) => Challenge.fromJsonList(response.data)) ??
+        [];
   }
 
   @override
   Future<List<Challenge>> findChallenges(String query) async {
-    var response =
-        await dio.get("$baseUrl/api/challenges/search", queryParameters: {
+    var response = await dio.get("$baseUrl/challenge", queryParameters: {
       "q": query,
     });
-    return response.evaluate((data) => Challenge.fromJsonList(response.data));
+    return response.evaluate((data) => Challenge.fromJsonList(response.data)) ??
+        [];
   }
 }

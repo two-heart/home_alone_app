@@ -39,17 +39,16 @@ class DependencyInjection {
 
     dio = addInterceptors(dio);
 
-    /*locator.registerSingleton<ChallengeApi>(
-      HttpChallengeApi(
-          baseUrl: DotEnv().env['BASE_URL'],
-          dio: dio,
-      )
-    );*/
+    locator.registerSingleton<ChallengeApi>(HttpChallengeApi(
+      baseUrl: DotEnv().env['BASE_URL'],
+      dio: dio,
+    ));
+
     var storage = new FlutterSecureStorage();
     token = await storage.read(key: "token");
     locator.registerSingleton(storage);
 
-    locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
+    //locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
       baseUrl: DotEnv().env['BASE_URL'],

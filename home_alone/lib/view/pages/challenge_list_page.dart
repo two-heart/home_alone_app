@@ -40,6 +40,7 @@ class _ChallengeListPageState extends State<ChallengeListPage>
     api
         .getAllChallenges()
         .then((challenges) => setState(() {
+              print(challenges);
               data = challenges;
               refreshController.refreshCompleted();
             }))

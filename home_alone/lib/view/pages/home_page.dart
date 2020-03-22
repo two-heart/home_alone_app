@@ -3,7 +3,6 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/challenge_search_delegate.dart';
 import 'package:home_alone/view/pages/dashboard_page.dart';
-import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/pages/settings_page.dart';
 import 'package:home_alone/view/theme/colors.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
