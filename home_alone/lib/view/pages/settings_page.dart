@@ -37,12 +37,12 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userWidget = user != null ? Text(user.displayedName) : Container();
+    final userWidget = user != null ? Text('Angemeldet als: ${user.displayedName}') : Container();
     return Center(
         child: Column(
       children: [
-        ThemedFlatButton(text: 'Kategorien ändern', onPressed: () {Navigator.pushNamed(context, '/categories');},),
         userWidget,
+        ThemedFlatButton(text: 'Kategorien ändern', onPressed: () {Navigator.pushNamed(context, '/categories');},),
       ],
     ));
   }

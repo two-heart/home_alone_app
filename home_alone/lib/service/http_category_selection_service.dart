@@ -24,11 +24,14 @@ class HttpCategorySelectionService {
   }
 
   selectCategories(List<String> selectedCategories) async {
-    print(selectedCategories);
+    // print(selectedCategories);
+    final data = {"categoryIds": jsonEncode( selectedCategories)};
+    print(data);
     var response = await dio.post(
       "$baseUrl/user/categories",
       data: {"categoryIds": selectedCategories},
     );
-    print(response.data);
+    print(response.statusCode);
+    print(response.statusMessage);
   }
 }
