@@ -146,22 +146,12 @@ class _DashboardPageState extends State<DashboardPage>
             SizedBox(
               height: 180,
               child: ListView.builder(
-                  physics: ClampingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: challenges.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final challenge = challenges[index];
-                    return InkWell(
-                        onTap: () {Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ChallengeDetail(challenge: challenge)),
-                        );},
-                        child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        width: 350,
-                        child: DiscoverChallengeTile(challenge)));
-                  }),
+                physics: ClampingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: challenges.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    DiscoverChallengeTile(challenges[index]),
+              ),
             )
           ],
         )));

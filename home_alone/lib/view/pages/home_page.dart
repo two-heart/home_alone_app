@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/challenge_search_delegate.dart';
@@ -9,7 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'challenge_list_page.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({
     Key key,
     this.title,
@@ -17,8 +18,38 @@ class MyHomePage extends StatelessWidget {
 
   final String title;
 
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+
+  TabController _tabController;
+  int currentTabIndex;
+
+  @override
+  void initState() {
+    _tabController =
+        TabController(vsync: this, length: _navigationItems.length);
+    _tabController.addListener(_onIndexChanged);
+    super.initState();
+  }
+
+  void _onIndexChanged() {
+    setState(() {
+      if (!_tabController.indexIsChanging) {
+        currentTabIndex = _tabController.index;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
 
   _onRefresh() async {
     // final weatherStore = locator.get<WeatherStore>();
@@ -30,13 +61,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // var model = Provider.of<WeatherModel>(context);
-    return DefaultTabController(
-      length: _navigationItems.length,
-      child: Scaffold(
-          appBar: _buildAppBar(context),
-          body: _buildContent(context),
-          bottomNavigationBar: _buildTabBar(context)),
-    );
+    return Scaffold(
+        appBar: _buildAppBar(context),
+        body: _buildContent(context),
+        bottomNavigationBar: _buildTabBar(context));
   }
 
   AppBar _buildAppBar(
@@ -44,7 +72,9 @@ class MyHomePage extends StatelessWidget {
   ) {
     return AppBar(
       title: Text("Home Alone"),
-      actions: _buildSearchAction(context),
+      actions: currentTabIndex != 2
+          ? _buildSearchAction(context)
+          : _buildLogoutAction(context),
     );
   }
 
@@ -52,7 +82,7 @@ class MyHomePage extends StatelessWidget {
     return SmartRefresher(
       controller: _refreshController,
       onRefresh: _onRefresh,
-      child: TabBarView(children: [
+      child: TabBarView(controller: _tabController, children: [
         DashboardPage(),
         ChallengeListPage(),
         SettingsPage(),
@@ -64,6 +94,7 @@ class MyHomePage extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         child: TabBar(
+          controller: _tabController,
           indicator: ShapeDecoration(
               shape: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -104,6 +135,20 @@ class MyHomePage extends StatelessWidget {
               searchFieldLabel: "Name der Challenge ...",
             ),
           );
+        },
+      )
+    ];
+  }
+
+  List<Widget> _buildLogoutAction(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(Icons.forward),
+        onPressed: () {
+          locator.get<FlutterSecureStorage>().delete(key: "token");
+          locator.get<FlutterSecureStorage>().delete(key: "user");
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/login", (route) => false);
         },
       )
     ];
