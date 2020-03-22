@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
+import 'package:home_alone/model/category.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/view/pages/login_page.dart';
@@ -12,6 +13,7 @@ import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
 import 'package:share/share.dart';
+import 'package:home_alone/view/widgets/challenge/challenge_icon.dart';
 
 const URLS = [
   "https://www.stendo.net/mobile/img/senior/senior-13.jpg",
@@ -50,6 +52,7 @@ class _ChallengeDetailState extends State<ChallengeDetail>
   Widget _buildContent(BuildContext context) => ListView(
         shrinkWrap: true,
         children: <Widget>[
+          _buildCategory(widget.challenge.category, context),
           _buildImage(widget.challenge, context),
           _buildShareButton(),
           _buildText(widget.challenge),
@@ -167,5 +170,31 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         builder: (BuildContext context) {
           return _buildFinishedPopup(context);
         });
+  }
+
+  Widget _buildCategory(Category category, BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          child: CategoryIcon(
+            maxRadius: 16,
+            category: category,
+          ),
+          padding: EdgeInsets.only(left: 4.0, top: 8.0, bottom: 8.0),
+        ),
+        Padding(
+          child: ThemedText(
+            fontSize: 16,
+            text: category.name,
+            color: Color(0xFF00AB96),
+            textAlign: TextAlign.left,
+          ),
+          padding: EdgeInsets.only(left: 4, right: 8),
+        )
+      ],
+    );
   }
 }
