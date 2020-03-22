@@ -59,7 +59,7 @@ class _SetUsernamePageState extends State<SetUsernamePage>
             ],
           ),
         ),
-      );
+      ).withWeirdBall();
 
   Widget _buildGreetingText(BuildContext context) =>
       ThemedText(text: "Super dich an Board zu haben!");

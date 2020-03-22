@@ -45,12 +45,14 @@ extension WeirdBallExtension on Widget {
   Widget withWeirdBall({ParentWidgetBuilder builder}) {
     return Stack(
       fit: StackFit.expand,
+      alignment: Alignment.topCenter,
       children: [
         Positioned(
-          left: 16,
+          // left: 16,
           top: 16,
           child: Hero(
-            child: WeirdBall(inHero: true),
+            // child: WeirdBall(inHero: true),
+            child: _buildIcon(),
             tag: "WEIRD_BALL",
           ),
         ),
@@ -58,6 +60,9 @@ extension WeirdBallExtension on Widget {
       ],
     );
   }
+
+  Widget _buildIcon() => Image.asset('assets/hamster.png',
+      height: HomeAloneDimensions.circularLogoSize * 3);
 }
 
 extension AwfulKeyboardFix on Widget {
