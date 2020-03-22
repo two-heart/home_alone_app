@@ -10,10 +10,12 @@ class CategoryIcon extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) => CircleAvatar(
+        foregroundColor: Colors.green,
         maxRadius: 50,
-        child: Image.asset(_getImagePath(challenge.category.name)),
+        child:
+            Image.asset(_getImagePath(challenge.category.name.toLowerCase())),
       );
 
   String _getImagePath(String category) =>
-      'assets/image/category/$category.png';
+      'assets/image/categories/$category.png';
 }

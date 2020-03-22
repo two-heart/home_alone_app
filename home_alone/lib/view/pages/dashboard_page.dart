@@ -5,6 +5,7 @@ import 'package:home_alone/model/category.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/view/widgets/categories/discover_challenge_tile.dart';
+import 'package:home_alone/view/widgets/challenge/challenge_icon.dart';
 import 'package:home_alone/view/widgets/challenge/challenge_tile.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -148,7 +149,9 @@ class _DashboardPageState extends State<DashboardPage>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    child: Icon(Icons.work),
+                    child: CategoryIcon(
+                      challenge: challenges.first,
+                    ),
                     padding: EdgeInsets.only(left: 4.0),
                   ),
                   Padding(
@@ -171,7 +174,8 @@ class _DashboardPageState extends State<DashboardPage>
                   scrollDirection: Axis.horizontal,
                   itemCount: challenges.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      DiscoverChallengeTile(challenges[index]),
+                      DiscoverChallengeTile(
+                          challenges[index], () => _onRefresh()),
                 ),
               ),
             )

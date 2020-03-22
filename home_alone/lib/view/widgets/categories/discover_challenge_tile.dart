@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
+import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/view/pages/challenge_detail_page.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 
 class DiscoverChallengeTile extends StatelessWidget {
   final Challenge challenge;
-
-  DiscoverChallengeTile(this.challenge);
+  final Function onChallengeAccepted;
+  DiscoverChallengeTile(this.challenge, this.onChallengeAccepted);
 
   @override
   Widget build(BuildContext context) {
@@ -142,5 +144,8 @@ class DiscoverChallengeTile extends StatelessWidget {
     );
   }
 
-  void _acceptChallenge() {}
+  void _acceptChallenge() async {
+    await locator.get<ChallengeApi>().acceptChallenge(challenge.id);
+    onChallengeAccepted();
+  }
 }
