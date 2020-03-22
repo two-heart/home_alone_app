@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:home_alone/model/category.dart';
 
-import 'package:home_alone/service/ext.dart';
 
 class HttpCategorySelectionService {
   HttpCategorySelectionService({
@@ -15,5 +16,16 @@ class HttpCategorySelectionService {
   Future<List<Category>> getAllCategories() async {
     var response = await dio.get("$baseUrl/category");
     return Category.fromJsonList(response.data);
+  }
+
+  selectCategories(List<String> selectedCategories) async {
+    final data = {"categoryIds": selectedCategories};
+    print(data);
+
+    var response = await dio.post(
+      "$baseUrl/user/categories",
+      data: data,
+    );
+    print(response);
   }
 }

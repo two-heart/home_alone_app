@@ -36,7 +36,12 @@ class CategorySelectionStore {
 
   Future<void> updateCategories() async {
     final selectedCategories =
-        categorySelectionModel.categories.where((f) => f.isSelected).toList();
-    // await categorySelectionService.updateCategories();
+        categorySelectionModel.categories._getIdsOfSelected();
+    await categorySelectionService.selectCategories(selectedCategories);
   }
+}
+
+extension on List<CategoryModel> {
+  List<String> _getIdsOfSelected() =>
+      this.where((f) => f.isSelected).map((f) => f.category.id).toList();
 }
