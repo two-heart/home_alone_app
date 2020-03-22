@@ -44,15 +44,6 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         shrinkWrap: true,
         children: <Widget>[
           _buildImage(widget.challenge, context),
-          ThemedButton(
-              text: 'test',
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return _buildFinishedPopup(context);
-                    });
-              }),
           _buildShareButton(),
           _buildText(widget.challenge),
         ],
@@ -102,9 +93,13 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     return _buildAcceptChallengeButton();
   }
 
-  Widget _buildSlider() {
-    return Container();
-  }
+  Widget _buildSlider() => Padding(
+        child: ThemedButton(
+          text: 'Challenge abschießen',
+          onPressed: _finishChallenge,
+        ),
+        padding: EdgeInsets.all(16.0),
+      );
 
   Widget _buildAcceptChallengeButton() => Padding(
         child: ThemedButton(
@@ -138,5 +133,14 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         )
       ],
     ));
+  }
+
+  _finishChallenge() {
+    widget.challenge.finished = true;
+    widget.challenge.finishedAt = DateTime.now();
+    showDialog(context: context,
+        builder: (BuildContext context) {
+          return _buildFinishedPopup(context);
+        });
   }
 }
