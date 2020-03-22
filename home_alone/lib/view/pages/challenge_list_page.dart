@@ -159,35 +159,39 @@ class _ChallengeListPageState extends State<ChallengeListPage>
             _renderCaption("Geschafft!"),
             SizedBox(
                 height: 160,
-                child: ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: finishedChallenges.length,
-                    itemBuilder: (context, index) {
-                      return DiscoverChallengeTile(
-                        finishedChallenges[index],
-                        () {},
-                        width: 250,
-                        fromAcceptedChallenges: true,
-                      );
-                    }))
+                child: finishedChallenges.length == 0
+                    ? Text('Noch keine Challenges abgeschlossen')
+                    : ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: finishedChallenges.length,
+                        itemBuilder: (context, index) {
+                          return DiscoverChallengeTile(
+                            finishedChallenges[index],
+                            () {},
+                            width: 250,
+                            fromAcceptedChallenges: true,
+                          );
+                        }))
           ],
         ),
         Column(
           children: <Widget>[
             _renderCaption("Offene Challenges"),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                itemCount: acceptedChallenges.length,
-                itemBuilder: (context, index) {
-                  return DiscoverChallengeTile(
-                    acceptedChallenges[index],
-                    () {},
-                    fromAcceptedChallenges: true,
-                  );
-                }),
+            acceptedChallenges.length == 0
+                ? Text('Noch keine Challenges begonnen')
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: acceptedChallenges.length,
+                    itemBuilder: (context, index) {
+                      return DiscoverChallengeTile(
+                        acceptedChallenges[index],
+                        () {},
+                        fromAcceptedChallenges: true,
+                      );
+                    }),
           ],
         ),
       ],
