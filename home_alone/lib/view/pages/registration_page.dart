@@ -97,7 +97,7 @@ class _RegistrationPageState extends State<RegistrationPage>
         filled: false,
         hintStyle: TextStyle(color: Theme.of(context).hintColor),
         hintText: "E-Mail",
-      ), //TODO i18n
+      ),
     );
   }
 
@@ -118,8 +118,8 @@ class _RegistrationPageState extends State<RegistrationPage>
           ),
           filled: false,
           hintStyle: new TextStyle(color: Theme.of(context).hintColor),
-          hintText: "Password",
-        ) //TODO i18n
+          hintText: "Passwort",
+        )
         );
   }
 
