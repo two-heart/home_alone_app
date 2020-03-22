@@ -53,7 +53,7 @@ class WelcomePage extends StatelessWidget {
 
   Widget _buildWelcomeExplanation(BuildContext context) => LabelText(
       text:
-          'Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen un dich selbst herausfordern kannst');
+          'Hier erwarten dich spannende Challanges, mit denen du deine Quarantänezeit aufpeppen und dich selbst herausfordern kannst.');
 
   Widget _buildRegisterButton(BuildContext context) => ThemedButton(
         text: 'Registrieren',
