@@ -8,6 +8,7 @@ class ThemedButton extends StatelessWidget {
   final double textScaleFactor;
   final Widget alternativeChild;
   final double width;
+  final double padding;
 
   const ThemedButton({
     this.onPressed,
@@ -15,6 +16,7 @@ class ThemedButton extends StatelessWidget {
     this.textScaleFactor = 1.0,
     this.alternativeChild,
     this.width,
+    this.padding = 10.0,
   });
 
   @override
@@ -40,7 +42,7 @@ class ThemedButton extends StatelessWidget {
                     HomeAloneColors.primaryButtonGradientEndColor,
                   ],
                 )),
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(padding),
             child: alternativeChild != null ? alternativeChild : _buildText()),
       ),
     );

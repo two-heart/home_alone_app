@@ -8,6 +8,6 @@ void main() {
     final data = await "mock_challenges.json".toJsonList<Challenge>(convert);
     final challenge = data[0];
     expect(data, isNotNull);
-    expect(challenge.id, "1");
+    expect(challenge.id, "67e6a2fa-1c4b-4249-9a13-d725ff2d1e78");
   });
 }
