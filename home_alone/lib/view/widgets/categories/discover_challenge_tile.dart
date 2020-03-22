@@ -63,10 +63,10 @@ class DiscoverChallengeTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
+          children: challenge.accepted ? <Widget>[
             ThemedButton(
                 text: "Teilnehmen", width: 120, onPressed: _acceptChallenge)
-          ],
+          ] : [],
         ),
       ),
     );

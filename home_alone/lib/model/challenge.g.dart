@@ -14,7 +14,7 @@ Challenge _$ChallengeFromJson(Map<String, dynamic> json) {
     teaser: json['teaser'] as String,
     imageUrl: json['imageUrl'] as String,
     category: Category.fromJson(json['category'] as Map<String, dynamic>),
-    finished: json['finished'] as bool ?? false,
+    finished: json['finished'] as bool,
     acceptedAt: json['acceptedAt'] == null
         ? null
         : DateTime.parse(json['acceptedAt'] as String),

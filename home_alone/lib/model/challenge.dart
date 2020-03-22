@@ -13,7 +13,7 @@ class Challenge {
   Category category;
   bool get accepted => finished != null;
 
-  @JsonKey(nullable: true, defaultValue: false)
+  @JsonKey(nullable: true)
   bool finished;
   @JsonKey(nullable: true)
   DateTime finishedAt;
