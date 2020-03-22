@@ -13,11 +13,11 @@ class DiscoverChallengeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => _openDetailPage(context),
-      child: _buildContent(),
+      child: _buildContent(context),
     );
   }
 
-  Container _buildContent() {
+  Container _buildContent(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       width: 350,
@@ -29,7 +29,7 @@ class DiscoverChallengeTile extends StatelessWidget {
           children: <Widget>[
             _buildImageSection(),
             _buildTeaserText(),
-            _buildButtonRow()
+            _buildButtonRow(context)
           ],
         ),
       ),
@@ -61,7 +61,7 @@ class DiscoverChallengeTile extends StatelessWidget {
         padding: EdgeInsets.only(left: 4.0),
       );
 
-  Widget _buildButtonRow() {
+  Widget _buildButtonRow(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
         right: 8,
@@ -76,7 +76,9 @@ class DiscoverChallengeTile extends StatelessWidget {
                   child: ThemedFlatButton(
                     fontSize: 14,
                     text: "Zur Challenge",
-                    onPressed: () {},
+                    onPressed: () {
+                      _openDetailPage(context);
+                    },
                   ),
                 ),
                 ThemedButton(

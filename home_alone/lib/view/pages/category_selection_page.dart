@@ -10,6 +10,9 @@ import 'package:home_alone/viewmodel/category_selection_model.dart';
 import 'package:provider/provider.dart';
 
 class CategorySelection extends StatefulWidget {
+  final bool fromSettings;
+  CategorySelection({@required this.fromSettings});
+
   @override
   _CategorySelectionState createState() => _CategorySelectionState();
 }
@@ -25,7 +28,7 @@ class _CategorySelectionState extends State<CategorySelection> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: ThemedAppBar(
-            title: 'Home Alone',
+          title: 'Kategorien',
         ),
         body: _buildBody(context),
       );
@@ -80,16 +83,30 @@ class _CategorySelectionState extends State<CategorySelection> {
         fontSize: HomeAloneDimensions.welcomeHeaderSmallerTextSize,
       );
 
-  Widget _buildNextButton(BuildContext context) => ThemedButton(
-        text: 'Weiter',
-        onPressed:
-            Provider.of<CategorySelectionModel>(context).actionButtonIsEnabled
-                ? () => _sendCategorySelectionOpenHomePage(context)
-                : null,
-      );
+  Widget _buildNextButton(BuildContext context) {
+    var onPressed;
+    var model = Provider.of<CategorySelectionModel>(context);
+    print(widget.fromSettings);
+    if (widget.fromSettings) {
+      onPressed = () async {
+        await _sendCategorySelectionOpenHomePage(context);
+        Navigator.of(context).pop();
+      };
+    } else if (model.actionButtonIsEnabled) {
+      onPressed = () async {
+        await _sendCategorySelectionOpenHomePage(context);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+      };
+    }
+
+    return ThemedButton(
+      text: widget.fromSettings ? 'Speichern' : 'Weiter',
+      onPressed: onPressed,
+    );
+  }
 
   _sendCategorySelectionOpenHomePage(BuildContext context) async {
     await locator.get<CategorySelectionStore>().updateCategories();
-    // Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }
 }

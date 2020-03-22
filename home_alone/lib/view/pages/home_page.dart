@@ -9,6 +9,8 @@ import 'package:home_alone/view/theme/border.dart';
 import 'package:home_alone/view/theme/colors.dart';
 import 'package:home_alone/view/theme/icons.dart';
 import 'package:home_alone/view/widgets/themed_app_bar.dart';
+import 'package:home_alone/viewmodel/app_model.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'challenge_list_page.dart';
@@ -44,6 +46,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     setState(() {
       if (!_tabController.indexIsChanging) {
         currentTabIndex = _tabController.index;
+        Provider.of<AppModel>(context, listen: false).tab =
+            Tabs.values[currentTabIndex];
       }
     });
   }
@@ -74,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     BuildContext context,
   ) {
     return ThemedAppBar(
+      title: Provider.of<AppModel>(context).currentTabTitle,
       showLogo: true,
       actions: currentTabIndex != 2
           ? _buildSearchAction(context)
