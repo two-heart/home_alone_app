@@ -28,14 +28,18 @@ class HttpChallengeApi implements ChallengeApi {
     var response = await dio.get("$baseUrl/challenge");
     print(response);
     final challenges = Challenge.fromJsonList(response.data);
-    challengesModel.challenges = challenges.map((f) => ChallengeModel(f));
+    challengesModel.challenges =
+        challenges.map((f) => ChallengeModel(f)).toList();
     return challenges;
   }
 
   @override
   Future<List<Challenge>> getSubscribedChallenges() async {
     var response = await dio.get("$baseUrl/user/challenge");
-    return Challenge.fromJsonList(response.data);
+    final challenges = Challenge.fromJsonList(response.data);
+
+    challengesModel.subScribedChallenges = challenges.map((f) => ChallengeModel(f)).toList();
+    return challenges;
   }
 
   @override
@@ -65,9 +69,10 @@ class HttpChallengeApi implements ChallengeApi {
   }
 
   @override
-  Future<void> acceptChallenge(String id) async {
+  Future<bool> acceptChallenge(String id) async {
     var response = await dio.post("$baseUrl/challenge/$id/accept");
     print(response.statusCode);
-    return Challenge.fromJsonList(response.data);
+    print(response.data);
+    // return Challenge.fromJsonList(response.data);
   }
 }

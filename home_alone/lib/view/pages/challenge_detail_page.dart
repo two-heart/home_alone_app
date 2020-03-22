@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
+import 'package:home_alone/service/challenge/challenge_api.dart';
+import 'package:home_alone/service/challenge/http_challenge_api.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_app_bar.dart';
@@ -42,6 +44,7 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         shrinkWrap: true,
         children: <Widget>[
           _buildImage(widget.challenge, context),
+          _buildShareButton(),
           _buildText(widget.challenge),
         ],
       );
@@ -50,7 +53,6 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     return ThemedFlatButton(
         text: 'Share',
         onPressed: () {
-          print('pressed');
           Share.share(
               'Spiel mit mir die ${widget.challenge.name}. In der home alone challenge App.');
         });
@@ -104,13 +106,23 @@ class _ChallengeDetailState extends State<ChallengeDetail>
       );
 
   void _acceptChallenge() {
-    // locator.get<>()
+    // await locator.get<HttpChallengeApi>().acceptChallenge(widget.challenge.id);
+    locator.get<ChallengeApi>().acceptChallenge(widget.challenge.id);
   }
 
-  Widget _finishedScreen() {
+  Widget _buildFinishedPopup(BuildContext context) {
     return AlertDialog(
-      content: Text(
-          'Herzlichen Glückwunsch du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
-    );
+        content: Column(
+      children: <Widget>[
+        Text(
+            'Herzlichen Glückwunsch du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
+        ThemedButton(
+          text: 'Weiter',
+          onPressed: () {
+            Navigator.pushNamed(context, '/home');
+          },
+        )
+      ],
+    ));
   }
 }
