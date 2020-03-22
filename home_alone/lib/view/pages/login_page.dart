@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:home_alone/store/login_store.dart';
 import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/login/login_button.dart';
+import 'package:home_alone/view/widgets/themed_app_bar.dart';
 import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage> with AwfulKeyboardMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: ThemedAppBar(title: "Login"),
       body: _buildBody(context),
     );
   }

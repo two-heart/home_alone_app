@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
+import 'package:home_alone/view/widgets/themed_app_bar.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
@@ -20,7 +21,7 @@ class _ChallengeDetailState extends State<ChallengeDetail>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Challenge')),
+      appBar: ThemedAppBar(title: 'Challenge'),
       body: _buildBody(context).withAwfulKeyboardFix(this),
     );
   }

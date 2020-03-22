@@ -5,7 +5,9 @@ import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/challenge_search_delegate.dart';
 import 'package:home_alone/view/pages/dashboard_page.dart';
 import 'package:home_alone/view/pages/settings_page.dart';
+import 'package:home_alone/view/theme/border.dart';
 import 'package:home_alone/view/theme/colors.dart';
+import 'package:home_alone/view/widgets/themed_app_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'challenge_list_page.dart';
@@ -70,8 +72,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   AppBar _buildAppBar(
     BuildContext context,
   ) {
-    return AppBar(
-      title: Text("Home Alone"),
+    return ThemedAppBar(
+      showLogo: true,
       actions: currentTabIndex != 2
           ? _buildSearchAction(context)
           : _buildLogoutAction(context),

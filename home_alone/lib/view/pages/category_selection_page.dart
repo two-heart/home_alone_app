@@ -3,6 +3,7 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/category_selection_store.dart';
 import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/categories/category_list.dart';
+import 'package:home_alone/view/widgets/themed_app_bar.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/viewmodel/category_selection_model.dart';
@@ -22,7 +23,9 @@ class _CategorySelectionState extends State<CategorySelection> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text('Home Alone')),
+        appBar: ThemedAppBar(
+            title: 'Home Alone',
+        ),
         body: _buildBody(context),
       );
 
