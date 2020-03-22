@@ -17,17 +17,7 @@ class LoginButton extends StatelessWidget {
             onPressed:
                 loginModel.isLoginButtonEnabled ? () => _login(context) : null,
             text: "Einloggen",
-            alternativeChild: model.isLoading
-                ? Center(
-                    child: Container(
-                      width: 24,
-                      height: 24,
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      ),
-                    ),
-                  )
-                : null,
+            alternativeChild: model.isLoading ? _buildLoadingSpinner() : null,
             textScaleFactor: HomeAloneDimensions.loginButtonTextScale,
           );
         },
@@ -43,4 +33,14 @@ class LoginButton extends StatelessWidget {
       Navigator.of(context).pushNamedAndRemoveUntil("/home", (route) => false);
     }
   }
+
+  Widget _buildLoadingSpinner() => Center(
+        child: Container(
+          width: 24,
+          height: 24,
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.white,
+          ),
+        ),
+      );
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/view/theme/colors.dart';
+import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/viewmodel/category_model.dart';
+import 'package:provider/provider.dart';
 
 class CategoryListItem extends StatelessWidget {
   const CategoryListItem({this.category});
@@ -7,17 +10,41 @@ class CategoryListItem extends StatelessWidget {
   final CategoryModel category;
 
   @override
-  Widget build(BuildContext context) => Row(
-        children: <Widget>[
-          _buildInformation(),
-          _buildCheckBox(),
-        ],
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 4.0),
+        child: Row(
+          children: <Widget>[
+            _buildCategoryIcon(),
+            SizedBox(width: 8),
+            _buildCategoryName(),
+            Expanded(child: Container()),
+            _buildCheckBox(),
+          ],
+        ),
       );
 
-  Widget _buildCheckBox() => Checkbox(
-        value: category.isSelected,
-        onChanged: null,
+  Widget _buildCheckBox() => ChangeNotifierProvider.value(
+        value: category,
+        child: Consumer<CategoryModel>(
+          builder: (context, model, _) => Checkbox(
+            activeColor: HomeAloneColors.categoryIconColor,
+            value: model.isSelected,
+            onChanged: (value) => model.isSelected = value,
+          ),
+        ),
       );
 
-  _buildInformation() {}
+  Widget _buildCategoryName() => LabelText(
+        text: category.category.name,
+        fontWeight: FontWeight.bold,
+        color: HomeAloneColors.categoryIconColor,
+      );
+
+  Widget _buildCategoryIcon() => CircleAvatar(
+        backgroundColor: HomeAloneColors.categoryIconColor,
+        child: Icon(
+          Icons.shopping_cart,
+          color: Colors.white,
+        ),
+      );
 }

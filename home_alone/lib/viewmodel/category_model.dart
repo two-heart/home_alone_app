@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/model/category.dart';
 
 class CategoryModel extends ChangeNotifier {
-  CategoryModel({this.name});
-  final String name;
+  CategoryModel({
+    this.category,
+    bool isSelected = false,
+  }) {
+    _isSelected = isSelected;
+  }
+  Category category;
 
   bool _isSelected;
   bool get isSelected => _isSelected;
   set isSelected(bool value) {
-    isSelected = value;
+    _isSelected = value;
     notifyListeners();
   }
 }
