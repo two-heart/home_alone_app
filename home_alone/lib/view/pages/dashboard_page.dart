@@ -16,7 +16,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage>
     with AutomaticKeepAliveClientMixin {
-  Map<String, List<Challenge>> data = Map<String, List<Challenge>>();
+  Map<Category, List<Challenge>> data = Map<Category, List<Challenge>>();
   RefreshController refreshController;
   bool isLoading = false;
 
@@ -27,7 +27,7 @@ class _DashboardPageState extends State<DashboardPage>
     super.initState();
     refreshController = RefreshController();
     allCategories = [];
-    data = Map<String, List<Challenge>>();
+    data = Map<Category, List<Challenge>>();
     _onRefresh();
   }
 
@@ -46,8 +46,8 @@ class _DashboardPageState extends State<DashboardPage>
     api
         .getAllChallenges()
         .then((challenges) => setState(() {
-              this.data = groupBy<Challenge, String>(
-                  challenges, (value) => value.category.id);
+              this.data = groupBy<Challenge, Category>(
+                  challenges, (value) => value.category);
               this.allCategories = challenges.map((c) => c.category).toList();
               refreshController.refreshCompleted();
             }))
@@ -138,7 +138,7 @@ class _DashboardPageState extends State<DashboardPage>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              category,
+              category.name,
               textAlign: TextAlign.left,
             ),
             SizedBox(
