@@ -40,16 +40,13 @@ class DependencyInjection {
 
     dio = addInterceptors(dio);
 
-    /*locator.registerSingleton<ChallengeApi>(
-      HttpChallengeApi(
-          baseUrl: DotEnv().env['BASE_URL'],
-          dio: dio,
-      )
-    );*/
+    locator.registerSingleton<ChallengeApi>(HttpChallengeApi(
+      baseUrl: DotEnv().env['BASE_URL'],
+      dio: dio,
+    ));
     var storage = new FlutterSecureStorage();
     token = await storage.read(key: "token");
     locator.registerSingleton(storage);
-
 
     locator.registerSingleton<HttpRegistrationService>(HttpRegistrationService(
       dio: dio,
@@ -64,7 +61,6 @@ class DependencyInjection {
       dio: dio,
       baseUrl: DotEnv().env['BASE_URL'],
     ));
-    locator.registerSingleton<ChallengeApi>(FakeChallengeApi());
   }
 
   static Dio addInterceptors(Dio dio) {
@@ -79,7 +75,8 @@ class DependencyInjection {
     if (options.request.method != 'POST') return options;
     if (options.statusCode < 299) {
       var data = options.data as Map<String, dynamic>;
-      if (data.containsKey('accessToken')) {
+      if (options.request.path.endsWith("/auth/login") &&
+          data.containsKey('accessToken')) {
         token = data['accessToken'];
         locator.get<FlutterSecureStorage>().write(key: "token", value: token);
       }
