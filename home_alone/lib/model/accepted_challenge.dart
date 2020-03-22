@@ -11,7 +11,8 @@ class AcceptedChallenge {
   DateTime acceptedAt;
   Challenge challenge;
 
-  AcceptedChallenge({this.finished, this.finishedAt, this.acceptedAt, this.challenge});
+  AcceptedChallenge(
+      {this.finished, this.finishedAt, this.acceptedAt, this.challenge});
 
   factory AcceptedChallenge.fromJson(Map<String, dynamic> json) =>
       _$AcceptedChallengeFromJson(json);

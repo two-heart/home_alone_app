@@ -147,8 +147,7 @@ class _LoginPageState extends State<LoginPage> with AwfulKeyboardMixin {
           filled: false,
           hintStyle: new TextStyle(color: Theme.of(context).hintColor),
           hintText: "Passwort",
-        )
-        );
+        ));
   }
 
   _buildButtons(BuildContext context) => Column(

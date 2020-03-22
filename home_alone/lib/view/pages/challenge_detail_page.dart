@@ -27,15 +27,20 @@ class _ChallengeDetailState extends State<ChallengeDetail>
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          _buildImage(widget.challenge, context),
-          _buildText(widget.challenge),
-          _buildSlider(context, 0),
-        ]),
-      ),
+      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+        Expanded(child: _buildContent(context)),
+        _buildButtonOrSlider(context),
+      ]),
     );
   }
+
+  Widget _buildContent(BuildContext context) => ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+          _buildImage(widget.challenge, context),
+          _buildText(widget.challenge),
+        ],
+      );
 
   Widget _buildImage(Challenge challenge, BuildContext context) {
     return Container(
@@ -45,9 +50,7 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         child: FittedBox(
           fit: BoxFit.fitWidth,
           child: Image(
-            image: NetworkImage(
-              challenge.imageUrl,
-            ),
+            image: NetworkImage(challenge.imageUrl),
           ),
         ));
   }
@@ -66,11 +69,20 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     );
   }
 
-  Widget _buildSlider(BuildContext context, _value) {
-    // TODO actual Slider and action
-    return Padding(
-      child: ThemedButton(text: 'Teilnehmen'),
-      padding: EdgeInsets.all(16.0),
-    );
+  Widget _buildButtonOrSlider(BuildContext context) {
+    print(widget.challenge != null);
+    if (widget.challenge.accepted == true) {
+      return _buildSlider();
+    }
+    return _buildParticipateButton();
   }
+
+  Widget _buildSlider() {
+    return Container();
+  }
+
+  Widget _buildParticipateButton() => Padding(
+        child: ThemedButton(text: 'Teilnehmen'),
+        padding: EdgeInsets.all(16.0),
+      );
 }

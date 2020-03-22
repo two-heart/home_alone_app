@@ -18,6 +18,7 @@ class HttpChallengeApi implements ChallengeApi {
   @override
   Future<List<Challenge>> getAllChallenges() async {
     var response = await dio.get("$baseUrl/challenge");
+    print(response);
     return Challenge.fromJsonList(response.data);
   }
 

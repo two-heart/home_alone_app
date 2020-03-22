@@ -11,16 +11,17 @@ class Challenge {
   String teaser;
   String imageUrl;
   Category category;
-  bool accepted = false;
+  bool accepted;
 
-  Challenge(
-      {this.id,
-      this.name,
-      this.description,
-      this.teaser,
-      this.imageUrl,
-      this.category,
-      this.accepted});
+  Challenge({
+    this.id,
+    this.name,
+    this.description,
+    this.teaser,
+    this.imageUrl,
+    this.category,
+    this.accepted = false,
+  });
 
   factory Challenge.fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);
