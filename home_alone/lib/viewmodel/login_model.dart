@@ -55,7 +55,4 @@ class LoginModel extends ChangeNotifier {
   bool get isPasswordFieldEnabled => _password?.isNotEmpty == true;
   bool get isLoginButtonEnabled =>
       _password?.isNotEmpty == true && _email?.isNotEmpty == true;
-  bool get isEmailValid => RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-      ).hasMatch(_email);
 }
