@@ -74,11 +74,10 @@ class DependencyInjection {
   static dynamic responseInterceptor(Response options) async {
     if (options.request.method != 'POST') return options;
     if (options.statusCode < 299) {
-      var data = options.data as Map<String, dynamic>;
       if ((options.request.path.endsWith("/auth/login") ||
-              options.request.path.endsWith("/auth/register")) &&
-          data.containsKey('accessToken')) {
-        print(data);
+              options.request.path.endsWith("/auth/register"))) {
+        var data = options.data as Map<String, dynamic>;
+        if(data['accessToken'] == null) return;
         token = data['accessToken'];
         locator.get<FlutterSecureStorage>().write(key: "token", value: token);
       }

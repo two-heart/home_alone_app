@@ -19,13 +19,13 @@ class HttpCategorySelectionService {
   }
 
   selectCategories(List<String> selectedCategories) async {
-    final data = {"categoryIds": selectedCategories};
+    final data = {"categoryIds": selectedCategories} as Map<dynamic, dynamic>;
     print(data);
 
     var response = await dio.post(
       "$baseUrl/user/categories",
       data: data,
     );
-    print(response);
+    print(response.statusCode);
   }
 }
