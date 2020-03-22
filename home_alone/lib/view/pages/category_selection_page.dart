@@ -18,6 +18,7 @@ class _CategorySelectionState extends State<CategorySelection> {
   @override
   void initState() {
     locator.get<CategorySelectionStore>().loadCategories();
+    locator.get<CategorySelectionStore>().loadSelectedCategories();
     super.initState();
   }
 
@@ -89,6 +90,6 @@ class _CategorySelectionState extends State<CategorySelection> {
 
   _sendCategorySelectionOpenHomePage(BuildContext context) async {
     await locator.get<CategorySelectionStore>().updateCategories();
-    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+    // Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }
 }
