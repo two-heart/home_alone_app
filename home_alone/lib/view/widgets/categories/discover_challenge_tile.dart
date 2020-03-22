@@ -49,7 +49,7 @@ class DiscoverChallengeTile extends StatelessWidget {
             ),
             Text(
               challenge.teaser,
-              maxLines: 3,
+              maxLines: 1,
             ),
             Expanded(
               child: Padding(
