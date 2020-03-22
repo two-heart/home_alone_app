@@ -87,7 +87,6 @@ class DependencyInjection {
   static dynamic requestInterceptor(RequestOptions options) {
     if (token == null) return options;
     options.headers.addAll({"Authorization": "Bearer " + token});
-    print('token set');
     return options;
   }
 
@@ -96,7 +95,6 @@ class DependencyInjection {
     locator.registerSingleton<RegistrationModel>(RegistrationModel());
     locator.registerSingleton<LoginModel>(LoginModel());
     locator.registerSingleton<CategorySelectionModel>(CategorySelectionModel());
-    // print('emailValid: ${locator.get<LoginModel>().isLoginButtonEnabled}');
   }
 
   static Future<void> _setUpStores() async {
