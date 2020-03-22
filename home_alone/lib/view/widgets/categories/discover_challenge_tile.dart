@@ -13,9 +13,14 @@ class DiscoverChallengeTile extends StatelessWidget {
   final Challenge challenge;
   final Function onChallengeAccepted;
   final bool fromAcceptedChallenges;
+  final double width;
 
-  DiscoverChallengeTile(this.challenge, this.onChallengeAccepted,
-      {this.fromAcceptedChallenges = false});
+  DiscoverChallengeTile(
+    this.challenge,
+    this.onChallengeAccepted, {
+    this.fromAcceptedChallenges = false,
+    this.width = 350,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class DiscoverChallengeTile extends StatelessWidget {
   Container _buildContent(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
-      width: 350,
+      width: width,
       child: Card(
         elevation: 4.0,
         child: Column(

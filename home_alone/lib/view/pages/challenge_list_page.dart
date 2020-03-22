@@ -167,6 +167,7 @@ class _ChallengeListPageState extends State<ChallengeListPage>
                       return DiscoverChallengeTile(
                         finishedChallenges[index],
                         () {},
+                        width: 250,
                         fromAcceptedChallenges: true,
                       );
                     }))
