@@ -116,16 +116,18 @@ class _ChallengeDetailState extends State<ChallengeDetail>
 
   Widget _buildFinishedPopup(BuildContext context) {
     return AlertDialog(
+      contentPadding: EdgeInsets.fromLTRB(20, 80, 20, 20),
         content: Column(
       children: <Widget>[
         new Image.asset(
-          'assets/hamster.png',
-          width: 400.0,
+          'assets/challenge_accomplished_face.png',
+          width: 300.0,
           fit: BoxFit.cover,
         ),
         ThemedText(text: 'Super du hast die Challenge erledigt!',),
         Text(
             'Du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
+        Expanded(child: Container(),),
         ThemedButton(
           text: 'Weiter',
           onPressed: () {
