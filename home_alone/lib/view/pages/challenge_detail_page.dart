@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
@@ -41,16 +42,19 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         shrinkWrap: true,
         children: <Widget>[
           _buildImage(widget.challenge, context),
-          ThemedFlatButton(
-              text: 'Share',
-              onPressed: () {
-                print('pressed');
-                Share.share(
-                    'Spiel mit mir die ${widget.challenge.name}. In der home alone challenge App.');
-              }),
           _buildText(widget.challenge),
         ],
       );
+
+  Widget _buildShareButton() {
+    return ThemedFlatButton(
+        text: 'Share',
+        onPressed: () {
+          print('pressed');
+          Share.share(
+              'Spiel mit mir die ${widget.challenge.name}. In der home alone challenge App.');
+        });
+  }
 
   Widget _buildImage(Challenge challenge, BuildContext context) {
     return Container(
@@ -84,15 +88,29 @@ class _ChallengeDetailState extends State<ChallengeDetail>
     if (widget.challenge.accepted == true) {
       return _buildSlider();
     }
-    return _buildParticipateButton();
+    return _buildAcceptChallengeButton();
   }
 
   Widget _buildSlider() {
     return Container();
   }
 
-  Widget _buildParticipateButton() => Padding(
-        child: ThemedButton(text: 'Teilnehmen'),
+  Widget _buildAcceptChallengeButton() => Padding(
+        child: ThemedButton(
+          text: 'Teilnehmen',
+          onPressed: _acceptChallenge,
+        ),
         padding: EdgeInsets.all(16.0),
       );
+
+  void _acceptChallenge() {
+    // locator.get<>()
+  }
+
+  Widget _finishedScreen() {
+    return AlertDialog(
+      content: Text(
+          'Herzlichen Glückwunsch du hast die Challenge ${widget.challenge.name} abgeschlossen.'),
+    );
+  }
 }

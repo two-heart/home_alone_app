@@ -18,6 +18,7 @@ import 'package:home_alone/store/login_store.dart';
 import 'package:home_alone/store/registration_store.dart';
 import 'package:home_alone/viewmodel/app_model.dart';
 import 'package:home_alone/viewmodel/category_selection_model.dart';
+import 'package:home_alone/viewmodel/challenges_model.dart';
 import 'package:home_alone/viewmodel/login_model.dart';
 import 'package:home_alone/viewmodel/registration_model.dart';
 
@@ -103,6 +104,7 @@ class DependencyInjection {
     locator.registerSingleton<RegistrationModel>(RegistrationModel());
     locator.registerSingleton<LoginModel>(LoginModel());
     locator.registerSingleton<CategorySelectionModel>(CategorySelectionModel());
+    locator.registerSingleton<ChallengesModel>(ChallengesModel());
   }
 
   static Future<void> _setUpStores() async {

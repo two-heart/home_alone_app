@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/ext.dart';
+import 'package:home_alone/viewmodel/challenge_model.dart';
+import 'package:home_alone/viewmodel/challenges_model.dart';
 
 typedef ResultMapper<T> = T Function(dynamic data);
 enum ResponseType { NOT_AUTHENTICATED, FORBIDDEN, SERVER_ERROR }
@@ -12,13 +15,21 @@ class HttpChallengeApi implements ChallengeApi {
 
   Map<String, dynamic> defaultQueryParams;
 
-  HttpChallengeApi({this.baseUrl, this.dio}) : defaultQueryParams = {};
+  HttpChallengeApi({
+    this.baseUrl,
+    this.dio,
+    // this.challengesModel,
+  }) : defaultQueryParams = {};
+
+  ChallengesModel get challengesModel => locator.get<ChallengesModel>();
 
   @override
   Future<List<Challenge>> getAllChallenges() async {
     var response = await dio.get("$baseUrl/challenge");
     print(response);
-    return Challenge.fromJsonList(response.data);
+    final challenges = Challenge.fromJsonList(response.data);
+    challengesModel.challenges = challenges.map((f) => ChallengeModel(f));
+    return challenges;
   }
 
   @override
@@ -30,7 +41,18 @@ class HttpChallengeApi implements ChallengeApi {
   @override
   Future<List<Challenge>> getAcceptedChallenges() async {
     var response = await dio.get("$baseUrl/user/challenge/accepted");
-    return Challenge.fromJsonList(response.data);
+    final challenges = Challenge.fromJsonList(response.data);
+    _updateViewModel(challenges);
+
+    return challenges;
+  }
+
+  void _updateViewModel(List<Challenge> challenges) {
+    final selectedChallenges = challengesModel.challenges
+        .where((c) => challenges.any((test) => test.id == c.challenge.id));
+
+    selectedChallenges
+        .forEach((f) => f.challenge = f.challenge..finished = false);
   }
 
   @override
