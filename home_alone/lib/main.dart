@@ -75,7 +75,14 @@ class MyApp extends StatelessWidget {
           '/login': (context) => LoginPage(),
           '/register/setUsername': (context) => SetUsernamePage(),
           '/register': (context) => RegistrationPage(),
-          '/categories': (context) => CategorySelection(),
+          '/categories': (context) {
+            var args = ModalRoute.of(context).settings.arguments;
+            var fromSettings = false;
+            if (args != null && args is Map) {
+              fromSettings = args["fromSettings"] == true;
+            }
+            return CategorySelection(fromSettings: fromSettings);
+          },
           '/home': (context) => MyHomePage(),
           'challenge': (context) => ChallengeDetail()
         },
