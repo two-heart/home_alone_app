@@ -46,7 +46,7 @@ class _DashboardPageState extends State<DashboardPage>
     await Future.delayed(Duration(seconds: 2));
     final api = locator.get<ChallengeApi>();
     api
-        .getAllChallenges()
+        .getSubscribedChallenges()
         .then((challenges) => setState(() {
               this.data = groupBy<Challenge, Category>(
                   challenges, (value) => value.category);
