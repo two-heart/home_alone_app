@@ -86,6 +86,6 @@ class _CategorySelectionState extends State<CategorySelection> {
 
   _sendCategorySelectionOpenHomePage(BuildContext context) async {
     await locator.get<CategorySelectionStore>().updateCategories();
-    Navigator.of(context).pushReplacementNamed('/home');
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }
 }
