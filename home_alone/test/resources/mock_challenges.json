@@ -1,12 +1,24 @@
 [
   {
-    "id": "1",
-    "name": "First Challenge",
-    "description": "Completed challenge"
+    "id": "67e6a2fa-1c4b-4249-9a13-d725ff2d1e78",
+    "name": "Dynamic Quality Assistant",
+    "teaser": "Soluta ab sint laudantium corrupti qui cum ipsam.",
+    "description": "Maiores numquam qui laudantium et officiis omnis. Sunt occaecati sit temporibus id hic eos voluptate. Nemo impedit ratione autem fugiat iusto sit vero qui. Laboriosam sunt aut labore reprehenderit reiciendis natus eum sunt. Accusamus incidunt ea.\n \rConsequuntur neque enim autem eos consequatur quia provident. Eaque suscipit nesciunt sit. Nobis et placeat. Aperiam corrupti delectus. Laborum ab rerum distinctio corrupti laborum alias architecto delectus et. Maxime et neque saepe.\n \rQui eligendi nesciunt suscipit. Ratione ullam autem quaerat aut. Perspiciatis aliquid occaecati ea et iste est consectetur labore. Iusto voluptatem nulla quis voluptates corporis numquam deleniti. Laudantium nostrum eos voluptas ullam nemo.",
+    "imageUrl": "https://lh6.googleusercontent.com/IqK36yQSGSnFvY-7vxPRuCSwtdq7X7QaUoBqS6ho_MdxRS_R5hT3mPHP9SELxW6tuIl7b6CkhxnBXy35yauL=w2560-h1244",
+    "category": {
+      "id": "888b4f86-22a2-4bde-82ef-5b661cbeda88",
+      "name": "Realigned"
+    }
   },
   {
-    "id": "2",
-    "name": "Second Challenge",
-    "description": "Incompleted challenge"
+    "id": "88e6a2fa-1c4b-4249-9a13-d725ff2d1e78",
+    "name": "Dynamic Quality Assistant1",
+    "teaser": "Soluta ab sint laudantium corrupti qui cum ipsam.",
+    "description": "Maiores numquam qui laudantium et officiis omnis. Sunt occaecati sit temporibus id hic eos voluptate. Nemo impedit ratione autem fugiat iusto sit vero qui. Laboriosam sunt aut labore reprehenderit reiciendis natus eum sunt. Accusamus incidunt ea.\n \rConsequuntur neque enim autem eos consequatur quia provident. Eaque suscipit nesciunt sit. Nobis et placeat. Aperiam corrupti delectus. Laborum ab rerum distinctio corrupti laborum alias architecto delectus et. Maxime et neque saepe.\n \rQui eligendi nesciunt suscipit. Ratione ullam autem quaerat aut. Perspiciatis aliquid occaecati ea et iste est consectetur labore. Iusto voluptatem nulla quis voluptates corporis numquam deleniti. Laudantium nostrum eos voluptas ullam nemo.",
+    "imageUrl": "https://lh6.googleusercontent.com/IqK36yQSGSnFvY-7vxPRuCSwtdq7X7QaUoBqS6ho_MdxRS_R5hT3mPHP9SELxW6tuIl7b6CkhxnBXy35yauL=w2560-h1244",
+    "category": {
+      "id": "888b4f86-22a2-4bde-82ef-5b661cbeda88",
+      "name": "Realigned"
+    }
   }
 ]
