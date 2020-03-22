@@ -150,7 +150,9 @@ class _DashboardPageState extends State<DashboardPage>
                   itemBuilder: (BuildContext context, int index) {
                     final challenge = challenges[index];
                     return Container(
-                        width: 350, child: DiscoverChallengeTile(challenge));
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        width: 350,
+                        child: DiscoverChallengeTile(challenge));
                   }),
             )
           ],
