@@ -4,7 +4,7 @@ import 'package:home_alone/model/category.dart';
 class CategoryModel extends ChangeNotifier {
   CategoryModel({
     this.category,
-    bool isSelected = false,
+    bool isSelected = true,
   }) {
     _isSelected = isSelected;
   }
