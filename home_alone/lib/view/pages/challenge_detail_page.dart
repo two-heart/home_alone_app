@@ -4,8 +4,10 @@ import 'package:home_alone/view/pages/login_page.dart';
 import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_app_bar.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
+import 'package:home_alone/view/widgets/themed_flat_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/view/widgets/weird/weird_ball.dart';
+import 'package:share/share.dart';
 
 class ChallengeDetail extends StatefulWidget {
   final Challenge challenge;
@@ -39,6 +41,13 @@ class _ChallengeDetailState extends State<ChallengeDetail>
         shrinkWrap: true,
         children: <Widget>[
           _buildImage(widget.challenge, context),
+          ThemedFlatButton(
+              text: 'Share',
+              onPressed: () {
+                print('pressed');
+                Share.share(
+                    'Spiel mit mir die ${widget.challenge.name}. In der home alone challenge App.');
+              }),
           _buildText(widget.challenge),
         ],
       );

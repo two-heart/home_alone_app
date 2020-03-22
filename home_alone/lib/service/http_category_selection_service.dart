@@ -17,11 +17,18 @@ class HttpCategorySelectionService {
     return Category.fromJsonList(response.data);
   }
 
+  Future<List<Category>> getUsersCategories() async {
+    var response = await dio.get("$baseUrl/user/category");
+    print(response.data);
+    return Category.fromJsonList(response.data);
+  }
+
   selectCategories(List<String> selectedCategories) async {
+    print(selectedCategories);
     var response = await dio.post(
       "$baseUrl/user/categories",
       data: {"categoryIds": selectedCategories},
     );
-    print(response.statusCode);
+    print(response.data);
   }
 }

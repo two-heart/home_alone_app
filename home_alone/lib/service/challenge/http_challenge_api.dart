@@ -41,4 +41,11 @@ class HttpChallengeApi implements ChallengeApi {
     return response.evaluate((data) => Challenge.fromJsonList(response.data)) ??
         [];
   }
+
+  @override
+  Future<void> acceptChallenge(String id) async {
+    var response = await dio.post("$baseUrl/challenge/$id/accept");
+    print(response.statusCode);
+    return Challenge.fromJsonList(response.data);
+  }
 }
