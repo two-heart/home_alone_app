@@ -3,7 +3,6 @@ import 'package:home_alone/dependency_injection/locator.dart';
 import 'package:home_alone/store/category_selection_store.dart';
 import 'package:home_alone/view/theme/dime.dart';
 import 'package:home_alone/view/widgets/categories/category_list.dart';
-import 'package:home_alone/view/widgets/label_text.dart';
 import 'package:home_alone/view/widgets/themed_button.dart';
 import 'package:home_alone/view/widgets/themed_text.dart';
 import 'package:home_alone/viewmodel/category_selection_model.dart';
@@ -29,13 +28,15 @@ class _CategorySelectionState extends State<CategorySelection> {
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
       child: Center(
         child: ChangeNotifierProvider.value(
           value: locator.get<CategorySelectionModel>(),
           child: Builder(builder: (context) => _buildContent(context)),
         ),
       ),
-    );
+    ));
   }
 
   Column _buildContent(BuildContext context) {
