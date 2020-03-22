@@ -11,7 +11,16 @@ class Challenge {
   String teaser;
   String imageUrl;
   Category category;
-  bool accepted = false;
+  bool get accepted => finished != null;
+
+  @JsonKey(nullable: true, defaultValue: false)
+  bool finished;
+  @JsonKey(nullable: true)
+  DateTime finishedAt;
+  @JsonKey(nullable: true)
+  DateTime acceptedAt;
+
+
 
   Challenge(
       {this.id,
@@ -20,7 +29,9 @@ class Challenge {
       this.teaser,
       this.imageUrl,
       this.category,
-      this.accepted});
+      this.finished,
+      this.acceptedAt,
+      this.finishedAt});
 
   factory Challenge.fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);

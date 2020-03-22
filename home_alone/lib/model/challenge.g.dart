@@ -14,7 +14,13 @@ Challenge _$ChallengeFromJson(Map<String, dynamic> json) {
     teaser: json['teaser'] as String,
     imageUrl: json['imageUrl'] as String,
     category: Category.fromJson(json['category'] as Map<String, dynamic>),
-    accepted: json['accepted'] as bool,
+    finished: json['finished'] as bool ?? false,
+    acceptedAt: json['acceptedAt'] == null
+        ? null
+        : DateTime.parse(json['acceptedAt'] as String),
+    finishedAt: json['finishedAt'] == null
+        ? null
+        : DateTime.parse(json['finishedAt'] as String),
   );
 }
 
@@ -25,5 +31,7 @@ Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
       'teaser': instance.teaser,
       'imageUrl': instance.imageUrl,
       'category': instance.category,
-      'accepted': instance.accepted,
+      'finished': instance.finished,
+      'finishedAt': instance.finishedAt?.toIso8601String(),
+      'acceptedAt': instance.acceptedAt?.toIso8601String(),
     };

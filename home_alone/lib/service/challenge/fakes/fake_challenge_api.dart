@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:home_alone/model/accepted_challenge.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 
@@ -18,8 +17,8 @@ class FakeChallengeApi implements ChallengeApi {
   }
 
   @override
-  Future<List<AcceptedChallenge>> getAcceptedChallenges() async {
-    return AcceptedChallenge.fromJsonList(jsonDecode(accepted));
+  Future<List<Challenge>> getAcceptedChallenges() async {
+    return Challenge.fromJsonList(jsonDecode(accepted));
   }
 
   @override

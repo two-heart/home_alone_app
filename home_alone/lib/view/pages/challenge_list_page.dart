@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_alone/dependency_injection/locator.dart';
-import 'package:home_alone/model/accepted_challenge.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/view/widgets/challenge/challenge_tile.dart';
@@ -14,7 +13,7 @@ class ChallengeListPage extends StatefulWidget {
 
 class _ChallengeListPageState extends State<ChallengeListPage>
     with AutomaticKeepAliveClientMixin {
-  List<AcceptedChallenge> data = [];
+  List<Challenge> data = [];
   RefreshController refreshController;
   bool isLoading = false;
 
@@ -126,7 +125,7 @@ class _ChallengeListPageState extends State<ChallengeListPage>
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
                 final challenge = data[index];
-                return ChallengeTile(challenge.challenge);
+                return ChallengeTile(challenge);
               },
             ),
     );
