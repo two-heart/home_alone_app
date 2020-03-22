@@ -87,7 +87,18 @@ class DiscoverChallengeTile extends StatelessWidget {
                     width: 120,
                     onPressed: _acceptChallenge)
               ]
-            : [],
+            : [
+                Padding(
+                  padding: const EdgeInsets.only(left: 2.0),
+                  child: ThemedFlatButton(
+                    fontSize: 14,
+                    text: "Zur Challenge",
+                    onPressed: () {
+                      _openDetailPage(context);
+                    },
+                  ),
+                )
+              ],
       ),
     );
   }
