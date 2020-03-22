@@ -77,7 +77,7 @@ class _SetUsernamePageState extends State<SetUsernamePage>
             fillColor: Color(0xF4F4F4),
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xF4F4F4))),
-            labelText: "Lege einen Benutzername fest:"),
+            labelText: "Lege einen Name fest:"),
         controller: store.userNameController,
         onChanged: (t) => store.registrationModel.username = t,
       ),

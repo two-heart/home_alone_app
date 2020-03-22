@@ -87,6 +87,7 @@ class _RegistrationPageState extends State<RegistrationPage>
     return TextField(
       cursorColor: Theme.of(context).accentColor,
       controller: store.emailController,
+      keyboardType: TextInputType.emailAddress,
       onChanged: (t) => store.registrationModel.email = t,
       decoration: new InputDecoration(
         border: new OutlineInputBorder(

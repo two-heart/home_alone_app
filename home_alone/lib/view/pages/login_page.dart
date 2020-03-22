@@ -113,6 +113,7 @@ class _LoginPageState extends State<LoginPage> with AwfulKeyboardMixin {
       onChanged: store.onEmailTextChanged,
       cursorColor: Theme.of(context).accentColor,
       controller: emailController,
+      keyboardType: TextInputType.emailAddress,
       decoration: new InputDecoration(
         errorText: model.hasError ? model.errorMessage : null,
         border: new OutlineInputBorder(
@@ -122,7 +123,7 @@ class _LoginPageState extends State<LoginPage> with AwfulKeyboardMixin {
         ),
         filled: false,
         hintStyle: new TextStyle(color: Theme.of(context).hintColor),
-        hintText: "Username",
+        hintText: "E-Mail",
       ), //TODO i18n
     );
   }
