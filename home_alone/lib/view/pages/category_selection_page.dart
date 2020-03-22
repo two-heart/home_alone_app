@@ -28,8 +28,8 @@ class _CategorySelectionState extends State<CategorySelection> {
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+        child: Container(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
       child: Center(
         child: ChangeNotifierProvider.value(
           value: locator.get<CategorySelectionModel>(),
@@ -52,17 +52,17 @@ class _CategorySelectionState extends State<CategorySelection> {
   }
 
   _buildTextAndList(BuildContext context) => Expanded(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _buildLabelText(),
               SizedBox(height: 8),
               _buildCategoryList(context),
             ],
           ),
-      ),
-  );
+        ),
+      );
 
   Widget _buildCategoryList(BuildContext context) =>
       Provider.of<CategorySelectionModel>(context).isLoading

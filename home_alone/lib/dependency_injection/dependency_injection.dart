@@ -75,9 +75,9 @@ class DependencyInjection {
     if (options.request.method != 'POST') return options;
     if (options.statusCode < 299) {
       if ((options.request.path.endsWith("/auth/login") ||
-              options.request.path.endsWith("/auth/register"))) {
+          options.request.path.endsWith("/auth/register"))) {
         var data = options.data as Map<String, dynamic>;
-        if(data['accessToken'] == null) return;
+        if (data['accessToken'] == null) return;
         token = data['accessToken'];
         locator.get<FlutterSecureStorage>().write(key: "token", value: token);
       }

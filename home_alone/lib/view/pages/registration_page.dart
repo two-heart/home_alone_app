@@ -120,8 +120,7 @@ class _RegistrationPageState extends State<RegistrationPage>
           filled: false,
           hintStyle: new TextStyle(color: Theme.of(context).hintColor),
           hintText: "Passwort",
-        )
-        );
+        ));
   }
 
   _buildButtons(RegistrationModel model, BuildContext context) => Column(

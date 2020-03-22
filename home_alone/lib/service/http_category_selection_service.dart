@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:home_alone/model/category.dart';
 
-
 class HttpCategorySelectionService {
   HttpCategorySelectionService({
     this.dio,
@@ -19,7 +18,7 @@ class HttpCategorySelectionService {
   }
 
   selectCategories(List<String> selectedCategories) async {
-    final data = {"categoryIds": selectedCategories} as Map<dynamic, dynamic>;
+    final data = {"categoryIds": selectedCategories};
     print(data);
 
     var response = await dio.post(
