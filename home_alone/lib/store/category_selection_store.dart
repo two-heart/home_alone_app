@@ -38,6 +38,22 @@ class CategorySelectionStore {
     final selectedCategories =
         categorySelectionModel.categories._getIdsOfSelected();
     await categorySelectionService.selectCategories(selectedCategories);
+
+    final categories = await loadSelectedCategories();
+    print(categories);
+  }
+
+  Future<List<Category>> loadSelectedCategories() async {
+    final categories = await categorySelectionService.getUsersCategories();
+    if (categories?.isNotEmpty != true) {
+      return null;
+    }
+    categories.forEach((category) {
+      categorySelectionModel.categories
+          .firstWhere((c) => c.category.id == category.id)
+          .isSelected = true;
+    });
+    return categories;
   }
 }
 

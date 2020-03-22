@@ -29,4 +29,7 @@ class FakeChallengeApi implements ChallengeApi {
         .toList();
     return result;
   }
+
+  @override
+  Future<void> acceptChallenge(String id) async {}
 }
