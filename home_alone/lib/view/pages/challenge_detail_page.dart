@@ -94,7 +94,6 @@ class _ChallengeDetailState extends State<ChallengeDetail>
   }
 
   Widget _buildButtonOrSlider(BuildContext context) {
-    print(widget.challenge != null);
     if (widget.challenge.finished) {
       return Container();
     }
