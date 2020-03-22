@@ -443,27 +443,87 @@ final all = """
 ]
 """;
 
-final incomplete = """
+final accepted = """
 [
   {
-    "id": "056b5f13-0395-43c7-970b-fca780c2ac57",
-    "name": "pariatur ad excepteur",
-    "description": "Laborum adipisicing eu nisi aliqua ullamco labore consectetur laborum minim quis eiusmod. Sit aute ipsum mollit aliquip nostrud sint."
+    "finished": false,
+    "finishedAt": null,
+    "acceptedAt": "2020-03-22T00:36:34.853Z",
+    "challenge": {
+      "id": "0dcdd6e1-09b3-46b6-999f-31e42dfb67df",
+      "name": "Product Intranet Manager",
+      "teaser": "Deserunt voluptatibus perspiciatis et minima.",
+      "description": "Eum minus quo nihil dolore soluta laudantium est. Sapiente dolores excepturi unde. Sunt eum explicabo rem excepturi commodi qui suscipit rerum enim.\n \rEnim animi ipsa ex aspernatur. Voluptas in rem inventore dolorum qui aut ad consequuntur. Error excepturi ea ut eos officiis consectetur sit et ut.\n \rOfficiis unde perferendis ab est vitae cumque. Occaecati excepturi dolorem quae iusto aut dolores repellat. Excepturi quidem nemo ipsa nihil nemo ducimus. Veritatis enim dolores.",
+      "imageUrl": "https://lh6.googleusercontent.com/IqK36yQSGSnFvY-7vxPRuCSwtdq7X7QaUoBqS6ho_MdxRS_R5hT3mPHP9SELxW6tuIl7b6CkhxnBXy35yauL=w2560-h1244",
+      "category": {
+        "id": "0a405f8c-3164-45fc-b464-891ba4d60e6f",
+        "name": "Devolved"
+      }
+    }
   },
   {
-    "id": "9d47ec2e-9514-475a-9698-485af3d78a16",
-    "name": "cupidatat culpa deserunt",
-    "description": "Excepteur irure cupidatat elit in cupidatat esse do magna sunt quis cupidatat aliquip. Anim irure esse aute ex veniam."
+    "finished": false,
+    "finishedAt": null,
+    "acceptedAt": "2020-03-22T00:36:34.859Z",
+    "challenge": {
+      "id": "5dbc57bb-521d-430e-bb71-264b8139bb3f",
+      "name": "Product Directives Executive",
+      "teaser": "Aut officia fuga culpa amet laborum labore qui.",
+      "description": "Aliquam aut ut atque iusto itaque sed similique. Omnis hic distinctio quaerat. Quibusdam est provident reprehenderit.\n \rNon possimus a odit quas qui ipsum. Repudiandae nihil dolores labore. Sed ipsam optio non exercitationem doloremque perferendis doloremque earum.\n \rEst suscipit velit enim omnis tenetur sed et voluptas. Ipsam excepturi accusamus quia corrupti commodi enim. Odio cumque qui aliquid animi voluptatem aspernatur aut. Vero in corrupti officiis voluptates aut. At aspernatur amet unde accusantium.",
+      "imageUrl": "https://lh6.googleusercontent.com/IqK36yQSGSnFvY-7vxPRuCSwtdq7X7QaUoBqS6ho_MdxRS_R5hT3mPHP9SELxW6tuIl7b6CkhxnBXy35yauL=w2560-h1244",
+      "category": {
+        "id": "0a405f8c-3164-45fc-b464-891ba4d60e6f",
+        "name": "Devolved"
+      }
+    }
   },
   {
-    "id": "88885bab-31d5-4dc0-ad49-e02dbcb0cd88",
-    "name": "fugiat amet tempor",
-    "description": "Ea elit sunt voluptate anim veniam et do dolor et anim. Nisi anim excepteur ipsum aute ea proident duis occaecat."
+    "finished": true,
+    "finishedAt": null,
+    "acceptedAt": "2020-03-22T00:36:34.864Z",
+    "challenge": {
+      "id": "f85e6e65-aaf8-45bc-a428-0ba3b9e71387",
+      "name": "National Identity Officer",
+      "teaser": "In quam provident quia ipsam iure omnis.",
+      "description": "Deserunt quasi aut aut. Amet ut et quia dolorum pariatur totam modi. Reiciendis ea commodi omnis delectus et quos. Sit doloribus ipsum ipsum fugiat qui id saepe.\n \rBlanditiis voluptatem assumenda officiis. Vero totam sed facere dolorum distinctio. Aut autem ea sequi et. Veritatis illo corporis minus omnis non nemo natus.\n \rVoluptatum et fugit ab iusto sed placeat voluptatum. Cupiditate cum voluptas iste veritatis voluptatem nostrum fugiat. Eum occaecati eligendi soluta qui est aut voluptatem et. Et error a laudantium reiciendis sunt qui.",
+      "imageUrl": "https://lh6.googleusercontent.com/IqK36yQSGSnFvY-7vxPRuCSwtdq7X7QaUoBqS6ho_MdxRS_R5hT3mPHP9SELxW6tuIl7b6CkhxnBXy35yauL=w2560-h1244",
+      "category": {
+        "id": "0a405f8c-3164-45fc-b464-891ba4d60e6f",
+        "name": "Devolved"
+      }
+    }
   },
   {
-    "id": "320de2cc-c315-4d4a-8c79-8407e20fce7b",
-    "name": "sit nulla laborum",
-    "description": "Culpa enim magna voluptate duis ad cillum velit deserunt sit magna proident. Deserunt ea eiusmod aliquip labore ipsum aliquip consequat officia occaecat fugiat fugiat."
+    "finished": false,
+    "finishedAt": null,
+    "acceptedAt": "2020-03-22T00:36:34.868Z",
+    "challenge": {
+      "id": "a699d7c7-8980-46dd-acc4-eaf861fe5129",
+      "name": "Human Directives Executive",
+      "teaser": "Totam et placeat eveniet sit unde.",
+      "description": "Eum quo consectetur. Reiciendis et impedit provident error. Placeat adipisci ipsa sapiente corporis ut sed accusamus omnis. Exercitationem quia impedit enim et tempore iure.\n \rEnim cum sunt cumque provident rem veniam cum. Quaerat quod aut aperiam sit modi. Magni tempore delectus sapiente et aspernatur non molestias doloremque. Minus sequi fugit qui sed aut voluptatem quo harum vel. Culpa nesciunt sunt. Sit est reiciendis esse recusandae sed dolorum repellendus doloremque excepturi.\n \rAutem recusandae vel molestias sint dolorem temporibus vel tempore ut. Cumque id sint repellendus debitis quam facere. Praesentium nesciunt autem itaque nisi libero non suscipit quis. Dolor illum nihil reprehenderit totam temporibus fuga est. Cupiditate quos assumenda illum cupiditate aut quo sunt qui rem. Consequuntur eum assumenda inventore error dolor id quibusdam sint.",
+      "imageUrl": "https://lh6.googleusercontent.com/IqK36yQSGSnFvY-7vxPRuCSwtdq7X7QaUoBqS6ho_MdxRS_R5hT3mPHP9SELxW6tuIl7b6CkhxnBXy35yauL=w2560-h1244",
+      "category": {
+        "id": "0a405f8c-3164-45fc-b464-891ba4d60e6f",
+        "name": "Devolved"
+      }
+    }
+  },
+  {
+    "finished": false,
+    "finishedAt": null,
+    "acceptedAt": "2020-03-22T00:36:34.871Z",
+    "challenge": {
+      "id": "1cdef190-26c0-4048-a873-cb3c76bb97b8",
+      "name": "Internal Applications Officer",
+      "teaser": "Minima nihil deserunt eos qui voluptatem autem.",
+      "description": "Ut laudantium exercitationem quia et. Cum ex consequatur id odit quis expedita quia optio aut. Soluta autem omnis enim architecto. Temporibus vel ut aperiam. Reiciendis sit delectus maxime nam.\n \rQui repellat voluptas maiores sit. Officiis ratione accusamus voluptas debitis ab. Quasi repellendus laudantium voluptas asperiores et perspiciatis eaque qui. Consequuntur nihil ut distinctio dolore voluptatum magni.\n \rIure alias ducimus. Aliquam autem necessitatibus. Eum recusandae qui aliquid fugit quia aperiam. Ut temporibus doloribus eos numquam ullam quibusdam aliquid dolorem corporis. Aliquam et ratione ex sint magni aut. Repellat saepe nulla eum rem perspiciatis aperiam.",
+      "imageUrl": "https://lh6.googleusercontent.com/IqK36yQSGSnFvY-7vxPRuCSwtdq7X7QaUoBqS6ho_MdxRS_R5hT3mPHP9SELxW6tuIl7b6CkhxnBXy35yauL=w2560-h1244",
+      "category": {
+        "id": "d8d7b6a6-e6df-4a0d-ac31-2876c9e6f480",
+        "name": "Total"
+      }
+    }
   }
 ]
 """;

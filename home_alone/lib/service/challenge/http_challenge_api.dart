@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:home_alone/model/accepted_challenge.dart';
 import 'package:home_alone/model/challenge.dart';
 import 'package:home_alone/service/challenge/challenge_api.dart';
 import 'package:home_alone/service/ext.dart';
@@ -21,10 +22,16 @@ class HttpChallengeApi implements ChallengeApi {
   }
 
   @override
-  Future<List<Challenge>> getAllSubscribedChallenges() async {
-    var response = await dio.get("$baseUrl/challenge");
-    return response.evaluate((data) => Challenge.fromJsonList(response.data)) ??
-        [];
+  Future<List<Challenge>> getSubscribedChallenges() async {
+    var response = await dio.get("$baseUrl/user/challenge");
+    return Challenge.fromJsonList(response.data);
+  }
+
+  @override
+  Future<List<AcceptedChallenge>> getAcceptedChallenges() async {
+    var response = await dio.get("$baseUrl/user/challenge/accepted");
+    print(response.statusCode);
+    return AcceptedChallenge.fromJsonList(response.data);
   }
 
   @override
